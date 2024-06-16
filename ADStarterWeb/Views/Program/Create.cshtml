@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Create Program";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Create Program</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item"> Program Controls</li>
+                        <li class="breadcrumb-item active"> Create Program</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Program Registration Form</h5>
+                        <span>Fill out the form below to register a new program.</span>
+                    </div>
+                    <div class="card-body">
+                        <form class="needs-validation" novalidate="">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="programName">Program Name</label>
+                                    <select class="form-select" id="programName" required="">
+                                        <option selected="" disabled="" value="">Choose...</option>
+                                        <option value="Program1">Program 1</option>
+                                        <option value="Program2">Program 2</option>
+                                        <option value="Program3">Program 3</option>
+                                        <option value="Program4">Program 4</option>
+                                        <option value="Program5">Program 5</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a program name.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="session">Session</label>
+                                    <select class="form-select" id="session" required="">
+                                        <option selected="" disabled="" value="">Choose...</option>
+                                        <option value="1">Session 1</option>
+                                        <option value="2">Session 2</option>
+                                        <option value="3">Session 3</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a session.</div>
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="slot">Slot</label>
+                                    <select class="form-select" id="slot" required="">
+                                        <option selected="" disabled="" value="">Choose...</option>
+                                        <option value="8-9am">8-9am</option>
+                                        <option value="10-11am">10-11am</option>
+                                        <option value="12-1pm">12-1pm</option>
+                                        <option value="2-3pm">2-3pm</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a slot.</div>
+                                </div>
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" id="termsCheck" type="checkbox" required="">
+                                    <label class="form-check-label" for="termsCheck">Agree to terms and conditions</label>
+                                    <div class="invalid-feedback">You must agree before submitting.</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+
+@section Scripts {
+    <!-- Plugins JS start-->
+    <script src="../assets/js/sidebar-menu.js"></script>
+    <script src="../assets/js/slick/slick.min.js"></script>
+    <script src="../assets/js/slick/slick.js"></script>
+    <script src="../assets/js/header-slick.js"></script>
+    <script src="../assets/js/form-validation-custom.js"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="../assets/js/script.js"></script>
+}
