@@ -90,3 +90,34 @@ D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/ref/
 /Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.pdb
 /Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.genruntimeconfig.cache
 /Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/ref/Cuba Staterkit.dll
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/bin/Debug/net7.0/appsettings.Development.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/bin/Debug/net7.0/appsettings.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.staticwebassets.runtime.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.deps.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.runtimeconfig.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.dll
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.pdb
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.AssemblyInfoInputs.cache
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.AssemblyInfo.cs
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.csproj.CoreCompileInputs.cache
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.MvcApplicationPartsAssemblyInfo.cache
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.RazorAssemblyInfo.cache
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.RazorAssemblyInfo.cs
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.sourcelink.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.build.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.development.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.Cuba Staterkit.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.build.Cuba Staterkit.props
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.Cuba Staterkit.props
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.Cuba Staterkit.props
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.pack.json
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/scopedcss/bundle/Cuba Staterkit.styles.css
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/scopedcss/projectbundle/Cuba Staterkit.bundle.scp.css
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.dll
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/refint/Cuba Staterkit.dll
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.pdb
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.genruntimeconfig.cache
+/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/Debug/net7.0/ref/Cuba Staterkit.dll

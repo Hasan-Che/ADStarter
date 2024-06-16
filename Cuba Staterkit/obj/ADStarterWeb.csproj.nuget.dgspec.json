@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/Cuba Staterkit.csproj": {}
+    "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/ADStarterWeb.csproj": {}
   },
   "projects": {
-    "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/Cuba Staterkit.csproj": {
+    "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/ADStarterWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/Cuba Staterkit.csproj",
-        "projectName": "Cuba Staterkit",
-        "projectPath": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/Cuba Staterkit.csproj",
+        "projectUniqueName": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/ADStarterWeb.csproj",
+        "projectName": "ADStarterWeb",
+        "projectPath": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/ADStarterWeb.csproj",
         "packagesPath": "/Users/hasancheabdullah/.nuget/packages/",
         "outputPath": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/",
         "projectStyle": "PackageReference",

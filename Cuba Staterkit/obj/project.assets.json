@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/Cuba Staterkit.csproj",
-      "projectName": "Cuba Staterkit",
-      "projectPath": "/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/Cuba Staterkit.csproj",
+      "projectUniqueName": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/ADStarterWeb.csproj",
+      "projectName": "ADStarterWeb",
+      "projectPath": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/ADStarterWeb.csproj",
       "packagesPath": "/Users/hasancheabdullah/.nuget/packages/",
-      "outputPath": "/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/",
+      "outputPath": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/Cuba Staterkit/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/hasancheabdullah/.nuget/NuGet/NuGet.Config"

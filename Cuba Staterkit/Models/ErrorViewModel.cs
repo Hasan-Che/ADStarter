@@ -1,4 +1,4 @@
-namespace Cuba_Staterkit.Models
+namespace ADStarter.Models
 {
     public class ErrorViewModel
     {
