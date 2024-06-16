@@ -1,0 +1,92 @@
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/appsettings.Development.json
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/appsettings.json
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.staticwebassets.runtime.json
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.exe
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.deps.json
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.runtimeconfig.json
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.dll
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.pdb
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.csproj.AssemblyReference.cache
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.AssemblyInfoInputs.cache
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.AssemblyInfo.cs
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.csproj.CoreCompileInputs.cache
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.RazorAssemblyInfo.cache
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.RazorAssemblyInfo.cs
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.Cuba Staterkit.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.build.Cuba Staterkit.props
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.Cuba Staterkit.props
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.Cuba Staterkit.props
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.pack.json
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.build.json
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.development.json
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/bundle/Cuba Staterkit.styles.css
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/projectbundle/Cuba Staterkit.bundle.scp.css
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.dll
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/refint/Cuba Staterkit.dll
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.pdb
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.genruntimeconfig.cache
+C:/Users/DeveloperPC/Desktop/Cuba_New/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/ref/Cuba Staterkit.dll
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/appsettings.Development.json
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/appsettings.json
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.staticwebassets.runtime.json
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.exe
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.deps.json
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.runtimeconfig.json
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.dll
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.pdb
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.csproj.AssemblyReference.cache
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.GeneratedMSBuildEditorConfig.editorconfig
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.AssemblyInfoInputs.cache
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.AssemblyInfo.cs
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.csproj.CoreCompileInputs.cache
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.MvcApplicationPartsAssemblyInfo.cache
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.RazorAssemblyInfo.cache
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.RazorAssemblyInfo.cs
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.Cuba Staterkit.Microsoft.AspNetCore.StaticWebAssets.props
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.build.Cuba Staterkit.props
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.Cuba Staterkit.props
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.Cuba Staterkit.props
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.pack.json
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.build.json
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.development.json
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/bundle/Cuba Staterkit.styles.css
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/projectbundle/Cuba Staterkit.bundle.scp.css
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.dll
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/refint/Cuba Staterkit.dll
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.pdb
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.genruntimeconfig.cache
+D:/Work/Dhairya/PC/Cuba/Cuba/Cuba Staterkit/Cuba Staterkit/obj/Debug/net7.0/ref/Cuba Staterkit.dll
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/bin/Debug/net7.0/appsettings.Development.json
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/bin/Debug/net7.0/appsettings.json
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.staticwebassets.runtime.json
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.deps.json
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.runtimeconfig.json
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.dll
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/bin/Debug/net7.0/Cuba Staterkit.pdb
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.AssemblyInfoInputs.cache
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.AssemblyInfo.cs
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.csproj.CoreCompileInputs.cache
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.MvcApplicationPartsAssemblyInfo.cache
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.RazorAssemblyInfo.cache
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.RazorAssemblyInfo.cs
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.build.json
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.development.json
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.Cuba Staterkit.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.build.Cuba Staterkit.props
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.Cuba Staterkit.props
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.Cuba Staterkit.props
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/staticwebassets.pack.json
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/bundle/Cuba Staterkit.styles.css
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/scopedcss/projectbundle/Cuba Staterkit.bundle.scp.css
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.dll
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/refint/Cuba Staterkit.dll
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.pdb
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/Cuba Staterkit.genruntimeconfig.cache
+/Users/hasancheabdullah/Downloads/UTM/Semester 6/WBL/asp.net/staterkit/Cuba Staterkit/obj/Debug/net7.0/ref/Cuba Staterkit.dll

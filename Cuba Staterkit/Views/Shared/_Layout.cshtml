@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="_Style" />
+</head>
+<body>
+    <partial name="_Loader" />
+    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+        <div class="page-body-wrapper sidebar-icon">
+            <partial name="_Header" />
+            <div class="page-body-wrapper">
+                <partial name="_SidePenal" />
+                @RenderBody()
+                <partial name="_Footer" />
+            </div>
+        </div>
+    </div>
+    <partial name="_Script" />
+</body>
+</html>
