@@ -11,14 +11,6 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
-    <ProjectReference Include="..\ADStarter.Utility\ADStarter.Utility.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
-    <ProjectReference Include="..\ADStarter.DataAccess\ADStarter.DataAccess.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
@@ -30,5 +22,13 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.20" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADStarter.Utility\ADStarter.Utility.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\ADStarter.DataAccess\ADStarter.DataAccess.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>
