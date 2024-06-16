@@ -1,19 +1,22 @@
-﻿<Properties StartupConfiguration="{701F7D56-22A6-4BC8-97C4-1FCD6F747CF0}|https">
-  <MonoDevelop.Ide.ItemProperties.ADStarterWeb PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Cuba Staterkit/Models/ErrorViewModel.cs">
-    <Files>
-      <File FileName="Cuba Staterkit/Models/ErrorViewModel.cs" Line="1" Column="1" />
-    </Files>
+﻿<Properties>
+  <DisabledProjects>
+    <String>Cuba Staterkit/ADStarterWeb.csproj</String>
+  </DisabledProjects>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
-        <State name="__root__" />
+        <State name="__root__">
+          <Node name="ADStarter" expanded="True">
+            <Node name="ADStarterWeb" selected="True" />
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

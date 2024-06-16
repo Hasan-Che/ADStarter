@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADStarterWeb", "Cuba Staterkit\ADStarterWeb.csproj", "{701F7D56-22A6-4BC8-97C4-1FCD6F747CF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADStarterWeb", "ADStarterWeb\ADStarterWeb.csproj", "{701F7D56-22A6-4BC8-97C4-1FCD6F747CF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
