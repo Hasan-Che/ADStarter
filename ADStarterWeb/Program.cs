@@ -1,3 +1,9 @@
+using ADStarter.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using ADStarter.Utility;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,9 +23,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=SamplePage}/{action=Page1}/{id?}");

@@ -23,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ADStarter.Models\ADStarter.Models.csproj" />
+    <ProjectReference Include="..\ADStarter.Utility\ADStarter.Utility.csproj" />
   </ItemGroup>
 </Project>
