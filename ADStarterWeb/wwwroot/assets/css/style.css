@@ -57,6 +57,22 @@ body[class=dark-only] {
 /**=====================
      Reset css start
 ==========================**/
+#sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make sure the sidebar takes the full height of its container */
+}
+
+.sidebar-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-links .sidebar-list:last-child {
+  margin-top: auto;
+}
+
 .font-roboto {
   font-family: Roboto, sans-serif;
 }

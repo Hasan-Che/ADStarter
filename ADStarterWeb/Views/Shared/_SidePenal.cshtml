@@ -1,22 +1,22 @@
 ﻿<div class="sidebar-wrapper" sidebar-layout="stroke-svg">
     <div>
         <div class="logo-wrapper">
-            <a asp-controller="Dashboard" asp-action="Index"><img class="img-fluid for-light" src="~/assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="~/assets/images/logo/logo_dark.png" alt=""></a>
+            <a asp-controller="Dashboard" asp-action="Index"><img class="img-fluid for-light" src="~/assets/images/logoAD.png" alt=""><img class="img-fluid for-dark" src="~/assets/images/logo/logoAD.png" alt=""></a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
-        <div class="logo-icon-wrapper"><a asp-controller="Dashboard" asp-action="Index"><img class="img-fluid" src="~/assets/images/logo/logo-icon.png" alt=""></a></div>
+        <div class="logo-icon-wrapper"><a asp-controller="Dashboard" asp-action="Index"><img class="img-fluid" src="~/assets/images/logo/logoAD.png" alt=""></a></div>
         <nav class="sidebar-main">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="sidebar-menu">
-                <ul class="sidebar-links" id="simple-bar">
+                <ul class="sidebar-links flex-container" id="simple-bar">
                     <li class="sidebar-main-title">
                         <div>
                             <h6 class="lan-8">Applications</h6>
                         </div>
                     </li>
                     <li class="sidebar-list">
-                        <label class="badge badge-light-primary">5</label><a class="sidebar-link sidebar-title">
+                        <label class="badge badge-light-primary">2</label><a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
                             </svg>
@@ -25,9 +25,8 @@
                             </svg><span class="lan-3">Dashboard</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a class="lan-4" asp-controller="Dashboard" asp-action="Index">Main </a></li>
-                            <li><a class="lan-5" asp-controller="Dashboard" asp-action="Index">Metric</a></li>
-                            <li><a asp-controller="Dashboard" asp-action="Index">Gallery</a></li>
+                            <li><a asp-controller="Dashboard" asp-action="Index">Main Page</a></li>
+                            <li><a asp-controller="Dashboard" asp-action="Index">Galleries</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-list">
@@ -37,12 +36,42 @@
                             </svg>
                             <svg class="fill-icon">
                                 <use href="../assets/svg/icon-sprite.svg#fill-sample-page"></use>
-                            </svg><span>Sample Pages</span>
+                            </svg><span>Program</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-controller="SamplePage" asp-action="Page1">Page 1</a></li>
-                            <li><a asp-controller="SamplePage" asp-action="Page2">Page 2</a></li>
+                            <li><a asp-controller="Program" asp-action="#">Our Programs</a></li>
+                            <li><a asp-controller="Program" asp-action="Create">Register</a></li>
                         </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <svg class="stroke-icon">
+                                <use href="../assets/svg/icon-sprite.svg#stroke-task"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="../assets/svg/icon-sprite.svg#fill-task"></use>
+                            </svg><span>Billing</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <svg class="stroke-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="16" fill="currentColor" viewBox="0 0 16 16" stroke-width="0.3" stroke-linecap="round" stroke-linejoin="round">                                
+                                <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-.214c-2.162-1.241-4.49-1.843-6.912-2.083l.405 2.712A1 1 0 0 1 5.51 15.1h-.548a1 1 0 0 1-.916-.599l-1.85-3.49-.202-.003A2.014 2.014 0 0 1 0 9V7a2.02 2.02 0 0 1 1.992-2.013 75 75 0 0 0 2.483-.075c3.043-.154 6.148-.849 8.525-2.199zm1 0v11a.5.5 0 0 0 1 0v-11a.5.5 0 0 0-1 0m-1 1.35c-2.344 1.205-5.209 1.842-8 2.033v4.233q.27.015.537.036c2.568.189 5.093.744 7.463 1.993zm-9 6.215v-4.13a95 95 0 0 1-1.992.052A1.02 1.02 0 0 0 1 7v2c0 .55.448 1.002 1.006 1.009A61 61 0 0 1 4 10.065m-.657.975 1.609 3.037.01.024h.548l-.002-.014-.443-2.966a68 68 0 0 0-1.722-.082z"/>
+                            </svg>
+                            <svg class="fill-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="16" fill="currentColor" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
+                                <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25 25 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009l.496.008a64 64 0 0 1 1.51.048m1.39 1.081q.428.032.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a66 66 0 0 1 1.692.064q.491.026.966.06"/>
+                            </svg><span>Announcements</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <svg class="stroke-icon">
+                                <use href="../assets/svg/icon-sprite.svg#stroke-faq"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="../assets/svg/icon-sprite.svg#fill-faq"></use>
+                            </svg><span>FAQ</span>
+                        </a>
                     </li>
                 </ul>
             </div>

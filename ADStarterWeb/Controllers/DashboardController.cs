@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Cuba.Controllers
+namespace ADStarterWeb.Controllers
 {
     public class DashboardController : Controller
     {

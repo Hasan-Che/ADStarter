@@ -11,17 +11,17 @@ namespace ADStarterWeb.Controllers
         }
 
         // POST: Program/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(string progName, string progDesc, string progSummary, double progPrice)
-        {
-            if (ModelState.IsValid)
-            {
-                // For now, we'll just return a success view without doing anything
-                return RedirectToAction("Success");
-            }
-            return View();
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Create(string progName, string progDesc, string progSummary, double progPrice)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // For now, we'll just return a success view without doing anything
+        //        return RedirectToAction("Success");
+        //    }
+        //    return View();
+        //}
 
         // GET: Program/Success
         public IActionResult Success()
