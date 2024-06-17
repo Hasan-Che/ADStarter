@@ -36,79 +36,23 @@
                         </div>
                         <div class="more_lang">
                             <div class="lang selected" data-value="en"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">English<span> (US)</span></span></div>
-                            <div class="lang" data-value="de"><i class="flag-icon flag-icon-de"></i><span class="lang-txt">Deutsch</span></div>
-                            <div class="lang" data-value="es"><i class="flag-icon flag-icon-es"></i><span class="lang-txt">Español</span></div>
-                            <div class="lang" data-value="fr"><i class="flag-icon flag-icon-fr"></i><span class="lang-txt">Français</span></div>
-                            <div class="lang" data-value="pt"><i class="flag-icon flag-icon-pt"></i><span class="lang-txt">Português<span> (BR)</span></span></div>
+                            <div class="lang" data-value="bm"><i class="flag-icon flag-icon-my"></i></i><span class="lang-txt">Bahasa Malaysia</span></div>
+                            <div class="lang" data-value="tm"><i class="flag-icon flag-icon-in"></i></i><span class="lang-txt">Tamil</span></div>
                             <div class="lang" data-value="cn"><i class="flag-icon flag-icon-cn"></i><span class="lang-txt">简体中文</span></div>
-                            <div class="lang" data-value="ae"><i class="flag-icon flag-icon-ae"></i><span class="lang-txt">لعربية <span> (ae)</span></span></div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <span class="header-search">
-                        <svg>
-                            <use href="~/assets/svg/icon-sprite.svg"></use>
-                        </svg>
-                    </span>
-                </li>
-                <li class="onhover-dropdown">
-                    <svg>
-                        <use href="~/assets/svg/icon-sprite.svg"></use>
-                    </svg>
-                    <div class="onhover-show-div bookmark-flip">
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="front">
-                                    <h6 class="f-18 mb-0 dropdown-title">Bookmark</h6>
-                                    <ul class="bookmark-dropdown">
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-4 text-center">
-                                                    <div class="bookmark-content">
-                                                        <div class="bookmark-icon"><i data-feather="file-text"></i></div><span>Forms</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <div class="bookmark-content">
-                                                        <div class="bookmark-icon"><i data-feather="user"></i></div><span>Profile</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <div class="bookmark-content">
-                                                        <div class="bookmark-icon"><i data-feather="server"></i></div><span>Tables</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="text-center"><a class="flip-btn f-w-700" id="flip-btn" href="javascript:void(0)">Add New Bookmark</a></li>
-                                    </ul>
-                                </div>
-                                <div class="back">
-                                    <ul>
-                                        <li>
-                                            <div class="bookmark-dropdown flip-back-content">
-                                                <input type="text" placeholder="search...">
-                                            </div>
-                                        </li>
-                                        <li><a class="f-w-700 d-block flip-back" id="flip-back" href="javascript:void(0)">Back</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="mode">
                         <svg>
-                            <use href="~/assets/svg/icon-sprite.svg"></use>
+                            <use href="../assets/svg/icon-sprite.svg#moon"></use>
                         </svg>
                     </div>
                 </li>
                 <li class="cart-nav onhover-dropdown">
                     <div class="cart-box">
                         <svg>
-                            <use href="~/assets/svg/icon-sprite.svg"></use>
+                            <use href="../assets/svg/icon-sprite.svg#stroke-ecommerce"></use>
                         </svg><span class="badge rounded-pill badge-success">2</span>
                     </div>
                     <div class="cart-dropdown onhover-show-div">
@@ -157,14 +101,14 @@
                             <li class="total">
                                 <h6 class="mb-0">Order Total : <span class="f-right">$1000.00</span></h6>
                             </li>
-                            <li class="text-center"><a class="d-block mb-3 view-cart f-w-700" href="cart.html">Go to your cart</a><a class="btn btn-primary view-checkout" href="checkout.html">Checkout</a></li>
+                            <li class="text-center"><a class="d-block mb-3 view-cart f-w-700" asp-controller="Ecommerce" asp-action="Cart">Go to your cart</a><a class="btn btn-primary view-checkout" asp-controller="Ecommerce" asp-action="Checkout">Checkout</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="onhover-dropdown">
                     <div class="notification-box">
                         <svg>
-                            <use href="~/assets/svg/icon-sprite.svg"></use>
+                            <use href="../assets/svg/icon-sprite.svg#notification"></use>
                         </svg><span class="badge rounded-pill badge-secondary">4 </span>
                     </div>
                     <div class="onhover-show-div notification-dropdown">
@@ -204,14 +148,5 @@
                 </li>
             </ul>
         </div>
-        <script class="result-template" type="text/x-handlebars-template">
-            <div class="ProfileCard u-cf">
-            <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
-            <div class="ProfileCard-details">
-            <div class="ProfileCard-realName">{{name}}</div>
-            </div>
-            </div>
-        </script>
-        <script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
     </div>
 </div>

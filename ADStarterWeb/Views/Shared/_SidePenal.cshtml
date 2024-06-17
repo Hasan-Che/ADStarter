@@ -1,11 +1,11 @@
 ﻿<div class="sidebar-wrapper" sidebar-layout="stroke-svg">
     <div>
         <div class="logo-wrapper">
-            <a asp-controller="SamplePage" asp-action="Page1"><img class="img-fluid for-light" src="~/assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="~/assets/images/logo/logo_dark.png" alt=""></a>
+            <a asp-controller="Dashboard" asp-action="Index"><img class="img-fluid for-light" src="~/assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="~/assets/images/logo/logo_dark.png" alt=""></a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
-        <div class="logo-icon-wrapper"><a asp-controller="SamplePage" asp-action="Page1"><img class="img-fluid" src="~/assets/images/logo/logo-icon.png" alt=""></a></div>
+        <div class="logo-icon-wrapper"><a asp-controller="Dashboard" asp-action="Index"><img class="img-fluid" src="~/assets/images/logo/logo-icon.png" alt=""></a></div>
         <nav class="sidebar-main">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="sidebar-menu">
@@ -16,26 +16,33 @@
                         </div>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                        <label class="badge badge-light-primary">5</label><a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
-                                <use href="~/assets/svg/icon-sprite.svg"></use>
+                                <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
                             </svg>
                             <svg class="fill-icon">
-                                <use href="~/assets/svg/icon-sprite.svg"></use>
+                                <use href="../assets/svg/icon-sprite.svg#fill-home"></use>
+                            </svg><span class="lan-3">Dashboard</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a class="lan-4" asp-controller="Dashboard" asp-action="Index">Main </a></li>
+                            <li><a class="lan-5" asp-controller="Dashboard" asp-action="Index">Metric</a></li>
+                            <li><a asp-controller="Dashboard" asp-action="Index">Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title">
+                            <svg class="stroke-icon">
+                                <use href="../assets/svg/icon-sprite.svg#stroke-sample-page"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="../assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg><span>Sample Pages</span>
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a asp-controller="SamplePage" asp-action="Page1">Page 1</a></li>
                             <li><a asp-controller="SamplePage" asp-action="Page2">Page 2</a></li>
                         </ul>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="#" target="_blank">
-                            <svg class="stroke-icon">
-                                <use href="~/assets/svg/icon-sprite.svg"></use>
-                            </svg>
-                            <span>Documentation</span>
-                        </a>
                     </li>
                 </ul>
             </div>
