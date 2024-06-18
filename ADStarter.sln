@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADStarterWeb", "ADStarterWeb\ADStarterWeb.csproj", "{701F7D56-22A6-4BC8-97C4-1FCD6F747CF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADStarterWeb", "ADStarterWeb\ADStarterWeb.csproj", "{701F7D56-22A6-4BC8-97C4-1FCD6F747CF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADStarter.DataAccess", "ADStarter.DataAccess\ADStarter.DataAccess.csproj", "{22FD43E9-4E57-4721-BC10-1F03B1E95773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADStarter.DataAccess", "ADStarter.DataAccess\ADStarter.DataAccess.csproj", "{22FD43E9-4E57-4721-BC10-1F03B1E95773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADStarter.Models", "ADStarter.Models\ADStarter.Models.csproj", "{74BC2662-CFC3-46B3-9FCE-2081A9E40DA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADStarter.Models", "ADStarter.Models\ADStarter.Models.csproj", "{74BC2662-CFC3-46B3-9FCE-2081A9E40DA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADStarter.Utility", "ADStarter.Utility\ADStarter.Utility.csproj", "{0B480CA8-23E8-4814-8459-FAAC21500D7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADStarter.Utility", "ADStarter.Utility\ADStarter.Utility.csproj", "{0B480CA8-23E8-4814-8459-FAAC21500D7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
