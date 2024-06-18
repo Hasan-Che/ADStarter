@@ -19,18 +19,18 @@
                     <form id="account" method="post" class="theme-form">
                         <h4>Sign in to account</h4>
                         <p>Enter your email & password to login</p>
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                         <div class="form-floating mb-3">
                             <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                            @* <label asp-for="Input.Email" class="col-form-label">Email Address</label> *@
+                            @* <label asp-for="Input.Email" class="form-label">Email</label> *@
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <div class="form-input position-relative">
                                 <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
                                 <label asp-for="Input.Password" class="col-form-label">Password</label>
-                                <div class="show-hide"><span class="show"></span></div>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
-                            <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
                         <div class=" form-group mb-0">
                             <div class="checkbox mb-3">
