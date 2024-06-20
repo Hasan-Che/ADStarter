@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using ADStarter.DataAccess.Data;
-using ADStarter.DataAccess.Repository.IRepository
+using ADStarter.DataAccess.Repository.IRepository;
 
 
 using Microsoft.EntityFrameworkCore;
