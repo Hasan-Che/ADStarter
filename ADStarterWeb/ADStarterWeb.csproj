@@ -31,12 +31,4 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Controller\" />
-    <Folder Include="Areas\Admin\Views\" />
-    <Folder Include="Areas\CustomerService\Controller\" />
-    <Folder Include="Areas\CustomerService\Views\" />
-    <Folder Include="Areas\Therapist\Controller\" />
-    <Folder Include="Areas\Therapist\Views\" />
-  </ItemGroup>
 </Project>
