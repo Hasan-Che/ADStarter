@@ -4,6 +4,7 @@ using ADStarter.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240618071246_addDb")]
+    partial class addDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,9 +148,8 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("c_photo")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<byte[]>("c_photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("c_race")
                         .HasMaxLength(50)
@@ -454,9 +456,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int>("slot_ID")
                         .HasColumnType("int");
 
-                    b.Property<double>("slot_price")
-                        .HasColumnType("float");
-
                     b.Property<int>("t_ID")
                         .HasColumnType("int");
 
@@ -486,11 +485,8 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int>("prog_ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("session_bilangan")
-                        .HasColumnType("int");
-
-                    b.Property<string>("session_day")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("session_day")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("session_name")
                         .HasMaxLength(100)
@@ -514,9 +510,8 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("slot_ID"));
 
-                    b.Property<string>("slot_time")
-                        .HasColumnType("nvarchar(max)");
-
+                    b.Property<TimeSpan>("slot_time")
+                        .HasColumnType("time");
 
                     b.HasKey("slot_ID");
 
