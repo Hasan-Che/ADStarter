@@ -4,6 +4,7 @@ using ADStarter.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240618085901_Changevarcahr")]
+    partial class Changevarcahr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -454,9 +457,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int>("slot_ID")
                         .HasColumnType("int");
 
-                    b.Property<double>("slot_price")
-                        .HasColumnType("float");
-
                     b.Property<int>("t_ID")
                         .HasColumnType("int");
 
@@ -516,7 +516,6 @@ namespace ADStarter.DataAccess.Migrations
 
                     b.Property<string>("slot_time")
                         .HasColumnType("nvarchar(max)");
-
 
                     b.HasKey("slot_ID");
 
