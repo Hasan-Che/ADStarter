@@ -37,7 +37,8 @@ namespace ADStarter.Models
         [StringLength(50)]
         public string c_status { get; set; }
 
-        public byte[] c_photo { get; set; }
+        [StringLength(255)] // Adjust length based on your needs
+        public string c_photo { get; set; } // Change to string type
 
         [ForeignKey(nameof(prog_ID))]
         public virtual Program Program { get; set; }

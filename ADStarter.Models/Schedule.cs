@@ -1,5 +1,7 @@
 ﻿#nullable disable
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,6 +9,8 @@ namespace ADStarter.Models
 {
     public partial class Schedule
     {
+        public object therapist_ID;
+
         [Key]
         public int schedule_ID { get; set; }
 
@@ -21,6 +25,9 @@ namespace ADStarter.Models
         public int slot_ID { get; set; }
 
         public int c_myKid { get; set; }
+
+        // New property for slot price
+        public double slot_price { get; set; }
 
         [ForeignKey(nameof(session_ID))]
         public virtual SessionPrice SessionPrice { get; set; }

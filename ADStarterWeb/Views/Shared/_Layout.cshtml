@@ -40,8 +40,10 @@ else
             </div>
         </div>
         <partial name="_Script" />
-        @RenderSection("Script", required: false)
-        
+        @if (IsSectionDefined("scripts"))
+        {
+            RenderSection("scripts");
+        }
     </body>
 }
 </html>

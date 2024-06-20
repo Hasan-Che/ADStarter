@@ -1,4 +1,4 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "Create Program";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -36,16 +36,16 @@
                         <span>Fill out the form below to enroll a new program.</span>
                     </div>
                     <div class="card-body">
-                        <form id="programForm" class="needs-validation" novalidate="" method="post" action="/Program/Create">
+                        <form id="programForm" class="needs-validation" novalidate method="post" asp-action="Create">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label class="form-label" for="session">Session</label>
-                                    <select class="form-select" id="session" name="session" required="">
-                                        <option selected="" disabled="" value="">Choose...</option>
-                                        <option value="3">4 sessions</option>
-                                        <option value="4">8 sessions</option>
-                                        <option value="5">12 sessions</option>
-                                        <option value="6">20 sessions</option>
+                                    <label class="form-label" for="session_ID">Session</label>
+                                    <select class="form-select" id="session_ID" name="session_ID" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        @foreach (var session in ViewBag.SessionOptions)
+                                        {
+                                            <option value="@session.session_ID">@session.session_name</option>
+                                        }
                                     </select>
                                     <div class="invalid-feedback">Please select a session.</div>
                                 </div>
@@ -53,18 +53,18 @@
                             <div id="dateSlotContainer">
                                 <div class="row g-3 mt-3 date-slot-entry">
                                     <div class="col-md-5">
-                                        <label class="form-label" for="date">Select Date</label>
-                                        <input type="date" class="form-control" name="dates" required="">
+                                        <label class="form-label" for="sessionDate">Select Date</label>
+                                        <input type="date" class="form-control" id="sessionDate" name="sessionDate" required>
                                         <div class="invalid-feedback">Please select a date.</div>
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="form-label" for="slot">Slot</label>
-                                        <select class="form-select" name="slots" required="">
-                                            <option selected="" disabled="" value="">Choose...</option>
-                                            <option value="8-9am">8-9am</option>
-                                            <option value="10-11am">10-11am</option>
-                                            <option value="12-1pm">12-1pm</option>
-                                            <option value="2-3pm">2-3pm</option>
+                                        <label class="form-label" for="slot_ID">Slot</label>
+                                        <select class="form-select" id="slot_ID" name="slot_ID" required>
+                                            <option selected disabled value="">Choose...</option>
+                                            @foreach (var slot in ViewBag.SlotOptions)
+                                            {
+                                                <option value="@slot.slot_ID">@slot.slot_time</option>
+                                            }
                                         </select>
                                         <div class="invalid-feedback">Please select a slot.</div>
                                     </div>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="mb-3 mt-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" id="termsCheck" type="checkbox" required="">
+                                    <input class="form-check-input" id="termsCheck" type="checkbox" required>
                                     <label class="form-check-label" for="termsCheck">Agree to terms and conditions</label>
                                     <div class="invalid-feedback">You must agree before submitting.</div>
                                 </div>
@@ -93,46 +93,43 @@
     <!-- Container-fluid Ends-->
 </div>
 
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('addDateSlot').addEventListener('click', function () {
+                var container = document.getElementById('dateSlotContainer');
+                var newEntry = document.createElement('div');
+                newEntry.classList.add('row', 'g-3', 'mt-3', 'date-slot-entry');
+                newEntry.innerHTML = `
+                            <div class="col-md-5">
+                                <label class="form-label" for="date">Select Date</label>
+                                <input type="date" class="form-control" name="sessionDate" required>
+                                <div class="invalid-feedback">Please select a date.</div>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label" for="slot">Slot</label>
+                                <select class="form-select" name="slot_ID" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option value="8-9am">8-9am</option>
+                                    <option value="10-11am">10-11am</option>
+                                    <option value="12-1pm">12-1pm</option>
+                                    <option value="2-3pm">2-3pm</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a slot.</div>
+                            </div>
+                            <div class="col-md-2 mt-4 pt-2">
+                                <button type="button" class="btn btn-danger remove-date-slot">Remove</button>
+                            </div>
+                        `;
+                container.appendChild(newEntry);
+            });
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('addDateSlot').addEventListener('click', function () {
-            var container = document.getElementById('dateSlotContainer');
-            var newEntry = document.createElement('div');
-            newEntry.classList.add('row', 'g-3', 'mt-3', 'date-slot-entry');
-            newEntry.innerHTML = `
-                                    <div class="col-md-5">
-                                        <label class="form-label" for="date">Select Date</label>
-                                        <input type="date" class="form-control" name="dates" required="">
-                                        <div class="invalid-feedback">Please select a date.</div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label class="form-label" for="slot">Slot</label>
-                                        <select class="form-select" name="slots" required="">
-                                            <option selected="" disabled="" value="">Choose...</option>
-                                            <option value="8-9am">8-9am</option>
-                                            <option value="10-11am">10-11am</option>
-                                            <option value="12-1pm">12-1pm</option>
-                                            <option value="2-3pm">2-3pm</option>
-                                        </select>
-                                        <div class="invalid-feedback">Please select a slot.</div>
-                                    </div>
-                                    <div class="col-md-2 mt-4 pt-2">
-                                        <button type="button" class="btn btn-danger remove-date-slot">Remove</button>
-                                    </div>
-                                `;
-            container.appendChild(newEntry);
+            document.getElementById('dateSlotContainer').addEventListener('click', function (event) {
+                if (event.target.classList.contains('remove-date-slot')) {
+                    event.target.closest('.date-slot-entry').remove();
+                }
+            });
         });
-
-        document.getElementById('dateSlotContainer').addEventListener('click', function (event) {
-            if (event.target.classList.contains('remove-date-slot')) {
-                event.target.closest('.date-slot-entry').remove();
-            }
-        });
-    });
-</script>
-
-@* @section Scripts {
-
+    </script>
 }
  *@
