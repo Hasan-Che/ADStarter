@@ -1,29 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ADStarter.DataAccess.Data;
+using ADStarter.Models;
+using ADStarter.DataAccess.Repository.IRepository;
+using System.ComponentModel;
 
 namespace ADStarterWeb.Controllers
 {
     public class ProgramController : Controller
     {
         // GET: Program/Create
-        public IActionResult Create()
+        private readonly IUnitOfWork _unitOfWork;
+        public ProgramController(IUnitOfWork unitOfWork)
         {
-            return View();
+            _unitOfWork = unitOfWork;
         }
-
-        // POST: Program/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(string progName, string progDesc, string progSummary, double progPrice)
+        //public IActionResult Index()
         //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // For now, we'll just return a success view without doing anything
-        //        return RedirectToAction("Success");
-        //    }
+        //    List<Program> objProgramList = _unitOfWork.Program.GetAll().ToList();
+        //    return View(objProgramList);
+        //}
+        //public IActionResult Create()
+        //{
         //    return View();
         //}
+        //[HttpPost]
+        //public IActionResult Create(Program obj)
+        //{
+            
+        //}
+        //public IActionResult Edit(int? id)
+        //{
 
-        // GET: Program/Success
+        //}
         public IActionResult Success()
         {
             return View();
