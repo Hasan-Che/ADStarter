@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace ADStarterWeb.Areas.Identity.Pages.Account
 {
@@ -109,30 +110,30 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    var userId = user.Id; // Get the user ID
+                    HttpContext.Session.SetString("UserId", userId);
                     var roles = await _signInManager.UserManager.GetRolesAsync(user);
 
-                    // Redirect based on role
+                    // Redirect based on role with user ID
                     if (roles.Contains("Admin"))
                     {
-                        return Redirect("/Admin/AdminDashboard/Index"); // Example URL for Admin Dashboard
+                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin", id = userId });
                     }
                     else if (roles.Contains("CustomerService"))
                     {
-                        return Redirect("/CustomerServiceDashboard"); // Example URL for Customer Service Dashboard
+                        return RedirectToAction("Index", "CustomerServiceDashboard", new { area = "CustomerService", id = userId });
                     }
                     else if (roles.Contains("Therapist"))
                     {
-                        return Redirect("/TherapistDashboard"); // Example URL for Therapist Dashboard
+                        return RedirectToAction("Index", "TherapistDashboard", new { area = "Therapist", id = userId });
                     }
                     else if (roles.Contains("Parent"))
                     {
-                        return Redirect("/Parent/Dashboard/Index"); // Example URL for Therapist Dashboard
+                        return RedirectToAction("Index", "Dashboard", new { area = "Parent", id = userId });
                     }
                     return LocalRedirect(returnUrl);
                 }
@@ -155,5 +156,6 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
     }
 }
