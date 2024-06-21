@@ -3,10 +3,13 @@ using ADStarter.Models;
 using ADStarter.Models.ViewModels;
 using ADStarter.DataAccess.Data;
 using System.Linq;
+using ADStarter.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ADStarterWeb.Areas.Parent.Controllers
 {
     [Area("Parent")]
+    [Authorize(Roles = SD.Role_Parent)]
     public class ScheduleController : Controller
     {
         private readonly ApplicationDBContext _context;
