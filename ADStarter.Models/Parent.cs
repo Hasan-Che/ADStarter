@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -61,11 +62,7 @@ namespace ADStarter.Models
 
         public double fm_income { get; set; }
 
-        public int acc_ID { get; set; }
-        [ValidateNever]
-
-        [ForeignKey(nameof(acc_ID))]
-        public virtual Account Account { get; set; }
+        public IdentityUser User { get; set; }
 
         public virtual ICollection<Child> Children { get; set; } = new List<Child>();
     }

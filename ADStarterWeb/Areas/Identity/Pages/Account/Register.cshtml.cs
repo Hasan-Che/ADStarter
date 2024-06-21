@@ -180,11 +180,16 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                         switch (Input.Role)
                         {
                             case "Parent":
-                                returnUrl = Url.Content("~/Dashboard/Index");
+                                returnUrl = Url.Content("~/Parent/Dashboard/Index");
                                 break;
                             case "Therapist":
+                                returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                                break;
+                            case "Admin":
+                                returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                                break;
                             case "CustomerService":
-                                returnUrl = Url.Content("~/Admin/ManageUsers");
+                                returnUrl = Url.Content("~/CustomerService/ManageUsers");
                                 break;
                             default:
                                 returnUrl = Url.Content("~/");

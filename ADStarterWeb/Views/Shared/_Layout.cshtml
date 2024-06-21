@@ -20,6 +20,14 @@
                     {
                         @await Html.PartialAsync("_SidebarTherapist")
                     }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Admin")
+                    {
+                        @await Html.PartialAsync("_SidebarAdmin")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "CustomerSService")
+                    {
+                        @await Html.PartialAsync("_SidebarCustomerSService")
+                    }
                     else
                     {
                         <partial name="_SidePenal" />

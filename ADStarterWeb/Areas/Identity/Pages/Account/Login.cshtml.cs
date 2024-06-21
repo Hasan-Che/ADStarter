@@ -103,7 +103,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/Dashboard/Index");
+            returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -114,7 +114,26 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    var roles = await _signInManager.UserManager.GetRolesAsync(user);
+
+                    // Redirect based on role
+                    if (roles.Contains("Admin"))
+                    {
+                        return Redirect("/Admin/AdminDashboard/Index"); // Example URL for Admin Dashboard
+                    }
+                    else if (roles.Contains("CustomerService"))
+                    {
+                        return Redirect("/CustomerServiceDashboard"); // Example URL for Customer Service Dashboard
+                    }
+                    else if (roles.Contains("Therapist"))
+                    {
+                        return Redirect("/TherapistDashboard"); // Example URL for Therapist Dashboard
+                    }
+                    else if (roles.Contains("Parent"))
+                    {
+                        return Redirect("/Parent/Dashboard/Index"); // Example URL for Therapist Dashboard
+                    }
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

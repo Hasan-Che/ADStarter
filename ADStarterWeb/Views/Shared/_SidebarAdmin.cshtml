@@ -1,0 +1,89 @@
+﻿<div class="sidebar-wrapper" sidebar-layout="stroke-svg">
+    <div>
+        <div class="logo-wrapper">
+            <a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">
+                <img class="img-fluid for-light" src="/assets/images/logoAD.png" alt="">
+                <img class="img-fluid for-dark" src="/assets/images/logo/logoAD.png" alt="">
+            </a>
+            <div class="back-btn"><i class="fa fa-angle-left"></i></div>
+            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
+        </div>
+        <div class="logo-icon-wrapper">
+            <a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">
+                <img class="img-fluid" src="/assets/images/logo/logoAD.png" alt="">
+            </a>
+        </div>
+        <nav class="sidebar-main">
+            <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+            <div id="sidebar-menu">
+                <ul class="sidebar-links flex-container" id="simple-bar">
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6 class="lan-8">Applications</h6>
+                        </div>
+                    </li>
+                    <li class="sidebar-list">
+                        <label class="badge badge-light-primary">2</label>
+                        <a class="sidebar-link sidebar-title">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-home"></use>
+                            </svg>
+                            <span class="lan-3">Dashboard</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">Main Page</a></li>
+                            <li><a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">Galleries</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
+                            </svg>
+                            <span>Program</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Parent" asp-controller="Program" asp-action="#">Our Programs</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="Create2">Screening and Consultation</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="Create3">Full Assessment</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="CreateProgram3">Intervention with Consistency</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="CreateProgram4">Re-assessment</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="CreateProgram5">Back-To-School 4</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="CreateProgram6">Back-To-School 8</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="ViewChildSchedule">View Schedule</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-task"></use>
+                            </svg>
+                            <span>Billing</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-faq"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-faq"></use>
+                            </svg>
+                            <span>FAQ</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
+        </nav>
+    </div>
+</div>
