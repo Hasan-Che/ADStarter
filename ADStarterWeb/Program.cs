@@ -40,6 +40,6 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=landingPage}/{action=landingPages}/{id?}");
+    pattern: "{area=Therapist}/{controller=Dashboard}/{action=Index}/{id?}");
 
 app.Run();
