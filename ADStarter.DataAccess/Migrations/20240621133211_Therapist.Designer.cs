@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240618071246_addDb")]
-    partial class addDb
+    [Migration("20240621133211_Therapist")]
+    partial class Therapist
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -148,8 +148,9 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<byte[]>("c_photo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("c_photo")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("c_race")
                         .HasMaxLength(50)
@@ -169,11 +170,16 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int>("prog_ID")
                         .HasColumnType("int");
 
+                    b.Property<int>("t_ID")
+                        .HasColumnType("int");
+
                     b.HasKey("c_myKid");
 
                     b.HasIndex("parent_ID");
 
                     b.HasIndex("prog_ID");
+
+                    b.HasIndex("t_ID");
 
                     b.ToTable("Children");
                 });
@@ -456,6 +462,9 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int>("slot_ID")
                         .HasColumnType("int");
 
+                    b.Property<double>("slot_price")
+                        .HasColumnType("float");
+
                     b.Property<int>("t_ID")
                         .HasColumnType("int");
 
@@ -485,8 +494,11 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int>("prog_ID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("session_day")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("session_bilangan")
+                        .HasColumnType("int");
+
+                    b.Property<string>("session_day")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("session_name")
                         .HasMaxLength(100)
@@ -510,8 +522,8 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("slot_ID"));
 
-                    b.Property<TimeSpan>("slot_time")
-                        .HasColumnType("time");
+                    b.Property<string>("slot_time")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("slot_ID");
 
@@ -722,12 +734,10 @@ namespace ADStarter.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -764,12 +774,10 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -824,9 +832,17 @@ namespace ADStarter.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("ADStarter.Models.Therapist", "Therapist")
+                        .WithMany()
+                        .HasForeignKey("t_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Parent");
 
                     b.Navigation("Program");
+
+                    b.Navigation("Therapist");
                 });
 
             modelBuilder.Entity("ADStarter.Models.CustomerService", b =>

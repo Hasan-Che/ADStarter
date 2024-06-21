@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addDb : Migration
+    public partial class Therapist : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -85,7 +85,7 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     slot_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    slot_time = table.Column<TimeSpan>(type: "time", nullable: false)
+                    slot_time = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -159,8 +159,8 @@ namespace ADStarter.DataAccess.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -204,8 +204,8 @@ namespace ADStarter.DataAccess.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -225,7 +225,8 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     session_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    session_day = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    session_bilangan = table.Column<int>(type: "int", nullable: false),
+                    session_day = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     session_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     sp_price = table.Column<double>(type: "float", nullable: false),
                     prog_ID = table.Column<int>(type: "int", nullable: false)
@@ -369,6 +370,7 @@ namespace ADStarter.DataAccess.Migrations
                     c_myKid = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     prog_ID = table.Column<int>(type: "int", nullable: false),
+                    t_ID = table.Column<int>(type: "int", nullable: false),
                     parent_ID = table.Column<int>(type: "int", nullable: false),
                     c_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     c_age = table.Column<int>(type: "int", nullable: false),
@@ -378,7 +380,7 @@ namespace ADStarter.DataAccess.Migrations
                     c_religion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     c_race = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     c_status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    c_photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    c_photo = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -395,6 +397,12 @@ namespace ADStarter.DataAccess.Migrations
                         principalTable: "Programs",
                         principalColumn: "prog_ID",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Children_Therapists_t_ID",
+                        column: x => x.t_ID,
+                        principalTable: "Therapists",
+                        principalColumn: "t_ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -436,7 +444,8 @@ namespace ADStarter.DataAccess.Migrations
                     session_datetime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     prog_ID = table.Column<int>(type: "int", nullable: false),
                     slot_ID = table.Column<int>(type: "int", nullable: false),
-                    c_myKid = table.Column<int>(type: "int", nullable: false)
+                    c_myKid = table.Column<int>(type: "int", nullable: false),
+                    slot_price = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -645,6 +654,11 @@ namespace ADStarter.DataAccess.Migrations
                 column: "prog_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Children_t_ID",
+                table: "Children",
+                column: "t_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CustomerServices_acc_ID",
                 table: "CustomerServices",
                 column: "acc_ID");
@@ -799,10 +813,10 @@ namespace ADStarter.DataAccess.Migrations
                 name: "Slots");
 
             migrationBuilder.DropTable(
-                name: "Therapists");
+                name: "Parents");
 
             migrationBuilder.DropTable(
-                name: "Parents");
+                name: "Therapists");
 
             migrationBuilder.DropTable(
                 name: "Programs");

@@ -12,6 +12,7 @@ namespace ADStarter.Models
         public int c_myKid { get; set; }
 
         public int prog_ID { get; set; }
+        public int t_ID { get; set; }
 
         public int parent_ID { get; set; }
 
@@ -45,6 +46,9 @@ namespace ADStarter.Models
 
         [ForeignKey("parent_ID")]
         public virtual Parent Parent { get; set; }
+
+        [ForeignKey("t_ID")]
+        public virtual Therapist Therapist { get; set; }
 
         public virtual TreatmentHistory TreatmentHistory { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
