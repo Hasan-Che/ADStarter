@@ -1,7 +1,7 @@
 ﻿using ADStarter.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ADStarterWeb.Controllers
+namespace ADStarterWeb.Areas.Parent.Controllers
 {
     public class RegistrationController : Controller
     {
