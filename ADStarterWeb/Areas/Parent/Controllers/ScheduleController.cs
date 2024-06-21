@@ -4,8 +4,9 @@ using ADStarter.Models.ViewModels;
 using ADStarter.DataAccess.Data;
 using System.Linq;
 
-namespace ADStarterWeb.Controllers
+namespace ADStarterWeb.Areas.Parent.Controllers
 {
+    [Area("Parent")]
     public class ScheduleController : Controller
     {
         private readonly ApplicationDBContext _context;
@@ -98,7 +99,7 @@ namespace ADStarterWeb.Controllers
                     var sessionDate = model.SessionDates[i];
                     var slotID = model.Slot_IDs[i];
 
-                    var session_ID = (sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday) ? 4 : 3;
+                    var session_ID = sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday ? 4 : 3;
 
                     var schedule = new Schedule
                     {
@@ -171,7 +172,7 @@ namespace ADStarterWeb.Controllers
                     var session_ID = _context.SessionPrices
                         .Where(sp => sp.prog_ID == 3 // Assuming prog_ID 3 for this scenario
                                   && sp.session_bilangan == model.NumberOfSessions
-                                  && ((sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday)
+                                  && (sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday
                                   ? sp.session_day == "Weekend"
                                   : sp.session_day == "Weekday"))
                         .Select(sp => sp.session_ID)
@@ -243,7 +244,7 @@ namespace ADStarterWeb.Controllers
                     var sessionDate = model.SessionDates[i];
                     var slotID = model.Slot_IDs[i];
 
-                    var session_ID = (sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday) ? 14 : 13;
+                    var session_ID = sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday ? 14 : 13;
 
                     var schedule = new Schedule
                     {
@@ -309,7 +310,7 @@ namespace ADStarterWeb.Controllers
                     var slotID = model.Slot_IDs[i];
 
                     // Determine the session ID based on the selected date
-                    var session_ID = (sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday) ? 16 : 15;
+                    var session_ID = sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday ? 16 : 15;
 
                     var schedule = new Schedule
                     {
@@ -371,7 +372,7 @@ namespace ADStarterWeb.Controllers
                     var slotID = model.Slot_IDs[i];
 
                     // Determine the session ID based on the selected date
-                    var session_ID = (sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday) ? 18 : 17;
+                    var session_ID = sessionDate.DayOfWeek == DayOfWeek.Saturday || sessionDate.DayOfWeek == DayOfWeek.Sunday ? 18 : 17;
 
                     var schedule = new Schedule
                     {
@@ -453,6 +454,25 @@ namespace ADStarterWeb.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult GetSchedules(int childId)
+        {
+            var schedules = _context.Schedules
+                .Where(s => s.c_myKid == childId)
+                .Select(s => new
+                {
+                    title = s.Program.prog_name + " - " + s.Therapist.t_name,
+                    start = s.session_datetime.ToString("yyyy-MM-ddTHH:mm:ss"),
+                    end = s.session_datetime.AddMinutes(60).ToString("yyyy-MM-ddTHH:mm:ss"),
+                    description = s.Slot.slot_time
+                })
+                .ToList();
+
+            return Json(schedules);
+        }
+
+
 
 
     }

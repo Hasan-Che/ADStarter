@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ADStarterWeb.Controllers
+namespace ADStarterWeb.Areas.Therapist.Controllers
 {
+    [Area("Therapist")]
     public class DashboardController : Controller
     {
         public IActionResult Index()

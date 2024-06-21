@@ -12,7 +12,26 @@
             <div class="page-body-wrapper sidebar-icon">
                 <partial name="_Header" />
                 <div class="page-body-wrapper">
-                    <partial name="_SidePenal" />
+                    @if (ViewContext.RouteData.Values["area"]?.ToString() == "Parent")
+                    {
+                        @await Html.PartialAsync("_SidebarParent")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Therapist")
+                    {
+                        @await Html.PartialAsync("_SidebarTherapist")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "CustomerService")
+                    {
+                        @await Html.PartialAsync("_SidebarCustomerService")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Admin")
+                    {
+                        @await Html.PartialAsync("_SidebarAdmin")
+                    }
+                    else
+                    {
+                        <partial name="_SidePenal" />
+                    }
                     @RenderBody()
                     <partial name="IconMarkup" />
                     <partial name="_Footer" />
@@ -20,8 +39,7 @@
             </div>
         </div>
         <partial name="_Script" />
-        @RenderSection("Script",required:false)
-
+        @RenderSection("Script", required: false)
     </body>
 }
 else
@@ -33,7 +51,26 @@ else
             <div class="page-body-wrapper sidebar-icon">
                 <partial name="_Header" />
                 <div class="page-body-wrapper">
-                    <partial name="_SidePenal" />
+                    @if (ViewContext.RouteData.Values["area"]?.ToString() == "Parent")
+                    {
+                        @await Html.PartialAsync("_SidebarParent")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Therapist")
+                    {
+                        @await Html.PartialAsync("_SidebarTherapist")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "CustomerService")
+                    {
+                        @await Html.PartialAsync("_SidebarCustomerService")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Admin")
+                    {
+                        @await Html.PartialAsync("_SidebarAdmin")
+                    }
+                    else
+                    {
+                        <partial name="_SidePenal" />
+                    }
                     @RenderBody()
                     <partial name="_Footer" />
                 </div>
@@ -42,7 +79,7 @@ else
         <partial name="_Script" />
         @if (IsSectionDefined("scripts"))
         {
-            RenderSection("scripts");
+            @RenderSection("scripts")
         }
     </body>
 }
