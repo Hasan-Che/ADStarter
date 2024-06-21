@@ -20,6 +20,14 @@
                     {
                         @await Html.PartialAsync("_SidebarTherapist")
                     }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "CustomerService")
+                    {
+                        @await Html.PartialAsync("_SidebarCustomerService")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Admin")
+                    {
+                        @await Html.PartialAsync("_SidebarAdmin")
+                    }
                     else
                     {
                         <partial name="_SidePenal" />
@@ -50,6 +58,14 @@ else
                     else if (ViewContext.RouteData.Values["area"]?.ToString() == "Therapist")
                     {
                         @await Html.PartialAsync("_SidebarTherapist")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "CustomerService")
+                    {
+                        @await Html.PartialAsync("_SidebarCustomerService")
+                    }
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Admin")
+                    {
+                        @await Html.PartialAsync("_SidebarAdmin")
                     }
                     else
                     {
