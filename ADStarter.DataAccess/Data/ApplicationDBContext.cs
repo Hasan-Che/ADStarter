@@ -13,6 +13,7 @@ namespace ADStarter.DataAccess.Data
 
         }
 
+        
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AccType> AccTypes { get; set; }
