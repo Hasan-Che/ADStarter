@@ -3,10 +3,13 @@ using ADStarter.Models.ViewModels;
 using ADStarter.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using ADStarter.Models;
+using ADStarter.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ADStarterWeb.Areas.Parent.Controllers
 {
     [Area("Parent")]
+    [Authorize(Roles = SD.Role_Parent)]
     public class RegistrationController : Controller
     {
         private readonly ApplicationDBContext _db;
