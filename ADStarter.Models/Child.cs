@@ -12,7 +12,6 @@ namespace ADStarter.Models
         public int c_myKid { get; set; }
 
         public int prog_ID { get; set; }
-        public int t_ID { get; set; }
 
         public int parent_ID { get; set; }
 

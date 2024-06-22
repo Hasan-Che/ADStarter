@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ADStarterWeb.Areas.Parent.Controllers
+namespace ADStarterWeb.Areas.Admin.Controllers
 {
-    [Area("Parent")]
+    [Area("Admin")]
     public class PaymentController : Controller
     {
         private readonly ApplicationDBContext _context;

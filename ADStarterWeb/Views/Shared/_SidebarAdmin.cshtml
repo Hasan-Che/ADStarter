@@ -53,7 +53,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
                             </svg>
@@ -62,6 +62,9 @@
                             </svg>
                             <span>Billing</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Admin" asp-controller="Payment" asp-action="Invoice">Manage Invoices</a></li>
+                        </ul>
                     </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
