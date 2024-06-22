@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ADStarter.Models.ViewModels
@@ -15,7 +16,7 @@ namespace ADStarter.Models.ViewModels
         public string c_nationality { get; set; }
         public string c_religion { get; set; }
         public string c_race { get; set; }
-        public string c_status { get; set; }
+        public string c_status { get; set; } = "Step One";
         public string c_photo { get; set; } // Add this property
                                             // Add other properties as needed
     }

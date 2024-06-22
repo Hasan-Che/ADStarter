@@ -31,7 +31,4 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Parents\Controller\" />
-  </ItemGroup>
 </Project>

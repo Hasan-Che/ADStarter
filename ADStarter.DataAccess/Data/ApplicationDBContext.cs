@@ -42,6 +42,11 @@ namespace ADStarter.DataAccess.Data
             modelBuilder.Entity<Parent>()
                 .HasKey(p => p.parent_ID);
 
+            modelBuilder.Entity<Parent>()
+                .HasOne(p => p.Account)
+                .WithOne(a => a.Parent)
+                .HasForeignKey<Parent>(p => p.acc_ID);
+
             modelBuilder.Entity<Account>()
                 .HasMany(a => a.Admins)
                 .WithOne(ad => ad.Account)
@@ -56,11 +61,6 @@ namespace ADStarter.DataAccess.Data
                 .HasMany(a => a.Therapists)
                 .WithOne(t => t.Account)
                 .HasForeignKey(t => t.acc_ID);
-
-            modelBuilder.Entity<Parent>()
-                .HasOne(p => p.Account)
-                .WithOne(a => a.Parent)
-                .HasForeignKey<Parent>(p => p.acc_ID);
 
             modelBuilder.Entity<Child>()
                 .HasOne(c => c.Program)
