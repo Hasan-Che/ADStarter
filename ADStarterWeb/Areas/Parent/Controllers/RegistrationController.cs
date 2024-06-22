@@ -4,7 +4,7 @@ using ADStarter.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using ADStarter.Models;
 
-namespace ADStarterWeb.Controllers
+namespace ADStarterWeb.Areas.Parent.Controllers
 {
     [Area("Parent")]
     public class RegistrationController : Controller

@@ -16,6 +16,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
+<<<<<<< HEAD
                         <form asp-action="ChildForm" method="post" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -23,6 +24,9 @@
                                     <input asp-for="c_myKid" class="form-control" />
                                     <span asp-validation-for="c_myKid" class="text-danger"></span>
                                 </div>
+=======
+                        <form asp-action="ChildForm" method="post" class="needs-validation" novalidate>
+>>>>>>> main
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label asp-for="c_name" class="form-label">Child's Name</label>
@@ -74,7 +78,11 @@
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <button type="submit" class="btn btn-primary">Next</button>
+<<<<<<< HEAD
                                     <button type="submit" formaction="@Url.Action("ChildForm", "Registration", new { action = "skip" })" class="btn btn-secondary ms-2">Skip</button>
+=======
+                                    <button type="button" class="btn btn-secondary ms-2" onclick="location.href='@Url.Action("Index", "Home")'">Skip</button>
+>>>>>>> main
                                 </div>
                             </div>
                         </form>
@@ -84,3 +92,12 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
+=======
+
+@section Scripts {
+    <script>
+        // Add any necessary script logic here
+    </script>
+}
+>>>>>>> main
