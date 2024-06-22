@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -28,7 +28,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;    
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
@@ -152,6 +152,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
                     if (!String.IsNullOrEmpty(Input.Role))
                     {
                         await _userManager.AddToRoleAsync(user, Input.Role);
@@ -160,57 +161,49 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_Parent);
                     }
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // Log in the user after registration
+                    await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    // Retrieve the user ID
+                    //var userId = user.Id;
+
+                    // Redirect based on role with user ID
+                    switch (Input.Role)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        case "Parent":
+                            returnUrl = Url.Content("~/Parent/Dashboard/Index");
+                            break;
+                        case "Therapist":
+                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                            break;
+                        case "Admin":
+                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                            break;
+                        case "CustomerService":
+                            returnUrl = Url.Content("~/CustomerService/ManageUsers");
+                            break;
+                        default:
+                            returnUrl = Url.Content("~/");
+                            break;
                     }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        // Set returnUrl based on role
-                        switch (Input.Role)
-                        {
-                            case "Parent":
-                                returnUrl = Url.Content("~/Parent/Dashboard/Index");
-                                break;
-                            case "Therapist":
-                                returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                                break;
-                            case "Admin":
-                                returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                                break;
-                            case "CustomerService":
-                                returnUrl = Url.Content("~/CustomerService/ManageUsers");
-                                break;
-                            default:
-                                returnUrl = Url.Content("~/");
-                                break;
-                        }
-                        return LocalRedirect(returnUrl);
-                    }
+
+                    //// Append user ID as query parameter
+                    //returnUrl += $"?id={userId}";
+
+                    return LocalRedirect(returnUrl);
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-            }  
+            }
+
             // If we got this far, something failed, redisplay form
             return Page();
-                
         }
-            
+
 
         private IdentityUser CreateUser()
         {
@@ -234,6 +227,5 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
         }
-    
     }
 }

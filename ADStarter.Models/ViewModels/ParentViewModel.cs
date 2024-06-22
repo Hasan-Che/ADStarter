@@ -1,9 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ADStarter.Models.ViewModels
 {
     public class ParentViewModel
     {
+        [Required]
+        public int parent_ID { get; set; }
         [Required]
         [StringLength(100)]
         public string f_name { get; set; }

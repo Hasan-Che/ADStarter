@@ -14,6 +14,8 @@ namespace ADStarter.DataAccess.Data
         }
 
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccType> AccTypes { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Child> Children { get; set; }
@@ -34,31 +36,32 @@ namespace ADStarter.DataAccess.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Parent>()
+                .HasIndex(p => p.acc_ID)
+                .IsUnique();
+
+            modelBuilder.Entity<Parent>()
                 .HasKey(p => p.parent_ID);
-
-<<<<<<< Updated upstream
-=======
-            modelBuilder.Entity<Account>()
-                .HasOne(a => a.Admin)
-                .WithOne(ad => ad.Account)
-                .HasForeignKey<Admin>(ad => ad.acc_ID);
-
-            modelBuilder.Entity<Account>()
-                .HasOne(a => a.CustomerService)
-                .WithOne(cs => cs.Account)
-                .HasForeignKey<CustomerService>(cs => cs.acc_ID);
-
-            modelBuilder.Entity<Account>()
-                .HasOne(a => a.Therapist)
-                .WithOne(t => t.Account)
-                .HasForeignKey<Therapist>(t => t.acc_ID);
 
             modelBuilder.Entity<Parent>()
                 .HasOne(p => p.Account)
                 .WithOne(a => a.Parent)
                 .HasForeignKey<Parent>(p => p.acc_ID);
 
->>>>>>> Stashed changes
+            modelBuilder.Entity<Account>()
+                .HasMany(a => a.Admins)
+                .WithOne(ad => ad.Account)
+                .HasForeignKey(ad => ad.acc_ID);
+
+            modelBuilder.Entity<Account>()
+                .HasMany(a => a.CustomerServices)
+                .WithOne(cs => cs.Account)
+                .HasForeignKey(cs => cs.acc_ID);
+
+            modelBuilder.Entity<Account>()
+                .HasMany(a => a.Therapists)
+                .WithOne(t => t.Account)
+                .HasForeignKey(t => t.acc_ID);
+
             modelBuilder.Entity<Child>()
                 .HasOne(c => c.Program)
                 .WithMany(p => p.Children)

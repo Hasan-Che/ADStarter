@@ -31,17 +31,4 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-
-//session
-
-    <Content Update="Views\Shared\_SidebarCustomerService.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-//=======
-    <Folder Include="Areas\Parents\Controller\" />
-//main
-  </ItemGroup>
 </Project>
