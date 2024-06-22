@@ -34,6 +34,7 @@
   <ItemGroup>
 
 //session
+
     <Content Update="Views\Shared\_SidebarCustomerService.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

@@ -49,4 +49,5 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Parent}/{controller=landingPage}/{action=landingPages}/{id?}");
+
 app.Run();

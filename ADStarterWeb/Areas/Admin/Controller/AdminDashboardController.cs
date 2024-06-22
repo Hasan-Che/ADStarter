@@ -10,6 +10,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
     {
         public IActionResult Index() 
         {
+
             return View();
         }
     }
