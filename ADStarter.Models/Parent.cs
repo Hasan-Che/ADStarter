@@ -10,9 +10,9 @@ namespace ADStarter.Models
         [Key]
         public int parent_ID { get; set; }
 
-        public int f_ID { get; set; }
+        public string f_ID { get; set; }
 
-        public int m_ID { get; set; }
+        public string m_ID { get; set; }
 
         [StringLength(100)]
         public string f_name { get; set; }
