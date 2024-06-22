@@ -14,8 +14,6 @@ namespace ADStarter.DataAccess.Data
         }
 
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<AccType> AccTypes { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Child> Children { get; set; }
@@ -34,10 +32,6 @@ namespace ADStarter.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Parent>()
-                .HasIndex(p => p.acc_ID)
-                .IsUnique();
 
             modelBuilder.Entity<Parent>()
                 .HasKey(p => p.parent_ID);

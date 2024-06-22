@@ -48,7 +48,6 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                     m_email = model.m_email,
                     m_status = model.m_status,
                     fm_income = model.fm_income,
-                    acc_ID = _id
                 };
 
                 _db.Parents.Add(parent);
