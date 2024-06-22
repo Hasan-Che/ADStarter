@@ -50,4 +50,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{area=Parent}/{controller=LandingPage}/{action=landingPage}/{id?}");
 
+
 app.Run();

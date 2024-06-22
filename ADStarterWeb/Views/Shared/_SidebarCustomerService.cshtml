@@ -1,7 +1,7 @@
 ﻿<div class="sidebar-wrapper" sidebar-layout="stroke-svg">
     <div>
         <div class="logo-wrapper">
-            <a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">
+            <a asp-area="CustomerService" asp-controller="Dashboard" asp-action="Index">
                 <img class="img-fluid for-light" src="/assets/images/logoAD.png" alt="">
                 <img class="img-fluid for-dark" src="/assets/images/logo/logoAD.png" alt="">
             </a>
@@ -9,7 +9,7 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
         <div class="logo-icon-wrapper">
-            <a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">
+            <a asp-area="CustomerService" asp-controller="Dashboard" asp-action="Index">
                 <img class="img-fluid" src="/assets/images/logo/logoAD.png" alt="">
             </a>
         </div>
@@ -34,8 +34,8 @@
                             <span class="lan-3">Dashboard</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">Main Page</a></li>
-                            <li><a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">Galleries</a></li>
+                            <li><a asp-area="CustomerService" asp-controller="Dashboard" asp-action="Index">Main Page</a></li>
+                            <li><a asp-area="CustomerService" asp-controller="Dashboard" asp-action="Index">Galleries</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-list">
@@ -49,14 +49,7 @@
                             <span>Program</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Parent" asp-controller="Program" asp-action="#">Our Programs</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="Create2">Screening and Consultation</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="Create3">Full Assessment</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="CreateProgram3">Intervention with Consistency</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="CreateProgram4">Re-assessment</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="CreateProgram5">Back-To-School 4</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="CreateProgram6">Back-To-School 8</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="ViewChildSchedule">View Schedule</a></li>
+                            <li><a asp-area="Therapist" asp-controller="Therapist" asp-action="TherapistSchedule">Schedule</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-list">
