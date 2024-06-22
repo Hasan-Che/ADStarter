@@ -1,6 +1,6 @@
-﻿@model ADStarter.Models.ViewModels.ScheduleViewModel
+﻿@model ADStarter.Models.ViewModels.NewScheduleViewModel
 @{
-    ViewData["Title"] = "Create Program";
+    ViewData["Title"] = "Create New Schedule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Screening and Consultation</h3>
+                    <h3>Create New Schedule</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -20,24 +20,23 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">Program Controls</li>
-                        <li class="breadcrumb-item active">Create Program</li>
+                        <li class="breadcrumb-item">Schedules</li>
+                        <li class="breadcrumb-item active">Create New Schedule</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Program Registration Form</h5>
-                        <span>Fill out the form below to enroll in a new program.</span>
+                        <h5>Schedule Form</h5>
+                        <span>Fill out the form below to create a new schedule.</span>
                     </div>
                     <div class="card-body">
-                        <form id="programForm" class="needs-validation" novalidate method="post" asp-action="Create2">
+                        <form id="scheduleForm" class="needs-validation" novalidate method="post" asp-action="CreateNewSchedule">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label" for="Child_ID">Child</label>
@@ -63,19 +62,15 @@
                                     <label class="form-label" for="Slot_ID">Slot</label>
                                     <select class="form-select" asp-for="Slot_ID" required>
                                         <option selected disabled value="">Choose...</option>
-                                        <option value="1">9.00 am - 10.00 am</option>
-                                        <option value="2">10.00 am - 11.00 am</option>
-                                        <option value="3">11.00 am - 12.00 pm</option>
-                                        <option value="4">2.00 pm - 3.00 pm</option>
-                                        <option value="5">3.00 pm - 4.00 pm</option>
-                                        <option value="6">4.00 pm - 5.00 pm</option>
+                                        @foreach (var slot in ViewBag.SlotOptions)
+                                        {
+                                            <option value="@slot.slot_ID">@slot.slot_ID - @slot.slot_time</option>
+                                        }
                                     </select>
                                     <div class="invalid-feedback">Please select a slot.</div>
                                 </div>
                             </div>
-                            <!-- Hidden field for Session_ID -->
                             <input type="hidden" id="Session_ID" name="Session_ID" asp-for="Session_ID" />
-
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <button class="btn btn-primary" type="submit">Submit form</button>
@@ -88,13 +83,12 @@
             </div>
         </div>
     </div>
-    <!-- Container-fluid Ends-->
 </div>
 
 @section Scripts {
     <script>
         function clearForm() {
-            document.getElementById('programForm').reset();
+            document.getElementById('scheduleForm').reset();
             document.querySelectorAll('.form-control').forEach(function (element) {
                 element.classList.remove('is-valid');
                 element.classList.remove('is-invalid');
@@ -135,12 +129,11 @@
                     var date = new Date(document.getElementById('SessionDate').value);
                     var dayOfWeek = date.getDay(); // 0 (Sunday) to 6 (Saturday)
 
-                    // Assuming session_ID for weekdays and weekends
-                    var session_ID = dayOfWeek === 0 || dayOfWeek === 6 ? 2 : 1;
+                    // Set session_ID: 1 for Sunday to Thursday, 2 for Friday and Saturday
+                    var session_ID = (dayOfWeek === 5 || dayOfWeek === 6) ? 2 : 1;
                     document.getElementById('Session_ID').value = session_ID;
                 });
 
-                // Set the min attribute for the date input to tomorrow's date
                 var dateInput = document.getElementById('SessionDate');
                 var today = new Date();
                 today.setHours(0, 0, 0, 0);
