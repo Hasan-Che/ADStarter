@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -28,7 +28,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;    
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
@@ -136,73 +136,73 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+{
+    returnUrl ??= Url.Content("~/");
+
+    ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+    if (ModelState.IsValid)
+    {
+        var user = CreateUser();
+
+        await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+        await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+        var result = await _userManager.CreateAsync(user, Input.Password);
+
+        if (result.Succeeded)
         {
-            returnUrl ??= Url.Content("~/");
+            _logger.LogInformation("User created a new account with password.");
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            if (ModelState.IsValid)
+            if (!String.IsNullOrEmpty(Input.Role))
             {
-                var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
-
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    if (!String.IsNullOrEmpty(Input.Role))
-                    {
-                        await _userManager.AddToRoleAsync(user, Input.Role);
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(user, SD.Role_Parent);
-                    }
-
-                    // Log in the user after registration
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-                    // Retrieve the user ID
-                    //var userId = user.Id;
-
-                    // Redirect based on role with user ID
-                    switch (Input.Role)
-                    {
-                        case "Parent":
-                            returnUrl = Url.Content("~/Parent/Dashboard/Index");
-                            break;
-                        case "Therapist":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                            break;
-                        case "Admin":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                            break;
-                        case "CustomerService":
-                            returnUrl = Url.Content("~/CustomerService/ManageUsers");
-                            break;
-                        default:
-                            returnUrl = Url.Content("~/");
-                            break;
-                    }
-
-                    //// Append user ID as query parameter
-                    //returnUrl += $"?id={userId}";
-
-                    return LocalRedirect(returnUrl);
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                await _userManager.AddToRoleAsync(user, Input.Role);
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(user, SD.Role_Parent);
             }
 
-            // If we got this far, something failed, redisplay form
-            return Page();
+            // Log in the user after registration
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            // Retrieve the user ID
+            //var userId = user.Id;
+
+            // Redirect based on role with user ID
+            switch (Input.Role)
+            {
+                case "Parent":
+                    returnUrl = Url.Content("~/Parent/Dashboard/Index");
+                    break;
+                case "Therapist":
+                    returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                    break;
+                case "Admin":
+                    returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                    break;
+                case "CustomerService":
+                    returnUrl = Url.Content("~/CustomerService/ManageUsers");
+                    break;
+                default:
+                    returnUrl = Url.Content("~/");
+                    break;
+            }
+
+            //// Append user ID as query parameter
+            //returnUrl += $"?id={userId}";
+
+            return LocalRedirect(returnUrl);
         }
+
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
+        }
+    }
+
+    // If we got this far, something failed, redisplay form
+    return Page();
+}
 
 
         private IdentityUser CreateUser()
