@@ -163,13 +163,16 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     }
 
                     // Log in the user after registration
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    // Retrieve the user ID
+                    //var userId = user.Id
+                    // Redirect based on role with user ID
+                    var userRoles = await _userManager.GetRolesAsync(user);
+                    string userRole = userRoles.FirstOrDefault();
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    // Retrieve the user ID
-                    //var userId = user.Id;
 
-                    // Redirect based on role with user ID
-                    switch (Input.Role)
+                    switch (userRole)
                     {
                         case "Parent":
                             returnUrl = Url.Content("~/Parent/Dashboard/Index");
