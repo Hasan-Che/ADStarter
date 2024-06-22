@@ -11,6 +11,12 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <None Include="wwwroot\js\photoswipe\photoswipe-ui-default.min.js" />
+    <None Include="wwwroot\js\photoswipe\photoswipe.js" />
+    <None Include="wwwroot\js\photoswipe\photoswipe.min.js" />
+    <None Include="wwwroot\js\prism-copy\copyhtml-prism.js" />
+    <None Include="wwwroot\js\prism-copy\prism.js" />
+    <None Include="wwwroot\js\prism\prism.min.js" />
     <None Include="wwwroot\js\site.js" />
   </ItemGroup>
   <ItemGroup>

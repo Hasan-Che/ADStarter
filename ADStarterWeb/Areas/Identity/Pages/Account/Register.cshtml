@@ -25,12 +25,18 @@
                             
                                 <input asp-for="Input.Name" class="form-control" autocomplete="username" aria-required="true" placeholder="Full Name" />
                                 <span asp-validation-for="Input.Name" class="text-danger"></span>
-                            
                         </div> *@
                         <div class="form-group">
                             <label class="col-form-label pt-0">Email </label>
                             <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Password</label>
+                            <div class="form-input position-relative">
+                                <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
+                                <div class="show-hide"><span class="show"></span></div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-form-label pt-0">Password</label>
