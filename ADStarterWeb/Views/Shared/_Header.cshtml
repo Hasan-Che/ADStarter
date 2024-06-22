@@ -45,14 +45,14 @@
                 <li>
                     <div class="mode">
                         <svg>
-                            <use href="../assets/svg/icon-sprite.svg#moon"></use>
+                            <use href="/assets/svg/icon-sprite.svg#moon"></use>
                         </svg>
                     </div>
                 </li>
                 <li class="cart-nav onhover-dropdown">
                     <div class="cart-box">
                         <svg>
-                            <use href="../assets/svg/icon-sprite.svg#stroke-ecommerce"></use>
+                            <use href="/assets/svg/icon-sprite.svg#stroke-ecommerce"></use>
                         </svg><span class="badge rounded-pill badge-success">2</span>
                     </div>
                     <div class="cart-dropdown onhover-show-div">
@@ -80,7 +80,7 @@
                             </li>
                             <li>
                                 <div class="media">
-                                    <img class="img-fluid b-r-5 me-3 img-60" src="~/assets/images/other-images/cart-img.jpg" alt="">
+                                    <img class="img-fluid b-r-5 me-3 img-60" src="/assets/images/other-images/cart-img.jpg" alt="">
                                     <div class="media-body">
                                         <span>Furniture Chair for Home</span>
                                         <div class="qty-box">
@@ -108,7 +108,7 @@
                 <li class="onhover-dropdown">
                     <div class="notification-box">
                         <svg>
-                            <use href="../assets/svg/icon-sprite.svg#notification"></use>
+                            <use href="/assets/svg/icon-sprite.svg#notification"></use>
                         </svg><span class="badge rounded-pill badge-secondary">4 </span>
                     </div>
                     <div class="onhover-show-div notification-dropdown">
@@ -132,7 +132,7 @@
                 </li>
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
                     <div class="media profile-media">
-                        <img class="b-r-10" src="~/assets/images/dashboard/profile.png" alt="">
+                        <img class="b-r-10" src="/assets/images/dashboard/profile.png" alt="">
                         <div class="media-body">
                             <span>Emay Walter</span>
                             <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
@@ -143,7 +143,7 @@
                         <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
                         <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
                         <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
-                        <li><a asp-controller="Authentication" asp-action="LoginSimple"><i data-feather="log-in"> </i><span>Log out</span></a></li>
+                        <li><a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })"><i data-feather="log-in"> </i><span>Log out</span></a></li>
                     </ul>
                 </li>
             </ul>
