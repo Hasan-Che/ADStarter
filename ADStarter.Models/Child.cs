@@ -16,6 +16,8 @@ namespace ADStarter.Models
 
         public int parent_ID { get; set; }
 
+        public int t_ID { get; set; }
+
         [StringLength(100)]
         public string c_name { get; set; }
 
