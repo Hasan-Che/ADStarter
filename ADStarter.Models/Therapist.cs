@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,10 +20,7 @@ namespace ADStarter.Models
         [StringLength(255)]
         public string t_address { get; set; }
 
-        public int acc_ID { get; set; }
-
-        [ForeignKey(nameof(acc_ID))]
-        public virtual Account Account { get; set; }
+        public IdentityUser User { get; set; }
 
         public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
         public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
