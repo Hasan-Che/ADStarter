@@ -19,6 +19,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+    options.Cookie.HttpOnly = true; // Make the session cookie HTTP only
+    options.Cookie.IsEssential = true; // Make the session cookie essential
+});
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
@@ -37,9 +43,12 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 app.MapRazorPages();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Parent}/{controller=Dashboard}/{action=Index}/{id?}");
+    pattern: "{area=Parent}/{controller=landingPage}/{action=landingPages}/{id?}");
+
 
 app.Run();
