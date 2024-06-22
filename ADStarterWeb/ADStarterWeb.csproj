@@ -37,8 +37,4 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\landingPage\Controllers\" />
-    <Folder Include="Areas\landingPage\Views\Main\" />
-  </ItemGroup>
 </Project>
