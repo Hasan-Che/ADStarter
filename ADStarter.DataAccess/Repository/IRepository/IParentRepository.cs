@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADStarter.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace ADStarter.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IParentRepository : IRepository<Parent>
     {
-        IProgramRepository Program { get; }
-        IParentRepository Parent { get; }
-        void Save();
+        void Update(Parent obj);
     }
 }

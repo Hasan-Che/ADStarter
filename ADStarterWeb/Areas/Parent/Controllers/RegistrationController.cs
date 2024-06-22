@@ -3,6 +3,7 @@ using ADStarter.Models.ViewModels;
 using ADStarter.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using ADStarter.Models;
+using System.Security.Claims;
 
 namespace ADStarterWeb.Areas.Parent.Controllers
 {
@@ -27,6 +28,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
         [HttpPost]
         public IActionResult ParentForm(ParentViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 var parent = new ADStarter.Models.Parent
@@ -48,7 +50,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                     m_email = model.m_email,
                     m_status = model.m_status,
                     fm_income = model.fm_income,
-                    acc_ID = _id
+                    
                 };
 
                 _db.Parents.Add(parent);

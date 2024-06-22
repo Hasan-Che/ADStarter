@@ -11,8 +11,8 @@ namespace ADStarter.Models
         [Key]
         public int c_myKid { get; set; }
 
-        public int prog_ID { get; set; }
-        public int t_ID { get; set; }
+        public int? prog_ID { get; set; }
+        public int? t_ID { get; set; }
 
         public int parent_ID { get; set; }
 
@@ -50,10 +50,10 @@ namespace ADStarter.Models
         [ForeignKey("t_ID")]
         public virtual Therapist Therapist { get; set; }
 
-        public virtual TreatmentHistory TreatmentHistory { get; set; }
-        public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
-        public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
-        public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
-        public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+        public virtual TreatmentHistory? TreatmentHistory { get; set; }
+        public virtual ICollection<Schedule>? Schedules { get; set; } = new List<Schedule>();
+        public virtual ICollection<Report>? Reports { get; set; } = new List<Report>();
+        public virtual ICollection<Invoice>? Invoices { get; set; } = new List<Invoice>();
+        public virtual ICollection<Payment>? Payments { get; set; } = new List<Payment>();
     }
 }

@@ -61,12 +61,12 @@ namespace ADStarter.Models
 
         public double fm_income { get; set; }
 
-        public int acc_ID { get; set; }
-        [ValidateNever]
+        //public int acc_ID { get; set; }
+        //[ValidateNever]
 
-        [ForeignKey(nameof(acc_ID))]
-        public virtual Account Account { get; set; }
+        //[ForeignKey(nameof(acc_ID))]
+        //public virtual Account Account { get; set; }
 
-        public virtual ICollection<Child> Children { get; set; } = new List<Child>();
+        public virtual ICollection<Child>? Children { get; set; } = new List<Child>();
     }
 }
