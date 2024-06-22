@@ -6,8 +6,10 @@ namespace ADStarter.Models.ViewModels
 {
     public class ParentViewModel
     {
-        [Required]
-        public int parent_ID { get; set; }
+        
+        
+        [StringLength(100)]
+        public string f_ID { get; set;}
         [Required]
         [StringLength(100)]
         public string f_name { get; set; }
@@ -33,6 +35,8 @@ namespace ADStarter.Models.ViewModels
 
         [StringLength(50)]
         public string f_status { get; set; }
+        
+        public string m_ID { get; set; }
 
         [StringLength(100)]
         public string m_name { get; set; }

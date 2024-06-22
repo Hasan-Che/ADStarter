@@ -1,0 +1,49 @@
+﻿@model ADStarter.Models.ViewModels.ParentViewModel
+
+<div id="mother-form" style="display: none;">
+    <h3>Mother's Information</h3>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="m_ID" class="form-label">Mother's IC Number</label>
+            <input asp-for="m_ID" class="form-control" />
+            <span asp-validation-for="m_ID" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="m_name" class="form-label">Mother's Name</label>
+            <input asp-for="m_name" class="form-control" />
+            <span asp-validation-for="m_name" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="m_phoneNum" class="form-label">Mother's Phone Number</label>
+            <input asp-for="m_phoneNum" class="form-control" />
+            <span asp-validation-for="m_phoneNum" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="m_race" class="form-label">Mother's Race</label>
+            <input asp-for="m_race" class="form-control" />
+            <span asp-validation-for="m_race" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="m_address" class="form-label">Mother's Address</label>
+            <input asp-for="m_address" class="form-control" />
+            <span asp-validation-for="m_address" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="m_Waddress" class="form-label">Mother's Work Address</label>
+            <input asp-for="m_Waddress" class="form-control" />
+            <span asp-validation-for="m_Waddress" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="m_email" class="form-label">Mother's Email</label>
+            <input asp-for="m_email" class="form-control" />
+            <span asp-validation-for="m_email" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="m_status" class="form-label">Mother's Status</label>
+            <input asp-for="m_status" class="form-control" />
+            <span asp-validation-for="m_status" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-3" onclick="showFatherForm()">Previous</button>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</div>

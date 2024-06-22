@@ -24,7 +24,7 @@ namespace ADStarter.Models
 
         public int slot_ID { get; set; }
 
-        public int c_myKid { get; set; }
+        public string c_myKid { get; set; }
 
         // New property for slot price
         public double slot_price { get; set; }

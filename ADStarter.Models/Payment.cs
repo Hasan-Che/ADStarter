@@ -22,7 +22,7 @@ namespace ADStarter.Models
 
         public int receipt_id { get; set; }
 
-        public int c_myKid { get; set; }
+        public string c_myKid { get; set; }
 
         public int a_ID { get; set; }
 

@@ -9,7 +9,9 @@ namespace ADStarter.Models
     public partial class Child
     {
         [Key]
-        public int c_myKid { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string c_myKid { get; set; }
 
         public int? prog_ID { get; set; }
         public int? t_ID { get; set; }
@@ -38,7 +40,7 @@ namespace ADStarter.Models
         [StringLength(50)]
         public string c_status { get; set; }
 
-        [StringLength(255)] // Adjust length based on your needs
+        [StringLength(255)]
         public string c_photo { get; set; } // Change to string type
 
         [ForeignKey(nameof(prog_ID))]

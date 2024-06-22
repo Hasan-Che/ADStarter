@@ -10,7 +10,7 @@ namespace ADStarter.Models
         [Key]
         public int invoice_ID { get; set; }
 
-        public int c_myKid { get; set; }
+        public string c_myKid { get; set; }
 
         public int schedule_ID { get; set; }
 
