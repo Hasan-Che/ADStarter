@@ -136,73 +136,73 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
-{
-    returnUrl ??= Url.Content("~/");
-
-    ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-    if (ModelState.IsValid)
-    {
-        var user = CreateUser();
-
-        await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-        await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-        var result = await _userManager.CreateAsync(user, Input.Password);
-
-        if (result.Succeeded)
         {
-            _logger.LogInformation("User created a new account with password.");
+            returnUrl ??= Url.Content("~/");
 
-            if (!String.IsNullOrEmpty(Input.Role))
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            if (ModelState.IsValid)
             {
-                await _userManager.AddToRoleAsync(user, Input.Role);
+                var user = CreateUser();
+
+                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                var result = await _userManager.CreateAsync(user, Input.Password);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created a new account with password.");
+
+                    if (!String.IsNullOrEmpty(Input.Role))
+                    {
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Role_Parent);
+                    }
+
+                    // Log in the user after registration
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    // Retrieve the user ID
+                    //var userId = user.Id;
+
+                    // Redirect based on role with user ID
+                    switch (Input.Role)
+                    {
+                        case "Parent":
+                            returnUrl = Url.Content("~/Parent/Dashboard/Index");
+                            break;
+                        case "Therapist":
+                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                            break;
+                        case "Admin":
+                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                            break;
+                        case "CustomerService":
+                            returnUrl = Url.Content("~/CustomerService/ManageUsers");
+                            break;
+                        default:
+                            returnUrl = Url.Content("~/");
+                            break;
+                    }
+
+                    //// Append user ID as query parameter
+                    //returnUrl += $"?id={userId}";
+
+                    return LocalRedirect(returnUrl);
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
-            else
-            {
-                await _userManager.AddToRoleAsync(user, SD.Role_Parent);
-            }
 
-            // Log in the user after registration
-            await _signInManager.SignInAsync(user, isPersistent: false);
-
-            // Retrieve the user ID
-            //var userId = user.Id;
-
-            // Redirect based on role with user ID
-            switch (Input.Role)
-            {
-                case "Parent":
-                    returnUrl = Url.Content("~/Parent/Dashboard/Index");
-                    break;
-                case "Therapist":
-                    returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                    break;
-                case "Admin":
-                    returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                    break;
-                case "CustomerService":
-                    returnUrl = Url.Content("~/CustomerService/ManageUsers");
-                    break;
-                default:
-                    returnUrl = Url.Content("~/");
-                    break;
-            }
-
-            //// Append user ID as query parameter
-            //returnUrl += $"?id={userId}";
-
-            return LocalRedirect(returnUrl);
+            // If we got this far, something failed, redisplay form
+            return Page();
         }
-
-        foreach (var error in result.Errors)
-        {
-            ModelState.AddModelError(string.Empty, error.Description);
-        }
-    }
-
-    // If we got this far, something failed, redisplay form
-    return Page();
-}
 
 
         private IdentityUser CreateUser()
