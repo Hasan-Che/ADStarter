@@ -18,7 +18,5 @@ namespace ADStarter.Models
 
         public virtual ICollection<Announcement> Announcements { get; set; } = new List<Announcement>();
         public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
-        public IdentityUser User { get; set; }
     }
 }
