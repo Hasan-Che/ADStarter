@@ -2,8 +2,11 @@
 using ADStarter.Models;
 using ADStarter.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ADStarterWeb.Areas.Admin.Controllers
 {
@@ -16,7 +19,6 @@ namespace ADStarterWeb.Areas.Admin.Controllers
         {
             _context = context;
         }
-
 
         // GET: Admin/ChildScheduleAdmin/SelectChild
         public IActionResult SelectChild()
@@ -73,11 +75,143 @@ namespace ADStarterWeb.Areas.Admin.Controllers
                 Schedules = schedules
             };
 
+            return View(viewModel); // Return ChildScheduleDisplayViewModel to the view
+        }
+
+        // GET: Admin/ChildScheduleAdmin/EditSchedule/{id}
+        // GET: Admin/ChildScheduleAdmin/EditSchedule/{id}
+        public async Task<IActionResult> EditSchedule(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var schedule = await _context.Schedules
+                .Include(s => s.Program)
+                .Include(s => s.Therapist)
+                .Include(s => s.Slot)
+                .Include(s => s.Child)
+                .FirstOrDefaultAsync(s => s.schedule_ID == id);
+
+            if (schedule == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new EditScheduleViewModel
+            {
+                Child_ID = schedule.c_myKid, // Ensure Child_ID is set correctly
+                Session_ID = schedule.schedule_ID,
+                SessionDate = schedule.session_datetime,
+                Slot_ID = schedule.slot_ID
+            };
+
             return View(viewModel);
         }
 
+        // POST: Admin/ChildScheduleAdmin/EditSchedule/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSchedule(int id, EditScheduleViewModel viewModel)
+        {
+            if (id != viewModel.Session_ID)
+            {
+                return NotFound();
+            }
 
-        // Add more actions as needed for CRUD operations or other functionalities
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var schedule = await _context.Schedules.FindAsync(id);
+                    if (schedule == null)
+                    {
+                        return NotFound();
+                    }
 
+                    schedule.session_datetime = viewModel.SessionDate;
+                    schedule.slot_ID = viewModel.Slot_ID;
+
+                    _context.Update(schedule);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(ViewSchedule), new { childId = schedule.c_myKid });
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ScheduleExists(viewModel.Session_ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            // If ModelState is invalid, return to the Edit view with the viewModel
+            return View(viewModel);
+        }
+
+        private bool ScheduleExists(int id)
+        {
+            return _context.Schedules.Any(e => e.schedule_ID == id);
+        }
+
+
+        // GET: Admin/ChildScheduleAdmin/DeleteSchedule/{id}
+        public async Task<IActionResult> DeleteSchedule(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var schedule = await _context.Schedules
+                .Include(s => s.Program)
+                .Include(s => s.Therapist)
+                .Include(s => s.Slot)
+                .Include(s => s.Child) // Ensure Child is included
+                .FirstOrDefaultAsync(s => s.schedule_ID == id);
+
+            if (schedule == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ScheduleViewModel
+            {
+                Child_ID = schedule.c_myKid,
+                SessionDate = schedule.session_datetime,
+                Slot_ID = schedule.slot_ID,
+                Session_ID = schedule.schedule_ID,
+                ChildName = schedule.Child?.c_name,
+                SlotTime = schedule.Slot?.slot_time,
+                ProgramName = schedule.Program?.prog_name,
+                TherapistName = schedule.Therapist?.t_name
+            };
+
+            return View(viewModel);
+        }
+
+        // POST: Admin/ChildScheduleAdmin/DeleteSchedule/{id}
+        [HttpPost, ActionName("DeleteSchedule")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var schedule = await _context.Schedules.FindAsync(id);
+            if (schedule == null)
+            {
+                return NotFound();
+            }
+
+            _context.Schedules.Remove(schedule);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ViewSchedule), new { childId = schedule.c_myKid });
+        }
+
+     
     }
 }

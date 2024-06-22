@@ -1,0 +1,47 @@
+﻿@model ADStarter.Models.ViewModels.EditScheduleViewModel
+
+@{
+    ViewData["Title"] = "Edit Schedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Schedule</h2>
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-action="EditSchedule" method="post">
+                            <input type="hidden" asp-for="Session_ID" />
+                            <div class="form-group mb-3">
+                                <label asp-for="SessionDate" class="control-label">Session Date</label>
+                                <input asp-for="SessionDate" class="form-control" />
+                                <span asp-validation-for="SessionDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Slot_ID" class="control-label">Slot Time</label>
+                                <select asp-for="Slot_ID" class="form-control">
+                                    <option value="1">9.00 am - 10.00 am</option>
+                                    <option value="2">10.00 am - 11.00 am</option>
+                                    <option value="3">11.00 am - 12.00 pm</option>
+                                    <option value="4">2.00 pm - 3.00 pm</option>
+                                    <option value="5">3.00 pm - 4.00 pm</option>
+                                    <option value="6">4.00 pm - 5.00 pm</option>
+                                    <option value="7">9.00 am - 11.30 am</option>
+                                    <option value="8">2.00 pm - 4.30 pm</option>
+                                </select>
+                                <span asp-validation-for="Slot_ID" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a asp-action="ViewSchedule" asp-route-childId="@Model.Child_ID" class="btn btn-secondary ml-2">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

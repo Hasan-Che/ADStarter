@@ -42,6 +42,7 @@
                                     <th>Slot Time</th>
                                     <th>Program Name</th>
                                     <th>Therapist Name</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +53,10 @@
                                         <td>@schedule.SlotTime</td>
                                         <td>@schedule.ProgramName</td>
                                         <td>@schedule.TherapistName</td>
+                                        <td>
+                                            <a asp-action="EditSchedule" asp-route-id="@schedule.Session_ID" class="btn btn-sm btn-primary">Edit</a>
+                                            <a asp-action="DeleteSchedule" asp-route-id="@schedule.Session_ID" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

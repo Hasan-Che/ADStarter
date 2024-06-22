@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ADStarter.Models.ViewModels
+﻿namespace ADStarter.Models.ViewModels
 {
     public class ChildScheduleDisplayViewModel
     {
@@ -12,4 +6,5 @@ namespace ADStarter.Models.ViewModels
         public string ChildName { get; set; }
         public List<ScheduleViewModel> Schedules { get; set; }
     }
+
 }
