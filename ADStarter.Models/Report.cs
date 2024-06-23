@@ -15,7 +15,7 @@ namespace ADStarter.Models
 
         public DateTime rep_datetime { get; set; }
 
-        public int c_myKid { get; set; }
+        public string c_myKid { get; set; }
 
         public int t_ID { get; set; }
 

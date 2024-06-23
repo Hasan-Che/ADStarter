@@ -6,7 +6,7 @@
                 <img class="img-fluid for-dark" src="/assets/images/logo/logoAD.png" alt="">
             </a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
+            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"></i></div>
         </div>
         <div class="logo-icon-wrapper">
             <a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">
@@ -39,6 +39,17 @@
                         </ul>
                     </li>
                     <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" asp-area="Parent" asp-controller="Registration" asp-action="ChildForm">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-task"></use>
+                            </svg>
+                            <span>Add New Child</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
@@ -60,7 +71,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="sidebar-link sidebar-title link-nav" asp-area="Parent" asp-controller="Billing" asp-action="Index">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
                             </svg>
@@ -71,7 +82,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="sidebar-link sidebar-title link-nav" asp-area="Parent" asp-controller="FAQ" asp-action="Index">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-faq"></use>
                             </svg>

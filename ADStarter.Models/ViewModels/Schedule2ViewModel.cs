@@ -16,8 +16,9 @@
 //        [Required]
 //        public List<int> Slot_IDs { get; set; } = new List<int>();
 
-//        // Add a new property for the number of sessions
-//        [Required]
+//        Add a new property for the number of sessions
+//       [Required]
+
 //        public int NumberOfSessions { get; set; }
 //    }
 //}

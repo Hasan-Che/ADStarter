@@ -1,11 +1,14 @@
+
 ﻿//using System;
 //using System.Collections.Generic;
 //using System.ComponentModel.DataAnnotations;
+
 
 //namespace ADStarter.Models.ViewModels
 //{
 //    public class ScheduleViewModel
 //    {
+
 //        [Required(ErrorMessage = "Child is required.")]
 //        public int Child_ID { get; set; }
 
@@ -19,6 +22,7 @@
 //        public int Session_ID { get; set; }
 
 //        // Optional properties
+
 //        public string ChildName { get; set; }
 //        public string SlotTime { get; set; }
 //        public string ProgramName { get; set; }

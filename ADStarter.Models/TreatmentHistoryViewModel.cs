@@ -1,21 +1,18 @@
-﻿#nullable disable
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ADStarter.Models
+namespace ADStarter.Models.ViewModels
 {
-    public partial class TreatmentHistory
+    public class TreatmentHistoryViewModel
     {
-        [Key]
-        public string c_myKid { get; set; }
-
         [StringLength(100)]
         public string th_pediatrician { get; set; }
 
         [StringLength(255)]
         public string th_recommendation { get; set; }
 
+        [Required]
         public DateTime th_deadline { get; set; }
 
         [StringLength(255)]
@@ -23,8 +20,5 @@ namespace ADStarter.Models
 
         [StringLength(255)]
         public string th_prevTherapy { get; set; }
-
-        [ForeignKey(nameof(c_myKid))]
-        public virtual Child Child { get; set; }
     }
 }

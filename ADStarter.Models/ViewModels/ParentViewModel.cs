@@ -1,28 +1,21 @@
-﻿#nullable disable
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
 
-namespace ADStarter.Models
+namespace ADStarter.Models.ViewModels
 {
-    public partial class Parent
+    public class ParentViewModel
     {
-        [Key]
-        public int parent_ID { get; set; }
-
-        [Required]
+        
+        
         [StringLength(100)]
-        public string f_ID { get; set; }
-
+        public string f_ID { get; set;}
         [Required]
-        [StringLength(100)]
-        public string m_ID { get; set; }
-
         [StringLength(100)]
         public string f_name { get; set; }
 
+        [Required]
         [StringLength(15)]
         public string f_phoneNum { get; set; }
 
@@ -43,6 +36,8 @@ namespace ADStarter.Models
 
         [StringLength(50)]
         public string f_status { get; set; }
+        
+        public string m_ID { get; set; }
 
         [StringLength(100)]
         public string m_name { get; set; }
@@ -65,11 +60,7 @@ namespace ADStarter.Models
         [StringLength(50)]
         public string m_status { get; set; }
 
+        [Required]
         public double fm_income { get; set; }
-
-
-        public string? UserId { get; set; }
-
-        public virtual ICollection<Child>? Children { get; set; } = new List<Child>();
     }
 }
