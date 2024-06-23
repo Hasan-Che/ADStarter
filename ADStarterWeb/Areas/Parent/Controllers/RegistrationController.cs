@@ -65,6 +65,12 @@ namespace ADStarterWeb.Areas.Parent.Controllers
         //    return View(obj);
         //}
 
+        public IActionResult ChildForm()
+        {
+
+            return View();
+        }
+
         [HttpPost]
         public IActionResult ChildForm(ADStarter.Models.Parent obj)
         {
@@ -73,7 +79,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
 
             _unitOfWork.Parent.Add(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Parent Detail created successfully";
+            TempData["success"] = "Child Detail created successfully";
             return RedirectToAction("ChildForm");
         }
         public IActionResult Edit(int? parent_ID)

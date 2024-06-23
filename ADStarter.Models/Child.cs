@@ -37,8 +37,7 @@ namespace ADStarter.Models
         [StringLength(50)]
         public string c_race { get; set; }
 
-        [StringLength(50)]
-        public string c_status { get; set; }
+        public int? c_status { get; set; }
 
         [StringLength(255)]
         public string c_photo { get; set; } // Change to string type
