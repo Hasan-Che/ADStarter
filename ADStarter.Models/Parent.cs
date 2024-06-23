@@ -68,7 +68,7 @@ namespace ADStarter.Models
         public double fm_income { get; set; }
 
 
-        public IdentityUser User { get; set; }
+        public string? UserId { get; set; }
 
         public virtual ICollection<Child>? Children { get; set; } = new List<Child>();
     }

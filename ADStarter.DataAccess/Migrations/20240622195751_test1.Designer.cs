@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240622171309_test3")]
-    partial class test3
+    [Migration("20240622195751_test1")]
+    partial class test1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -195,7 +195,7 @@ namespace ADStarter.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("parent_ID"));
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("f_ID")
                         .IsRequired()
@@ -271,8 +271,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("parent_ID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Parents");
                 });
@@ -809,15 +807,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.Navigation("Child");
 
                     b.Navigation("Schedule");
-                });
-
-            modelBuilder.Entity("ADStarter.Models.Parent", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Payment", b =>

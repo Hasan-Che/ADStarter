@@ -22,29 +22,60 @@ namespace ADStarterWeb.Areas.Parent.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        public IActionResult FatherForm()
+        public IActionResult ParentForm()
         {
-           
+
             return View();
         }
+        
 
-
-            public IActionResult Create()
-            {
-                return View();
-            }
         [HttpPost]
-        public IActionResult Create(ADStarter.Models.Parent obj)
+        public IActionResult ParentForm(ADStarter.Models.Parent obj)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            obj.User = new IdentityUser { Id = userId };
+            obj.UserId = userId; // Set the user ID
 
             _unitOfWork.Parent.Add(obj);
             _unitOfWork.Save();
             TempData["success"] = "Parent Detail created successfully";
             return RedirectToAction("ChildForm");
         }
+        //[HttpPost]
+        //public IActionResult ParentForm(ADStarter.Models.Parent obj)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //        var user = _unitOfWork.IdentityUser.GetFirstOrDefault(u => u.Id == userId);
 
+        //        if (user != null)
+        //        {
+        //            obj.User = user;
+        //            _unitOfWork.Parent.Add(obj);
+        //            _unitOfWork.Save();
+        //            TempData["success"] = "Parent Detail created successfully";
+        //            return RedirectToAction("ChildForm");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "User not found.");
+        //        }
+        //    }
+
+        //    return View(obj);
+        //}
+
+        [HttpPost]
+        public IActionResult ChildForm(ADStarter.Models.Parent obj)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            obj.UserId = userId; // Set the user ID
+
+            _unitOfWork.Parent.Add(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Parent Detail created successfully";
+            return RedirectToAction("ChildForm");
+        }
         public IActionResult Edit(int? parent_ID)
             {
                 if (parent_ID == null || parent_ID == 0)
@@ -67,7 +98,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 if (ModelState.IsValid)
                 {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                obj.User = new IdentityUser { Id = userId };
+                obj.UserId = userId; // Set the user ID
                 _unitOfWork.Parent.Update(obj);
                     _unitOfWork.Save();
                     TempData["success"] = "ParentDetail updated successfully";

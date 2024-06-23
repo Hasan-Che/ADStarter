@@ -192,7 +192,7 @@ namespace ADStarter.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("parent_ID"));
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("f_ID")
                         .IsRequired()
@@ -268,8 +268,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("parent_ID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Parents");
                 });
@@ -806,15 +804,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.Navigation("Child");
 
                     b.Navigation("Schedule");
-                });
-
-            modelBuilder.Entity("ADStarter.Models.Parent", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Payment", b =>
