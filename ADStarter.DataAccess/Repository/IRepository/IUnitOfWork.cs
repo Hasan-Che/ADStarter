@@ -11,6 +11,7 @@ namespace ADStarter.DataAccess.Repository.IRepository
         IProgramRepository Program { get; }
         IParentRepository Parent { get; }
         IChildRepository Child { get; }
+        ITreatmentHistoryRepository TreatmentHistory { get; }
         void Save();
     }
 }

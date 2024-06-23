@@ -23,6 +23,8 @@ namespace ADStarterWeb.Areas.Parent.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
+        //PARENT FORM
         public IActionResult ParentForm()
         {
 
@@ -41,6 +43,8 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             TempData["parent_ID"] = obj.parent_ID; // Use double quotes for TempData keys
             return RedirectToAction("ChildForm");
         }
+
+        //CHILD FORM
 
         public IActionResult ChildForm()
         {
@@ -65,15 +69,54 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 _unitOfWork.Child.Add(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Child Detail created successfully";
-                TempData.Keep("parent_ID"); // Retain the parent_ID in TempData for subsequent requests
-                return RedirectToAction("ChildForm");
+                TempData["c_myKid"] = obj.c_myKid; // Use double quotes for TempData keys
+                return RedirectToAction("TreatmentHistoryForm");
             }
 
             // Handle the case when parent_ID is not available
             TempData["error"] = "Parent ID not found. Please try again.";
-            return RedirectToAction("ParentForm");
+            return RedirectToAction("Index");
         }
 
+        //TREATMENT HISTORY
+        public IActionResult TreatmentHistoryForm()
+        {
+            // Retrieve parent_ID from TempData
+            if (TempData["c_myKid"] != null)
+            {
+                ViewBag.cmyKid = TempData["c_myKid"];
+                TempData.Keep("c_myKid"); // Retain the parent_ID in TempData
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult TreatmentHistoryForm(ADStarter.Models.TreatmentHistory obj)
+        {
+            if (TempData["c_myKid"] != null)
+            {
+                var c_myKid = (string)TempData["c_myKid"];
+                obj.c_myKid = c_myKid; // Set the parent ID
+
+                _unitOfWork.TreatmentHistory.Add(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Treatment History Detail created successfully";
+                TempData["c_myKid"] = obj.c_myKid; // Use double quotes for TempData keys
+                return RedirectToAction("Index");
+            }
+
+            // Handle the case when parent_ID is not available
+            TempData["error"] = "Child MyKid not found. Please try again.";
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
+        //GET
         public IActionResult Edit(int? parent_ID)
             {
                 if (parent_ID == null || parent_ID == 0)
@@ -89,24 +132,27 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                     return NotFound();
                 }
                 return View(ParentFromDb);
-            }
-            [HttpPost]
-            public IActionResult Edit(ADStarter.Models.Parent obj)
+        }
+        //POST
+        [HttpPost]
+        public IActionResult Edit(ADStarter.Models.Parent obj)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 obj.UserId = userId; // Set the user ID
                 _unitOfWork.Parent.Update(obj);
-                    _unitOfWork.Save();
-                    TempData["success"] = "ParentDetail updated successfully";
-                    return RedirectToAction("Index");
-                }
-                return View();
-
+                _unitOfWork.Save();
+                TempData["success"] = "ParentDetail updated successfully";
+                return RedirectToAction("Index");
             }
+            return View();
 
-            public IActionResult Delete(int? parent_ID)
+        }
+
+
+        //GET
+        public IActionResult Delete(int? parent_ID)
             {
                 if (parent_ID == null || parent_ID == 0)
                 {
@@ -120,6 +166,8 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 }
                 return View(parentFromDb);
             }
+
+        //POST
             [HttpPost, ActionName("Delete")]
             public IActionResult DeletePOST(int? parent_ID)
             {
