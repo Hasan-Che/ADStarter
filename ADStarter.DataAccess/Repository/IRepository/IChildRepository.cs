@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ADStarter.DataAccess.Repository.IRepository
 {
-    public interface IProgramRepository : IRepository<Program>
+    public interface IChildRepository : IRepository<Child>
     {
-        void Update(Program obj);
+        void Update(Child obj);
     }
-
 }

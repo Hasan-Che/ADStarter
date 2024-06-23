@@ -1,0 +1,69 @@
+﻿@model ADStarter.Models.ViewModels.CreateScheduleViewModel
+
+@{
+    ViewData["Title"] = "Select Date and Slot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h3>Select Date and Slot</h3>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Select Date and Slot</h5>
+                <span>Select date(s) and slot(s) for scheduling.</span>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("CreateSchedule", "Schedule", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @for (int i = 0; i < Model.ProgSessionCount; i++)
+                    {
+                        <div class="form-group">
+                            <label>Date @(i + 1)</label>
+                            <input type="text" id="datepicker@(i)" name="SelectedDates[@i]" class="form-control datepicker" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label>Slot for Date @(i + 1)</label>
+                            <select name="SlotIds[@i]" class="form-control">
+                                <option value="1">9.00 am - 10.00 am</option>
+                                <option value="2">10.00 am - 11.00 am</option>
+                                <option value="3">11.00 am - 12.00 pm</option>
+                                <option value="4">2.00 pm - 3.00 pm</option>
+                                <option value="5">3.00 pm - 4.00 pm</option>
+                                <option value="6">4.00 pm - 5.00 pm</option>
+                                <option value="7">9.00 am - 11.30 am</option>
+                                <option value="8">2.00 pm - 4.30 pm</option>
+                            </select>
+                        </div>
+                    }
+
+                    <input type="hidden" name="ProgramId" value="@Model.ProgramId" />
+                    <input type="hidden" name="ChildId" value="@Model.ChildId" />
+                    <button type="submit" class="btn btn-primary">Create Schedule</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            // Initialize datepicker for each date input dynamically
+            $(".datepicker").each(function (index) {
+                $(this).datepicker({
+                    dateFormat: "yy-mm-dd",
+                    multipleDates: true
+                });
+            });
+        });
+    </script>
+}

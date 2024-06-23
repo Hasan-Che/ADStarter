@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ADStarter.DataAccess.Repository.IRepository
 {
-    public interface IProgramRepository : IRepository<Program>
+    public interface ISlotRepository : IRepository<Slot>
     {
-        void Update(Program obj);
+        void Update(Slot obj);
     }
-
 }
