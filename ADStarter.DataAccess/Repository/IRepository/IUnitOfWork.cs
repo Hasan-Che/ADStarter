@@ -10,6 +10,7 @@ namespace ADStarter.DataAccess.Repository.IRepository
     {
         IProgramRepository Program { get; }
         IParentRepository Parent { get; }
+        IChildRepository Child { get; }
         void Save();
     }
 }

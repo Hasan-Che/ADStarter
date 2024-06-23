@@ -13,7 +13,6 @@ namespace ADStarter.Models
         [StringLength(100)]
         public string c_myKid { get; set; }
 
-        public int? prog_ID { get; set; }
         public int? t_ID { get; set; }
 
         public int parent_ID { get; set; }
@@ -37,19 +36,16 @@ namespace ADStarter.Models
         [StringLength(50)]
         public string c_race { get; set; }
 
-        public int? c_status { get; set; }
+        public int? c_step { get; set; }
 
         [StringLength(255)]
         public string c_photo { get; set; } // Change to string type
-
-        [ForeignKey(nameof(prog_ID))]
-        public virtual Program Program { get; set; }
 
         [ForeignKey("parent_ID")]
         public virtual Parent Parent { get; set; }
 
         [ForeignKey("t_ID")]
-        public virtual Therapist Therapist { get; set; }
+        public virtual Therapist? Therapist { get; set; }
 
         public virtual TreatmentHistory? TreatmentHistory { get; set; }
         public virtual ICollection<Schedule>? Schedules { get; set; } = new List<Schedule>();

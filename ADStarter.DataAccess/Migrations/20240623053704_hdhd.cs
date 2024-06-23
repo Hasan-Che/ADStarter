@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class test1 : Migration
+    public partial class hdhd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -325,7 +325,6 @@ namespace ADStarter.DataAccess.Migrations
                 columns: table => new
                 {
                     c_myKid = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    prog_ID = table.Column<int>(type: "int", nullable: true),
                     t_ID = table.Column<int>(type: "int", nullable: true),
                     parent_ID = table.Column<int>(type: "int", nullable: false),
                     c_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
@@ -335,7 +334,7 @@ namespace ADStarter.DataAccess.Migrations
                     c_nationality = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     c_religion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     c_race = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    c_status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    c_step = table.Column<int>(type: "int", nullable: true, defaultValue: 0),
                     c_photo = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
@@ -346,12 +345,6 @@ namespace ADStarter.DataAccess.Migrations
                         column: x => x.parent_ID,
                         principalTable: "Parents",
                         principalColumn: "parent_ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Children_Programs_prog_ID",
-                        column: x => x.prog_ID,
-                        principalTable: "Programs",
-                        principalColumn: "prog_ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Children_Therapists_t_ID",
@@ -596,11 +589,6 @@ namespace ADStarter.DataAccess.Migrations
                 name: "IX_Children_parent_ID",
                 table: "Children",
                 column: "parent_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Children_prog_ID",
-                table: "Children",
-                column: "prog_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Children_t_ID",

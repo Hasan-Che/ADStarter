@@ -108,14 +108,12 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("c_status")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int?>("c_step")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("parent_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("prog_ID")
                         .HasColumnType("int");
 
                     b.Property<int?>("t_ID")
@@ -124,8 +122,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.HasKey("c_myKid");
 
                     b.HasIndex("parent_ID");
-
-                    b.HasIndex("prog_ID");
 
                     b.HasIndex("t_ID");
 
@@ -764,18 +760,11 @@ namespace ADStarter.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ADStarter.Models.Program", "Program")
-                        .WithMany("Children")
-                        .HasForeignKey("prog_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("ADStarter.Models.Therapist", "Therapist")
                         .WithMany()
                         .HasForeignKey("t_ID");
 
                     b.Navigation("Parent");
-
-                    b.Navigation("Program");
 
                     b.Navigation("Therapist");
                 });
@@ -1022,8 +1011,6 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Program", b =>
                 {
-                    b.Navigation("Children");
-
                     b.Navigation("Schedules");
 
                     b.Navigation("SessionPrices");

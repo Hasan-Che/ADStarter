@@ -17,6 +17,8 @@
                 <div class="card">
                     <div class="card-body">
                         <form asp-action="ChildForm" method="post" class="needs-validation" novalidate>
+                            <input type="hidden" name="parent_ID" value="@ViewBag.ParentID" />
+
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label asp-for="c_myKid" class="form-label">Child's MyKid Number</label>

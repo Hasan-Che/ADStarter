@@ -7,6 +7,7 @@ using ADStarter.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
 using ADStarter.DataAccess.Repository.IRepository;
 using ADStarter.Models;
+using ADStarter.Models.ViewModels;
 using ADStarter.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,68 +28,59 @@ namespace ADStarterWeb.Areas.Parent.Controllers
 
             return View();
         }
-        
+
 
         [HttpPost]
         public IActionResult ParentForm(ADStarter.Models.Parent obj)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             obj.UserId = userId; // Set the user ID
-
             _unitOfWork.Parent.Add(obj);
             _unitOfWork.Save();
             TempData["success"] = "Parent Detail created successfully";
+            TempData["parent_ID"] = obj.parent_ID; // Use double quotes for TempData keys
             return RedirectToAction("ChildForm");
         }
-        //[HttpPost]
-        //public IActionResult ParentForm(ADStarter.Models.Parent obj)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //        var user = _unitOfWork.IdentityUser.GetFirstOrDefault(u => u.Id == userId);
-
-        //        if (user != null)
-        //        {
-        //            obj.User = user;
-        //            _unitOfWork.Parent.Add(obj);
-        //            _unitOfWork.Save();
-        //            TempData["success"] = "Parent Detail created successfully";
-        //            return RedirectToAction("ChildForm");
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "User not found.");
-        //        }
-        //    }
-
-        //    return View(obj);
-        //}
 
         public IActionResult ChildForm()
         {
+            // Retrieve parent_ID from TempData
+            if (TempData["parent_ID"] != null)
+            {
+                ViewBag.ParentID = TempData["parent_ID"];
+                TempData.Keep("parent_ID"); // Retain the parent_ID in TempData
+            }
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult ChildForm(ADStarter.Models.Parent obj)
+        public IActionResult ChildForm(ADStarter.Models.Child obj)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            obj.UserId = userId; // Set the user ID
+            if (TempData["parent_ID"] != null)
+            {
+                var parent_ID = (int)TempData["parent_ID"];
+                obj.parent_ID = parent_ID; // Set the parent ID
 
-            _unitOfWork.Parent.Add(obj);
-            _unitOfWork.Save();
-            TempData["success"] = "Child Detail created successfully";
-            return RedirectToAction("ChildForm");
+                _unitOfWork.Child.Add(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Child Detail created successfully";
+                TempData.Keep("parent_ID"); // Retain the parent_ID in TempData for subsequent requests
+                return RedirectToAction("ChildForm");
+            }
+
+            // Handle the case when parent_ID is not available
+            TempData["error"] = "Parent ID not found. Please try again.";
+            return RedirectToAction("ParentForm");
         }
+
         public IActionResult Edit(int? parent_ID)
             {
                 if (parent_ID == null || parent_ID == 0)
                 {
                     return NotFound();
                 }
-            ADStarter.Models.Parent? ParentFromDb = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
+                ADStarter.Models.Parent? ParentFromDb = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
                 //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
                 //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
 

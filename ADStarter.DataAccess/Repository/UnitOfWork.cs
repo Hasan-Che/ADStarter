@@ -14,11 +14,13 @@ namespace ADStarter.DataAccess.Repository
         private ApplicationDBContext _db;
         public IProgramRepository Program { get; private set; }
         public IParentRepository Parent { get; private set; }
+        public IChildRepository Child { get; private set; }
         public UnitOfWork(ApplicationDBContext db)
         {
             _db = db;
             Program = new ProgramRepository(_db);
             Parent = new ParentRepository(_db);
+            Child = new ChildRepository(_db);
         }
         
 

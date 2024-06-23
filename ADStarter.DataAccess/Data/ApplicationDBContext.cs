@@ -59,11 +59,14 @@ namespace ADStarter.DataAccess.Data
 
             // =======
 
+            
             modelBuilder.Entity<Child>()
-                .HasOne(c => c.Program)
-                .WithMany(p => p.Children)
-                .HasForeignKey(c => c.prog_ID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .Property(c => c.c_step)
+                .HasDefaultValue(0);
+
+            modelBuilder.Entity<Child>()
+                .Property(c => c.t_ID)
+                .HasDefaultValue(null);
 
             modelBuilder.Entity<Child>()
                 .HasOne(c => c.Parent)
@@ -153,5 +156,6 @@ namespace ADStarter.DataAccess.Data
                 .OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
