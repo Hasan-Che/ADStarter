@@ -1,4 +1,6 @@
-﻿<div class="page-header">
+﻿@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<div class="page-header">
     <div class="header-wrapper row m-0">
         <form class="form-inline search-full col" action="#" method="get">
             <div class="form-group w-100">
@@ -137,11 +139,11 @@
                         var roles = await UserManager.GetRolesAsync(user);
                         var role = roles.FirstOrDefault();
 
+
                         <div class="media profile-media">
                             <img class="b-r-10" src="/assets/images/dashboard/profile.png" alt="">
                             <div class="media-body">
                                 <span>Hello @UserManager.GetUserName(User)!</span>
-                                <p class="mb-0 font-roboto">@role<i class="middle fa fa-angle-down"></i></p>
                             </div>
                         </div>
                         <ul class="profile-dropdown onhover-show-div">
