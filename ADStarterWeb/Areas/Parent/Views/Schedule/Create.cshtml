@@ -10,7 +10,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Intervention with Consistency</h3>
+                    <h3>Register Program</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -21,14 +21,14 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">Program Controls</li>
+                        <li class="breadcrumb-item">Register Program </li>
                         <li class="breadcrumb-item active">Select Child</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <div class="container mt-4">
         <div class="card">
             <div class="card-header">
@@ -39,18 +39,23 @@
                 @using (Html.BeginForm("SelectProgram", "Schedule", FormMethod.Post, new { @class = "needs-validation", @novalidate = "novalidate" }))
                 {
                     @Html.AntiForgeryToken()
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="ChildId" class="form-label">Select Child</label>
-                        <select name="ChildId" id="ChildId" class="form-select">
+                        <select name="ChildId" id="ChildId" class="form-select" aria-describedby="ChildIdFeedback" required>
                             <option value="">Select a Child...</option>
                             @foreach (var child in Model)
                             {
                                 <option value="@child.c_myKid">@child.c_name</option>
                             }
                         </select>
-                        @Html.ValidationMessage("ChildId", "", new { @class = "text-danger" })
+                        <div id="ChildIdFeedback" class="invalid-feedback">
+                            Please select a child.
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Next</button>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary me-3">Next</button>
+                        <a class="btn btn-secondary" href="@Url.Action("Index", "Dashboard")">Back</a>
+                    </div>
                 }
             </div>
         </div>
@@ -59,6 +64,22 @@
 
 @section Scripts {
     <script>
-        // Optional: Add any necessary scripts
+        // JavaScript for form validation
+        (function () {
+            'use strict';
+
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.from(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
     </script>
 }

@@ -17,6 +17,7 @@ namespace ADStarter.DataAccess.Repository
         public IScheduleRepository Schedule { get; private set; }
         public IChildRepository Child { get; private set; }
         public ISlotRepository Slot { get; private set; }
+        public ITherapistRepository Therapist { get; private set; }
         public UnitOfWork(ApplicationDBContext db)
         {
             _db = db;
@@ -25,7 +26,8 @@ namespace ADStarter.DataAccess.Repository
             Slot = new SlotRepository(_db);
             Schedule = new ScheduleRepository(_db);
             Child = new ChildRepository(_db);
-           
+            Therapist = new TherapistRepository(_db);
+
 
         }
         

@@ -10,7 +10,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Screening and Consultation</h3>
+                    <h3>Add new program</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -34,7 +34,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Program Registration Form</h5>
+                        <h5>Create New Program Form</h5>
                         <span>Fill out the form below to enroll in a new program.</span>
                     </div>
                     <div class="card-body">
@@ -42,13 +42,13 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label" asp-for="prog_name">Program Name</label>
-                                    <input asp-for="prog_name" class="form-control" />
+                                    <input asp-for="prog_name" class="form-control" required />
                                     <span asp-validation-for="prog_name" class="text-danger"></span>
                                     <div class="invalid-feedback">Please enter a program name.</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" asp-for="prog_desc">Program Description</label>
-                                    <textarea asp-for="prog_desc" class="form-control"></textarea>
+                                    <textarea asp-for="prog_desc" class="form-control" required></textarea>
                                     <span asp-validation-for="prog_desc" class="text-danger"></span>
                                     <div class="invalid-feedback">Please enter a program description.</div>
                                 </div>
@@ -56,13 +56,13 @@
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <label class="form-label" asp-for="prog_summary">Program Summary</label>
-                                    <textarea asp-for="prog_summary" class="form-control"></textarea>
+                                    <textarea asp-for="prog_summary" class="form-control" required></textarea>
                                     <span asp-validation-for="prog_summary" class="text-danger"></span>
                                     <div class="invalid-feedback">Please enter a program summary.</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" asp-for="prog_sessionCount">Session Count</label>
-                                    <input asp-for="prog_sessionCount" class="form-control" />
+                                    <input asp-for="prog_sessionCount" class="form-control" required />
                                     <span asp-validation-for="prog_sessionCount" class="text-danger"></span>
                                     <div class="invalid-feedback">Please enter the session count.</div>
                                 </div>
@@ -70,13 +70,13 @@
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <label class="form-label" asp-for="prog_step">Step</label>
-                                    <input asp-for="prog_step" class="form-control" />
+                                    <input asp-for="prog_step" class="form-control" required />
                                     <span asp-validation-for="prog_step" class="text-danger"></span>
                                     <div class="invalid-feedback">Please enter the step.</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" asp-for="prog_WeekdayPrice">Weekday Price</label>
-                                    <input asp-for="prog_WeekdayPrice" class="form-control" />
+                                    <input asp-for="prog_WeekdayPrice" class="form-control" type="number" step="0.01" required />
                                     <span asp-validation-for="prog_WeekdayPrice" class="text-danger"></span>
                                     <div class="invalid-feedback">Please enter the weekday price.</div>
                                 </div>
@@ -84,7 +84,7 @@
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <label class="form-label" asp-for="prog_WeekendPrice">Weekend Price</label>
-                                    <input asp-for="prog_WeekendPrice" class="form-control" />
+                                    <input asp-for="prog_WeekendPrice" class="form-control" type="number" step="0.01" required />
                                     <span asp-validation-for="prog_WeekendPrice" class="text-danger"></span>
                                     <div class="invalid-feedback">Please enter the weekend price.</div>
                                 </div>
