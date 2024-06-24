@@ -1,5 +1,6 @@
 ﻿using ADStarter.DataAccess.Data;
 using ADStarter.DataAccess.Repository.IRepository;
+using ADStarter.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace ADStarter.DataAccess.Repository
         public IChildRepository Child { get; private set; }
         public ISlotRepository Slot { get; private set; }
         public ITherapistRepository Therapist { get; private set; }
+        public ITreatmentHistoryRepository TreatmentHistory { get; private set; }
         public UnitOfWork(ApplicationDBContext db)
         {
             _db = db;
@@ -27,8 +29,7 @@ namespace ADStarter.DataAccess.Repository
             Schedule = new ScheduleRepository(_db);
             Child = new ChildRepository(_db);
             Therapist = new TherapistRepository(_db);
-
-
+            TreatmentHistory = new TreatmentHistoryRepository(_db);
         }
         
 

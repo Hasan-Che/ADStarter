@@ -1,4 +1,4 @@
-﻿@model ADStarter.Models.ViewModels.ChildViewModel
+﻿@model ADStarter.Models.Child
 
 @{
     ViewData["Title"] = "Child Form";
@@ -17,6 +17,8 @@
                 <div class="card">
                     <div class="card-body">
                         <form asp-action="ChildForm" method="post" class="needs-validation" novalidate>
+                            <input type="hidden" name="parent_ID" value="@ViewBag.ParentID" />
+
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label asp-for="c_myKid" class="form-label">Child's MyKid Number</label>
@@ -75,7 +77,7 @@
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <button type="submit" class="btn btn-primary">Next</button>
-                                    <button type="submit" formaction="@Url.Action("ChildForm", "Registration", new { action = "skip" })" class="btn btn-secondary ms-2">Skip</button>
+                                    <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "Dashboard")'">Skip</button>
                                 </div>
                             </div>
                         </form>
