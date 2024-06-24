@@ -29,6 +29,7 @@
                         <div class="form-floating mb-3">
                             <div class="form-input position-relative">
                                 <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                                <div class="show-hide"><span class="show"></span></div>
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                         </div>
@@ -100,4 +101,14 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('.show-hide').on('click', function () {
+                var passwordField = $(this).siblings('input');
+                var type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+                passwordField.attr('type', type);
+                $(this).toggleClass('show');
+            });
+        });
+    </script>
 }

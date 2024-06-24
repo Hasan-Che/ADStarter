@@ -9,7 +9,7 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
         <div class="logo-icon-wrapper">
-            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+            <a asp-area="Admin" asp-controller="AdminDashboard" asp-action="Index">
                 <img class="img-fluid" src="/assets/images/logo/logoAD.png" alt="">
             </a>
         </div>
@@ -46,6 +46,23 @@
                             <svg class="fill-icon">
                                 <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
+                            <span>Add User</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Identity"asp-page="/Account/Register">Add New User Identity</a></li>
+                            @* <li><a asp-area="Admin" asp-controller="AddUser" asp-action="Add">Add New User</a></li> *@
+                            <li><a asp-area="Admin" asp-controller="UserList" asp-action="List">View User List</a></li>
+                            <li><a asp-area="Admin" asp-page="/AddUser/Add">Add New User Default</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
+                            </svg>
                             <span>Program</span>
                         </a>
                         <ul class="sidebar-submenu">
@@ -54,7 +71,6 @@
                             <li><a asp-area="Admin" asp-controller="AdminSchedule" asp-action="Index">Child Schedule</a></li>
                             <li><a asp-area="Admin" asp-controller="AdminChild" asp-action="Index">Child Assigned Therapist</a></li>
                         </ul>
-                    </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
