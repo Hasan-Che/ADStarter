@@ -129,7 +129,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     }
                     else if (roles.Contains("Therapist"))
                     {
-                        return RedirectToAction("Index", "TherapistDashboard", new { area = "Therapist"});
+                        return RedirectToAction("Index", "Dashboard", new { area = "Therapist"});
                     }
                     else if (roles.Contains("Parent"))
                     {
