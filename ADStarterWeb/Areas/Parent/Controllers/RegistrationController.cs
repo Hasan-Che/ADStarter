@@ -24,162 +24,151 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        //PARENT FORM
+        // PARENT FORM
         public IActionResult ParentForm()
         {
-
             return View();
         }
-
 
         [HttpPost]
         public IActionResult ParentForm(ADStarter.Models.Parent obj)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            obj.UserId = userId; // Set the user ID
+            obj.UserId = userId;
             _unitOfWork.Parent.Add(obj);
             _unitOfWork.Save();
             TempData["success"] = "Parent Detail created successfully";
-            TempData["parent_ID"] = obj.parent_ID; // Use double quotes for TempData keys
+            TempData["parent_ID"] = obj.parent_ID;
             return RedirectToAction("ChildForm");
         }
 
-        //CHILD FORM
-
+        // CHILD FORM
         public IActionResult ChildForm()
         {
-            // Retrieve parent_ID from TempData
             if (TempData["parent_ID"] != null)
             {
                 ViewBag.ParentID = TempData["parent_ID"];
-                TempData.Keep("parent_ID"); // Retain the parent_ID in TempData
+                TempData.Keep("parent_ID");
             }
-
             return View();
         }
 
         [HttpPost]
-        public IActionResult ChildForm(ADStarter.Models.Child obj)
+        public IActionResult ChildForm(ADStarter.Models.Child obj, string action)
         {
             if (TempData["parent_ID"] != null)
             {
                 var parent_ID = (int)TempData["parent_ID"];
-                obj.parent_ID = parent_ID; // Set the parent ID
+                obj.parent_ID = parent_ID;
+
+                if (action == "Skip")
+                {
+                    return RedirectToAction("Index", "Dashboard");
+                }
 
                 _unitOfWork.Child.Add(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Child Detail created successfully";
-                TempData["c_myKid"] = obj.c_myKid; // Use double quotes for TempData keys
+                TempData["c_myKid"] = obj.c_myKid;
+
                 return RedirectToAction("TreatmentHistoryForm");
             }
 
-            // Handle the case when parent_ID is not available
             TempData["error"] = "Parent ID not found. Please try again.";
             return RedirectToAction("Index");
         }
 
-        //TREATMENT HISTORY
+
+        // TREATMENT HISTORY FORM
         public IActionResult TreatmentHistoryForm()
         {
-            // Retrieve parent_ID from TempData
             if (TempData["c_myKid"] != null)
             {
                 ViewBag.cmyKid = TempData["c_myKid"];
-                TempData.Keep("c_myKid"); // Retain the parent_ID in TempData
+                TempData.Keep("c_myKid");
             }
-
             return View();
         }
 
         [HttpPost]
-        public IActionResult TreatmentHistoryForm(ADStarter.Models.TreatmentHistory obj)
+        public IActionResult TreatmentHistoryForm(ADStarter.Models.TreatmentHistory obj, string submit)
         {
             if (TempData["c_myKid"] != null)
             {
                 var c_myKid = (string)TempData["c_myKid"];
-                obj.c_myKid = c_myKid; // Set the parent ID
-
+                obj.c_myKid = c_myKid;
                 _unitOfWork.TreatmentHistory.Add(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Treatment History Detail created successfully";
-                TempData["c_myKid"] = obj.c_myKid; // Use double quotes for TempData keys
-                return RedirectToAction("Index");
+
+                if (submit == "Skip")
+                {
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                return RedirectToAction("Index", "Dashboard");
             }
 
-            // Handle the case when parent_ID is not available
             TempData["error"] = "Child MyKid not found. Please try again.";
             return RedirectToAction("Index");
         }
 
-
-
-
-
-
-        //GET
+        // EDIT PARENT
         public IActionResult Edit(int? parent_ID)
+        {
+            if (parent_ID == null || parent_ID == 0)
             {
-                if (parent_ID == null || parent_ID == 0)
-                {
-                    return NotFound();
-                }
-                ADStarter.Models.Parent? ParentFromDb = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
-                //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
-                //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
-
-                if (ParentFromDb == null)
-                {
-                    return NotFound();
-                }
-                return View(ParentFromDb);
+                return NotFound();
+            }
+            ADStarter.Models.Parent? ParentFromDb = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
+            if (ParentFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(ParentFromDb);
         }
-        //POST
+
         [HttpPost]
         public IActionResult Edit(ADStarter.Models.Parent obj)
         {
             if (ModelState.IsValid)
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                obj.UserId = userId; // Set the user ID
+                obj.UserId = userId;
                 _unitOfWork.Parent.Update(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "ParentDetail updated successfully";
                 return RedirectToAction("Index");
             }
             return View();
-
         }
 
-
-        //GET
+        // DELETE PARENT
         public IActionResult Delete(int? parent_ID)
+        {
+            if (parent_ID == null || parent_ID == 0)
             {
-                if (parent_ID == null || parent_ID == 0)
-                {
-                    return NotFound();
-                }
+                return NotFound();
+            }
             ADStarter.Models.Parent? parentFromDb = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
-
             if (parentFromDb == null)
-                {
-                    return NotFound();
-                }
-                return View(parentFromDb);
-            }
-
-        //POST
-            [HttpPost, ActionName("Delete")]
-            public IActionResult DeletePOST(int? parent_ID)
             {
-                ADStarter.Models.Parent? obj = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
-                if (obj == null)
-                {
-                    return NotFound();
-                }
-                _unitOfWork.Parent.Remove(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "ParentDetail deleted successfully";
-                return RedirectToAction("Index");
+                return NotFound();
             }
+            return View(parentFromDb);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? parent_ID)
+        {
+            ADStarter.Models.Parent? obj = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Parent.Remove(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "ParentDetail deleted successfully";
+            return RedirectToAction("Index");
         }
     }
+}

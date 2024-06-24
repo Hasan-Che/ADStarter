@@ -16,6 +16,7 @@
                 <div class="card">
                     <div class="card-body">
                         <form asp-action="TreatmentHistoryForm" method="post" class="needs-validation" novalidate>
+                            <input type="hidden" asp-for="c_myKid" value="@ViewBag.cmyKid" />
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label asp-for="th_pediatrician" class="form-label">Pediatrician</label>
@@ -49,7 +50,8 @@
                             </div>
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "Dashboard")'">Skip</button>
+                                    <button type="submit" name="submit" value="Submit" class="btn btn-primary mt-3">Submit</button>
                                 </div>
                             </div>
                         </form>
