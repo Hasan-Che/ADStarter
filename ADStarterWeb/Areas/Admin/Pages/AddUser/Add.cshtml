@@ -1,8 +1,9 @@
 ﻿@page
-@model LoginModel
+@using ADStarter.Utility
+@model ADStarterWeb.Areas.Admin.Pages.AddUser.AddModel
 @{
-    ViewData["Title"] = "Login Simple";
-    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
+    ViewData["Title"] = "Register Simple";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row m-0">
@@ -10,56 +11,56 @@
         <div class="login-card">
             <div>
                 <div>
-                    <a class="logo">
+                    <a class="logo" asp-controller="Dashboard" asp-action="Index">
                         <img class="img-fluid for-light" src="~/assets/images/logo/logoAD.png" style="width:200px" alt="login page">
-                        <img class="img-fluid for-dark" src="~/assets/images/logo/logoAD.png" alt="login page">
+                        <img class="img-fluid for-dark" src="~/assets/images/logo/logoAD.png" style="width:200px" alt="login page">
                     </a>
                 </div>
                 <div class="login-main">
-                    <form id="account" method="post" class="theme-form">
-                        <h4>Sign in to account</h4>
-                        <p>Enter your email & password to login</p>
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="theme-form">
+                        <h4>Create your account</h4>
+                        <p>Enter your personal details to create an account</p>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                        <label class="col-form-label">Email Address</label>
-                        <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">Email </label>
                             <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
-                        <label class="col-form-label">Password</label>
-                        <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">Password</label>
                             <div class="form-input position-relative">
-                                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="*********" />
                                 <div class="show-hide"><span class="show"></span></div>
-                                <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+
                         </div>
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">Confirm Password</label>
+                            <div class="form-input position-relative">
+                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="*********" />
+                                <div class="show-hide"><span class="show"></span></div>
+                            </div>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <div class="form-group">
+                                <label class="col-form-label pt-0">Select Role</label>
+                                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                    <option disabled selected>-Select Role-</option>
+                                </select>
+                            </div>
+                        }
+
                         <div class="form-group mb-0">
                             <div class="checkbox p-0">
                                 <input id="checkbox1" type="checkbox">
-                                <label class="text-muted" for="checkbox1">Remember password</label>
-                            </div><a class="link" asp-controller="Authentication" asp-action="ForgetPassword">Forgot password?</a>
-                            @* <div class="text-end mt-3">
-                                <button class="btn btn-primary btn-block w-100" type="submit" asp-controller="Dashboard" asp-action="Index">Sign in</button>
-                            </div> *@
-                        </div>
-                        @* <div class=" form-group mb-0">
-                            <div class="checkbox p-0">
-                                <div>
-                                    <label asp-for="Input.RememberMe" class="form-label">
-                                        <input class="form-check-input" asp-for="Input.RememberMe" />@Html.DisplayNameFor(m => m.Input.RememberMe)
-                                    </label>
-                                    <div><a class="link" asp-page="./ForgotPassword">Forgot password?</a></div>
-                                </div>
-                                
+                                <label class="text-muted" for="checkbox1">Agree with <a class="ms-2" href="#">Privacy Policy</a></label>
                             </div>
-                        </div> *@
-
-                        
-                        
-                        <div class="text-end mt-3">
-                            <button id="login-submit" type="submit" class="btn btn-primary btn-block w-100">Sign in</button>
+                            <button id="registerSubmit" type="submit" class="btn btn-primary btn-block w-100">Create Account</button>
                         </div>
-                        <h6 class="text-muted mt-4 or">Or Sign in with</h6>
+                        <h6 class="text-muted mt-4 or">Or sign up with</h6>
                         <div class="social mt-4">
                             <div class="btn-showcase">
                                 @{
@@ -88,9 +89,9 @@
                                 }
                             </div>
                         </div>
-                        <p class="mt-4 mb-0 text-center">
-                            Don't have account?
-                            <a class="ms-2" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Create Account</a>
+                        <p class="mt-4 mb-0">
+                            Already have an account?
+                            <a class="ms-2" asp-page="./Login">Sign in</a>
                         </p>
                     </form>
                 </div>

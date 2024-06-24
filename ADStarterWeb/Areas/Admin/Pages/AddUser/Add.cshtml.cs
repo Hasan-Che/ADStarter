@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -22,25 +22,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
-namespace ADStarterWeb.Areas.Identity.Pages.Account
+namespace ADStarterWeb.Areas.Admin.Pages.AddUser
 {
-    public class RegisterModel : PageModel
+    public class AddModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<AddModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public RegisterModel(
+        public AddModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             RoleManager<IdentityRole> roleManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<AddModel> logger,
             IEmailSender emailSender,
             IHttpContextAccessor httpContextAccessor)
         {
@@ -87,7 +87,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(SD.Role_Therapist).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Therapist)).GetAwaiter().GetResult();
@@ -198,7 +198,17 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
         private void PopulateRoles()
         {
-            Input.RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+            var roles = _roleManager.Roles.Select(x => x.Name).ToList();
+
+            if (roles == null || !roles.Any())
+            {
+                _logger.LogError("No roles found in the database.");
+                throw new InvalidOperationException("No roles found in the database.");
+            }
+
+            _logger.LogInformation($"Roles found: {string.Join(", ", roles)}");
+
+            Input.RoleList = roles.Select(i => new SelectListItem
             {
                 Text = i,
                 Value = i

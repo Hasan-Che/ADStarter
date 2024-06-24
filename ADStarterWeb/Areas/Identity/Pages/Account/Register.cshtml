@@ -20,28 +20,15 @@
                         <h4>Create your account</h4>
                         <p>Enter your personal details to create an account</p>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                        @* <div class="form-group">
-                            <label class="col-form-label pt-0">Your Name</label>
-                            
-                                <input asp-for="Input.Name" class="form-control" autocomplete="username" aria-required="true" placeholder="Full Name" />
-                                <span asp-validation-for="Input.Name" class="text-danger"></span>
-                        </div> *@
                         <div class="form-group">
                             <label class="col-form-label pt-0">Email </label>
                             <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label class="col-form-label">Password</label>
-                            <div class="form-input position-relative">
-                                <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
-                                <div class="show-hide"><span class="show"></span></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-form-label pt-0">Password</label>
                             <div class="form-input position-relative">
-                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="*********" />
                                 <div class="show-hide"><span class="show"></span></div>
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -50,7 +37,7 @@
                         <div class="form-group">
                             <label class="col-form-label pt-0">Confirm Password</label>
                             <div class="form-input position-relative">
-                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="confirm password" />
+                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="*********" />
                                 <div class="show-hide"><span class="show"></span></div>
                             </div>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
@@ -114,5 +101,14 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/assets/js/login.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.show-hide').on('click', function () {
+                var passwordField = $(this).siblings('input');
+                var type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+                passwordField.attr('type', type);
+                $(this).toggleClass('show');
+            });
+        });
+    </script>
 }

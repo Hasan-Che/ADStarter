@@ -1,14 +1,14 @@
-using ADStarter.Utility;
+﻿using ADStarter.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ADStarterWeb.Areas.Admin.Controllers
+namespace ADStarterWeb.Areas.Parent.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]
-    public class AdminDashboardController : Controller
+    public class UserListController : Controller
     {
-        public IActionResult Index() 
+        public IActionResult UserList()
         {
 
             return View();

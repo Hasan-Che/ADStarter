@@ -22,25 +22,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
-namespace ADStarterWeb.Areas.Identity.Pages.Account
+namespace ADStarterWeb.Areas.Admin.Controllers
 {
-    public class RegisterModel : PageModel
+    public class AddUserModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<AddUserModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public RegisterModel(
+        public AddUserModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             RoleManager<IdentityRole> roleManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<AddUserModel> logger,
             IEmailSender emailSender,
             IHttpContextAccessor httpContextAccessor)
         {
@@ -54,26 +54,54 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             _httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public string ReturnUrl { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public class InputModel
         {
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -85,6 +113,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             public string Name { get; set; }
         }
 
+
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
@@ -94,10 +123,14 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer_service)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Parent)).GetAwaiter().GetResult();
             }
-
-            Input = new InputModel();
-            PopulateRoles();
-
+            Input = new()
+            {
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -129,16 +162,15 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                         await _userManager.AddToRoleAsync(user, SD.Role_Parent);
                     }
 
+                    // Log in the user after registration
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    // Retrieve the user ID
+                    //var userId = user.Id
+                    // Redirect based on role with user ID
                     var userRoles = await _userManager.GetRolesAsync(user);
                     string userRole = userRoles.FirstOrDefault();
-                    if (User.IsInRole(SD.Role_Admin))
-                    {
-                        TempData["success"] = "New User Created Successfully";
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                    }
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
 
                     switch (userRole)
                     {
@@ -151,13 +183,16 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                         case "Admin":
                             returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
                             break;
-                        case "Customer Service":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                        case "CustomerService":
+                            returnUrl = Url.Content("~/CustomerService/ManageUsers");
                             break;
                         default:
                             returnUrl = Url.Content("~/");
                             break;
                     }
+
+                    //// Append user ID as query parameter
+                    //returnUrl += $"?id={userId}";
 
                     return LocalRedirect(returnUrl);
                 }
@@ -168,10 +203,10 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 }
             }
 
-            Input = new InputModel();
-            PopulateRoles();
+            // If we got this far, something failed, redisplay form
             return Page();
         }
+
 
         private IdentityUser CreateUser()
         {
@@ -194,15 +229,6 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
-        }
-
-        private void PopulateRoles()
-        {
-            Input.RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
-            {
-                Text = i,
-                Value = i
-            });
         }
     }
 }
