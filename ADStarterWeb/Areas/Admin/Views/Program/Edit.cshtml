@@ -46,14 +46,14 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label asp-for="prog_name" class="form-label"></label>
+                                        <label asp-for="prog_name" class="form-label">Program Name</label>
                                         <input asp-for="prog_name" class="form-control" />
                                         <span asp-validation-for="prog_name" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label asp-for="prog_desc" class="form-label"></label>
+                                        <label asp-for="prog_desc" class="form-label">Program Description</label>
                                         <textarea asp-for="prog_desc" class="form-control"></textarea>
                                         <span asp-validation-for="prog_desc" class="text-danger"></span>
                                     </div>
@@ -63,14 +63,14 @@
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label asp-for="prog_summary" class="form-label"></label>
+                                        <label asp-for="prog_summary" class="form-label">Program Summary</label>
                                         <textarea asp-for="prog_summary" class="form-control"></textarea>
                                         <span asp-validation-for="prog_summary" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label asp-for="prog_sessionCount" class="form-label"></label>
+                                        <label asp-for="prog_sessionCount" class="form-label">Program Session Count</label>
                                         <input asp-for="prog_sessionCount" class="form-control" />
                                         <span asp-validation-for="prog_sessionCount" class="text-danger"></span>
                                     </div>
@@ -80,14 +80,14 @@
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label asp-for="prog_step" class="form-label"></label>
+                                        <label asp-for="prog_step" class="form-label">Program Step</label>
                                         <input asp-for="prog_step" class="form-control" />
                                         <span asp-validation-for="prog_step" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label asp-for="prog_WeekdayPrice" class="form-label"></label>
+                                        <label asp-for="prog_WeekdayPrice" class="form-label">Program Weekday Price</label>
                                         <input asp-for="prog_WeekdayPrice" class="form-control" />
                                         <span asp-validation-for="prog_WeekdayPrice" class="text-danger"></span>
                                     </div>
@@ -97,7 +97,7 @@
                             <div class="row g-3 mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label asp-for="prog_WeekendPrice" class="form-label"></label>
+                                        <label asp-for="prog_WeekendPrice" class="form-label">Program Weekend Price</label>
                                         <input asp-for="prog_WeekendPrice" class="form-control" />
                                         <span asp-validation-for="prog_WeekendPrice" class="text-danger"></span>
                                     </div>
@@ -109,7 +109,7 @@
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                                    <a asp-action="ListPrograms" class="btn btn-secondary">Cancel</a>
                                 </div>
                             </div>
                         </form>

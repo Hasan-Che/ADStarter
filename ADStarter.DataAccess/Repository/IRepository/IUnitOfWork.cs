@@ -13,6 +13,7 @@ namespace ADStarter.DataAccess.Repository.IRepository
         IScheduleRepository Schedule { get; }
         IChildRepository Child { get; }
         ISlotRepository Slot { get; }
+        ITherapistRepository Therapist { get; }
         void Save();
     }
 }

@@ -135,28 +135,71 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 return NotFound("Child not found.");
             }
 
-                for (int i = 0; i < model.SelectedDates.Count; i++)
+            for (int i = 0; i < model.SelectedDates.Count; i++)
+            {
+                var schedule = new Schedule
                 {
-                    var schedule = new Schedule
-                    {
-                        t_ID = child.t_ID,
-                        session_datetime = model.SelectedDates[i],
-                        prog_ID = model.ProgramId,
-                        slot_ID = model.SlotIds[i],
-                        c_myKid = model.ChildId
-                    };
+                    t_ID = child.t_ID,
+                    session_datetime = model.SelectedDates[i],
+                    prog_ID = model.ProgramId,
+                    slot_ID = model.SlotIds[i],
+                    c_myKid = model.ChildId
+                };
 
-                    _unitOfWork.Schedule.Add(schedule);
-                }
+                _unitOfWork.Schedule.Add(schedule);
+            }
 
-                _unitOfWork.Save();
-                TempData["Success"] = "Schedules created successfully.";
-                return RedirectToAction(nameof(Create));
-            
+            _unitOfWork.Save();
+            TempData["Success"] = "Schedules created successfully.";
+            return RedirectToAction(nameof(Create));
 
-          
+
+
         }
 
+
+        // GET: Schedule/ViewChildSchedule
+
+        // GET: Schedule/ViewChildSchedule
+        public IActionResult ViewChildSchedule()
+        {
+            var userId = _userManager.GetUserId(User);
+            var parent = _unitOfWork.Parent.GetFirstOrDefault(p => p.UserId == userId);
+
+            if (parent == null)
+            {
+                return NotFound("Parent not found.");
+            }
+
+            var children = _unitOfWork.Child.GetAll(c => c.parent_ID == parent.parent_ID).ToList();
+            var scheduleList = new List<ChildScheduleViewModel>();
+            var today = DateTime.Today;
+
+            foreach (var child in children)
+            {
+                var schedules = _unitOfWork.Schedule.GetAll(s => s.c_myKid == child.c_myKid && s.session_datetime >= today)
+                                                     .OrderBy(s => s.session_datetime)
+                                                     .ToList();
+
+                foreach (var schedule in schedules)
+                {
+                    var slot = _unitOfWork.Slot.GetFirstOrDefault(sl => sl.slot_ID == schedule.slot_ID);
+                    var program = _unitOfWork.Program.GetFirstOrDefault(p => p.prog_ID == schedule.prog_ID);
+                    var therapist = _unitOfWork.Therapist.GetFirstOrDefault(t => t.t_ID == child.t_ID);
+
+                    scheduleList.Add(new ChildScheduleViewModel
+                    {
+                        TherapistName = therapist?.t_name ?? "Not Assigned", // Display therapist name instead of t_ID
+                        ChildName = child.c_name,
+                        SessionDate = schedule.session_datetime,
+                        SlotTime = slot?.slot_time.ToString(),
+                        ProgramName = program?.prog_name
+                    });
+                }
+            }
+
+            return View(scheduleList);
+        }
 
 
 
