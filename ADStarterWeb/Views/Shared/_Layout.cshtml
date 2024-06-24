@@ -40,14 +40,10 @@
             </div>
         </div>
         <partial name="_Script" />
-        @RenderSection("Script", required: false)
-        @* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
-        <script src="~/assets/js/icons/feather-icon/feather.min.js"></script>
-        <script src="~/assets/js/icons/feather-icon/feather-icon.js"></script>
-        <script src="~/assets/js/config.js"></script>
-        <script src="~/assets/js/script.js"></script> *@
-
+        @if (IsSectionDefined("Scripts"))
+        {
+            RenderSection("Scripts");
+        }
     </body>
 }
 else
@@ -85,26 +81,22 @@ else
             </div>
         </div>
         <partial name="_Script" />
-        @* @if (IsSectionDefined("scripts"))
+        <script src="../assets/js/sidebar-menu.js"></script>
+        <script src="../assets/js/slick/slick.min.js"></script>
+        <script src="../assets/js/slick/slick.js"></script>
+        <script src="../assets/js/header-slick.js"></script>
+        <script src="../assets/js/script.js"></script>
+        @if (IsSectionDefined("Scripts"))
         {
-            RenderSection("scripts");
-        } *@
+            RenderSection("Scripts");
+        }
         @* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
         <script src="~/assets/js/icons/feather-icon/feather.min.js"></script>
         <script src="~/assets/js/icons/feather-icon/feather-icon.js"></script>
         <script src="~/assets/js/config.js"></script>
         <script src="~/assets/js/script.js"></script> *@
-        <script src="../assets/js/sidebar-menu.js"></script>
-        <script src="../assets/js/slick/slick.min.js"></script>
-        <script src="../assets/js/slick/slick.js"></script>
-        <script src="../assets/js/header-slick.js"></script>
-        <!-- Plugins JS Ends-->
-        <!-- Theme js-->
-        <!-- Plugins JS Ends-->
-        <!-- Theme js-->
-        <script src="../assets/js/script.js"></script>
-        @RenderSection("Script", required: false)
+        @*@RenderSection("Script", required: false)*@
     </body>
 }
 </html>
