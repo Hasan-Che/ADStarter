@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace ADStarter.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IProgramRepository Program { get; }
+        IParentRepository Parent { get; }
+        IScheduleRepository Schedule { get; }
+        IChildRepository Child { get; }
+        ISlotRepository Slot { get; }
         void Save();
     }
 }

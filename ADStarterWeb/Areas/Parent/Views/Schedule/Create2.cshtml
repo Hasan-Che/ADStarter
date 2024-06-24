@@ -1,4 +1,4 @@
-﻿@model ADStarter.Models.ViewModels.ScheduleViewModel
+﻿@* @model ADStarter.Models.ViewModels.ScheduleViewModel
 @{
     ViewData["Title"] = "Create Program";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -35,7 +35,6 @@
                     <div class="card-header">
                         <h5>Program Registration Form</h5>
                         <span>Fill out the form below to enroll in a new program.</span>
-
                     </div>
                     <div class="card-body">
                         <form id="programForm" class="needs-validation" novalidate method="post" asp-action="Create2">
@@ -156,3 +155,4 @@
         })();
     </script>
 }
+ *@

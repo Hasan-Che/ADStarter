@@ -1,153 +1,145 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ADStarter.Models.ViewModels;
 using ADStarter.DataAccess.Data;
-using Microsoft.EntityFrameworkCore;
 using ADStarter.Models;
+using System.Security.Claims;
+using ADStarter.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Identity;
+using ADStarter.DataAccess.Repository.IRepository;
+using ADStarter.Models;
+using ADStarter.Utility;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ADStarterWeb.Areas.Parent.Controllers
 {
     [Area("Parent")]
     public class RegistrationController : Controller
     {
-        private readonly ApplicationDBContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        private int _id = 11;
-
-        public RegistrationController(ApplicationDBContext db)
+        public RegistrationController(IUnitOfWork unitOfWork)
         {
-            _db = db; 
+            _unitOfWork = unitOfWork;
         }
-
-        [HttpGet]
         public IActionResult ParentForm()
         {
-            return View(new ParentViewModel());
+
+            return View();
         }
+        
 
         [HttpPost]
-        public IActionResult ParentForm(ParentViewModel model)
+        public IActionResult ParentForm(ADStarter.Models.Parent obj)
         {
-            if (ModelState.IsValid)
-            {
-                var parent = new ADStarter.Models.Parent
-                {
-                    // Map properties from ParentViewModel to Parent entity
-                    f_name = model.f_name,
-                    f_phoneNum = model.f_phoneNum,
-                    f_race = model.f_race,
-                    f_address = model.f_address,
-                    f_Waddress = model.f_Waddress,
-                    f_email = model.f_email,
-                    f_occupation = model.f_occupation,
-                    f_status = model.f_status,
-                    m_name = model.m_name,
-                    m_phoneNum = model.m_phoneNum,
-                    m_race = model.m_race,
-                    m_address = model.m_address,
-                    m_Waddress = model.m_Waddress,
-                    m_email = model.m_email,
-                    m_status = model.m_status,
-                    fm_income = model.fm_income,
-                };
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            obj.UserId = userId; // Set the user ID
 
-                _db.Parents.Add(parent);
-                _db.SaveChanges();
-
-                TempData["ParentID"] = parent.parent_ID;
-                TempData.Keep("ParentID");
-
-                return RedirectToAction("ChildForm");
-            }
-            return View(model);
+            _unitOfWork.Parent.Add(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Parent Detail created successfully";
+            return RedirectToAction("ChildForm");
         }
+        //[HttpPost]
+        //public IActionResult ParentForm(ADStarter.Models.Parent obj)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //        var user = _unitOfWork.IdentityUser.GetFirstOrDefault(u => u.Id == userId);
 
+        //        if (user != null)
+        //        {
+        //            obj.User = user;
+        //            _unitOfWork.Parent.Add(obj);
+        //            _unitOfWork.Save();
+        //            TempData["success"] = "Parent Detail created successfully";
+        //            return RedirectToAction("ChildForm");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "User not found.");
+        //        }
+        //    }
 
-        [HttpGet]
+        //    return View(obj);
+        //}
+
         public IActionResult ChildForm()
         {
-            if (TempData["ParentID"] == null)
-            {
-                return RedirectToAction("ParentForm");
-            }
 
-            var parentID = (int)TempData["ParentID"];
-            var childViewModel = new ChildViewModel
-            {
-                parent_ID = parentID,
-                c_status = "Step One" // Set default value here
-            };
-
-            TempData.Keep("ParentID"); // Retain TempData for the next request
-            return View(childViewModel);
+            return View();
         }
 
         [HttpPost]
-        public IActionResult ChildForm(ChildViewModel model, string action)
+        public IActionResult ChildForm(ADStarter.Models.Parent obj)
         {
-            if (action == "skip")
-            {
-                return RedirectToAction(nameof(Index), "Dashboard");
-            }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            obj.UserId = userId; // Set the user ID
 
-            if (ModelState.IsValid)
+            _unitOfWork.Parent.Add(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Child Detail created successfully";
+            return RedirectToAction("ChildForm");
+        }
+        public IActionResult Edit(int? parent_ID)
             {
-                var child = new Child
+                if (parent_ID == null || parent_ID == 0)
                 {
-                    // Map properties from ChildViewModel to Child entity
-                    parent_ID = model.parent_ID,
-                    c_myKid = model.c_myKid,
-                    prog_ID = model.prog_ID,
-                    c_name = model.c_name,
-                    c_age = model.c_age,
-                    c_gender = model.c_gender,
-                    c_dob = model.c_dob,
-                    c_nationality = model.c_nationality,
-                    c_religion = model.c_religion,
-                    c_race = model.c_race,
-                    c_status = model.c_status
-                };
-
-                _db.Children.Add(child);
-                _db.SaveChanges();
-
-                TempData["ChildData"] = child;
-                return RedirectToAction("TreatmentHistoryForm");
-            }
-
-            // Log ModelState errors for debugging
-            foreach (var modelState in ModelState.Values)
-            {
-                foreach (var error in modelState.Errors)
-                {
-                    Console.WriteLine(error.ErrorMessage);
+                    return NotFound();
                 }
+            ADStarter.Models.Parent? ParentFromDb = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
+                //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
+                //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
+
+                if (ParentFromDb == null)
+                {
+                    return NotFound();
+                }
+                return View(ParentFromDb);
             }
-
-            TempData.Keep("ParentID"); // Retain TempData for the next request
-            return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult TreatmentHistoryForm()
-        {
-            return View(new TreatmentHistoryViewModel());
-        }
-
-        [HttpPost]
-        public IActionResult TreatmentHistoryForm(TreatmentHistoryViewModel model)
-        {
-            if (ModelState.IsValid)
+            [HttpPost]
+            public IActionResult Edit(ADStarter.Models.Parent obj)
             {
-                var parentData = TempData["ParentData"] as ParentViewModel;
-                var childData = TempData["ChildData"] as ChildViewModel;
+                if (ModelState.IsValid)
+                {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                obj.UserId = userId; // Set the user ID
+                _unitOfWork.Parent.Update(obj);
+                    _unitOfWork.Save();
+                    TempData["success"] = "ParentDetail updated successfully";
+                    return RedirectToAction("Index");
+                }
+                return View();
 
-                // Save Parent, Child, and TreatmentHistory data to the database
-                // Your save logic here
-
-                return RedirectToAction(nameof(Index), "Dashboard");
             }
 
-            return View(model);
+            public IActionResult Delete(int? parent_ID)
+            {
+                if (parent_ID == null || parent_ID == 0)
+                {
+                    return NotFound();
+                }
+            ADStarter.Models.Parent? parentFromDb = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
+
+            if (parentFromDb == null)
+                {
+                    return NotFound();
+                }
+                return View(parentFromDb);
+            }
+            [HttpPost, ActionName("Delete")]
+            public IActionResult DeletePOST(int? parent_ID)
+            {
+                ADStarter.Models.Parent? obj = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
+                if (obj == null)
+                {
+                    return NotFound();
+                }
+                _unitOfWork.Parent.Remove(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "ParentDetail deleted successfully";
+                return RedirectToAction("Index");
+            }
         }
     }
-}

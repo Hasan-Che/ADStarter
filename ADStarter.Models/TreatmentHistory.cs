@@ -8,7 +8,7 @@ namespace ADStarter.Models
     public partial class TreatmentHistory
     {
         [Key]
-        public int c_myKid { get; set; }
+        public string c_myKid { get; set; }
 
         [StringLength(100)]
         public string th_pediatrician { get; set; }

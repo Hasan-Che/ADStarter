@@ -1,0 +1,38 @@
+﻿@model ADStarter.Models.ViewModels.ScheduleViewModel
+
+@{
+    ViewData["Title"] = "Select Program";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h3>Select Program</h3>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Select Program</h5>
+                <span>Select a program for scheduling.</span>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("SelectDateAndSlot", "Schedule", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label for="prog_ID" class="form-label">Select Program</label>
+                        @Html.DropDownListFor(m => m.prog_ID, (SelectList)ViewBag.Programs, "Select Program...", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.prog_ID, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.HiddenFor(m => m.ChildId)
+                    <button type="submit" class="btn btn-primary">Next</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

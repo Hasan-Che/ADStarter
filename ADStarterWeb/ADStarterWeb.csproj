@@ -24,6 +24,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.12" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ADStarter.Models\ADStarter.Models.csproj" />
     <ProjectReference Include="..\ADStarter.Utility\ADStarter.Utility.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
