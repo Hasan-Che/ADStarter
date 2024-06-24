@@ -15,7 +15,22 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Invoice()
+        public IActionResult CreateInvoice()
+        {
+            return View();
+        }
+
+        public IActionResult ManageInvoice()
+        {
+            return View();
+        }
+
+        public IActionResult ManagePayment()
+        {
+            return View();
+        }
+
+        public IActionResult HistoryPayment()
         {
             return View();
         }
