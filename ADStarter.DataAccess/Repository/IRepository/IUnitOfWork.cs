@@ -15,6 +15,7 @@ namespace ADStarter.DataAccess.Repository.IRepository
         ISlotRepository Slot { get; }
         ITherapistRepository Therapist { get; }
         ITreatmentHistoryRepository TreatmentHistory { get; }
+        IInvoiceRepository Invoice { get; }
         void Save();
     }
 }

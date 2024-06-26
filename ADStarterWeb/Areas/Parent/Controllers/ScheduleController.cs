@@ -72,35 +72,6 @@ namespace ADStarterWeb.Areas.Parent.Controllers
         }
 
         // GET: Schedule/SelectDateAndSlot
-        // GET: Schedule/SelectDateAndSlot
-        //public IActionResult SelectDateAndSlot(int prog_ID, string childId)
-        //{
-        //    var program = _unitOfWork.Program.GetFirstOrDefault(p => p.prog_ID == prog_ID);
-        //    if (program == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var allSlots = _unitOfWork.Slot.GetAll().ToList();
-
-        //    var viewModel = new CreateScheduleViewModel
-        //    {
-        //        ProgramId = prog_ID,
-        //        ChildId = childId,
-        //        AvailableSlots = allSlots.Select(s => new SlotViewModel
-        //        {
-        //            SlotId = s.slot_ID,
-        //            SlotTime = s.slot_time.ToString()
-        //        }).ToList(),
-        //        ProgSessionCount = program.prog_sessionCount ,// Assign program session count to view model
-        //          SlotIds = new List<int>() // Initialize SlotIds as an empty list
-        //    };
-
-        //    return View(viewModel);
-        //}
-
-
-        // GET: Schedule/SelectDateAndSlot
         public IActionResult SelectDateAndSlot(int prog_ID, string childId)
         {
             var program = _unitOfWork.Program.GetFirstOrDefault(p => p.prog_ID == prog_ID);
@@ -119,11 +90,6 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             return View(viewModel);
         }
 
-
-
-
-        // POST: Schedule/CreateSchedule
-        // POST: Schedule/CreateSchedule
         // POST: Schedule/CreateSchedule
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -147,18 +113,53 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 };
 
                 _unitOfWork.Schedule.Add(schedule);
+                _unitOfWork.Save(); // Save the schedule first to get the generated ID
+
+                // Create the corresponding invoice
+                CreateInvoiceForSchedule(schedule);
             }
 
-            _unitOfWork.Save();
             TempData["Success"] = "Schedules created successfully.";
             return RedirectToAction(nameof(Create));
-
-
-
         }
 
+        private void CreateInvoiceForSchedule(Schedule schedule)
+        {
+            // Determine the due date (30 days after session_datetime)
+            DateTime dueDate = schedule.session_datetime.AddDays(30);
 
-        // GET: Schedule/ViewChildSchedule
+            // Fetch the program to determine the invoice amount
+            var program = _unitOfWork.Program.GetFirstOrDefault(p => p.prog_ID == schedule.prog_ID);
+            if (program == null)
+            {
+                // Handle the error case where the program is not found
+                throw new Exception("Program not found");
+            }
+
+            // Determine if the session date is a weekend or weekday
+            double invoiceAmount;
+            if (schedule.session_datetime.DayOfWeek == DayOfWeek.Friday || schedule.session_datetime.DayOfWeek == DayOfWeek.Saturday)
+            {
+                invoiceAmount = program.prog_WeekendPrice/program.prog_sessionCount;
+            }
+            else
+            {
+                invoiceAmount = program.prog_WeekdayPrice/program.prog_sessionCount;
+            }
+
+            // Create the invoice object
+            Invoice invoice = new Invoice
+            {
+                c_myKid = schedule.c_myKid,
+                schedule_ID = schedule.schedule_ID,
+                due_date = dueDate,
+                invoice_amount = invoiceAmount
+            };
+
+            // Add the new invoice to the database
+            _unitOfWork.Invoice.Add(invoice);
+            _unitOfWork.Save();
+        }
 
         // GET: Schedule/ViewChildSchedule
         public IActionResult ViewChildSchedule()
@@ -189,7 +190,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
 
                     scheduleList.Add(new ChildScheduleViewModel
                     {
-                        TherapistName = therapist?.t_name ?? "Not Assigned", // Display therapist name instead of t_ID
+                        TherapistName = therapist?.t_name ?? "Not Assigned",
                         ChildName = child.c_name,
                         SessionDate = schedule.session_datetime,
                         SlotTime = slot?.slot_time.ToString(),
@@ -200,34 +201,5 @@ namespace ADStarterWeb.Areas.Parent.Controllers
 
             return View(scheduleList);
         }
-
-
-
-        //}
-
-        //// Repopulate AvailableSlots
-        //var allSlots = _unitOfWork.Slot.GetAll().ToList();
-        //model.AvailableSlots = allSlots.Select(s => new SlotViewModel
-        //{
-        //    SlotId = s.slot_ID,
-        //    SlotTime = s.slot_time.ToString()
-        //}).ToList();
-
-        //// Repopulate SelectedDates if null or empty
-        //if (model.SelectedDates == null || !model.SelectedDates.Any())
-        //{
-        //    var program = _unitOfWork.Program.GetFirstOrDefault(p => p.prog_ID == model.ProgramId);
-        //    if (program != null)
-        //    {
-        //        model.SelectedDates = Enumerable.Range(0, program.prog_sessionCount)
-        //                                        .Select(i => DateTime.Now.Date.AddDays(i))
-        //                                        .ToList();
-        //    }
-        //}
-
-        //return View("SelectDateAndSlot", model);
-
-
-
     }
 }
