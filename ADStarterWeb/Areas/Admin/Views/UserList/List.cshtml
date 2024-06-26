@@ -67,7 +67,7 @@
                                                 }
                                             </td>
                                             <td class="text-end">
-                                                <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", "UserList", new { id = user.UserId, area = "Admin" })">
+                                                <a class="btn btn-primary btn-sm" href="@Url.Action("AddDetails", "UserList", new {area = "Admin" })">
                                                     <i class="fa fa-pencil"></i> Edit
                                                 </a>
                                                 <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "UserList", new { id = user.UserId, area = "Admin" })">

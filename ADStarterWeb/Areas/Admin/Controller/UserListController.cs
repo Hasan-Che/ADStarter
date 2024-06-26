@@ -44,5 +44,9 @@ namespace ADStarterWeb.Areas.Admin.Controllers
 
             return View(userRolesViewModel);
         }
+        public IActionResult AddDetails()
+        {
+            return View();
+        }
     }
 }
