@@ -1,6 +1,8 @@
-﻿
+﻿@using ADStarter.Models.ViewModels
+@model List<UserRolesViewModel>
+
 @{
-    ViewData["Title"] = "List Of User";
+    ViewData["Title"] = "User List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +11,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Edit Profile</h3>
+                    <h3>User List</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -34,8 +36,11 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add User Details</h4>
-                            <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
+                            <h4 class="card-title mb-0">User List</h4>
+                            <div class="card-options">
+                                <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                                <a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+                            </div>
                         </div>
                         <div class="table-responsive add-project">
                             <table class="table card-table table-vcenter text-nowrap">
@@ -43,8 +48,8 @@
                                     <tr>
                                         <th>User ID</th>
                                         <th>Email</th>
-                                        <th>Roles</th>
-                                        <th></th>
+                                        <th>Role(s)</th>
+                                        <th></th> <!-- Added for action buttons -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,11 +58,21 @@
                                         <tr>
                                             <td>@user.UserId</td>
                                             <td>@user.Email</td>
-                                            <td>@string.Join(", ", user.Roles)</td>
+                                            <td>
+                                                @foreach (var role in user.Roles)
+                                                {
+                                                    <span>@role</span>
+
+                                                    <br />
+                                                }
+                                            </td>
                                             <td class="text-end">
-                                                <a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a>
-                                                <a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a>
-                                                <a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a>
+                                                <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", "UserList", new { id = user.UserId, area = "Admin" })">
+                                                    <i class="fa fa-pencil"></i> Edit
+                                                </a>
+                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "UserList", new { id = user.UserId, area = "Admin" })">
+                                                    <i class="fa fa-trash"></i> Delete
+                                                </a>
                                             </td>
                                         </tr>
                                     }
@@ -71,7 +86,8 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
-@section Script {
+
+@section Scripts {
     <!-- Plugins JS start-->
     <script src="../assets/js/sidebar-menu.js"></script>
     <script src="../assets/js/slick/slick.min.js"></script>
