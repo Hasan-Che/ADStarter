@@ -1,31 +1,31 @@
-﻿@model IEnumerable<ADStarter.Models.ViewModels.ChildScheduleViewModel>
+﻿<!-- Areas/Therapist/Views/AssignedChild/Index.cshtml -->
+@model List<ADStarter.Models.ViewModels.AssignedChildViewModel>
 
 @{
-    ViewData["Title"] = "View Child Schedule";
+    ViewData["Title"] = "Assigned Children";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
-            <h3>Child Schedule</h3>
+            <h3>Assigned Children</h3>
         </div>
     </div>
 
     <div class="container mt-4">
         <div class="card">
             <div class="card-header">
-                <h5>Schedule</h5>
+                <h5>Children List</h5>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Child Name</th>
-                            <th>Therapist Name</th>
-                            <th>Session Date</th>
-                            <th>Slot Time</th>
-                            <th>Program Name</th>
+                            <th>Age</th>
+                            <th>C-Step</th>
+                            <th>Gender</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,10 +33,9 @@
                         {
                             <tr>
                                 <td>@item.ChildName</td>
-                                <td>@item.TherapistName</td>
-                                <td>@item.SessionDate.ToString("yyyy-MM-dd")</td>
-                                <td>@item.SlotTime</td>
-                                <td>@item.ProgramName</td>
+                                <td>@item.Age</td>
+                                <td>@item.CStep</td>
+                                <td>@item.Gender</td>
                             </tr>
                         }
                     </tbody>

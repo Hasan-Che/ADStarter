@@ -65,15 +65,9 @@
                                     <span asp-validation-for="ReportRemark" class="text-danger"></span>
                                 </div>
 
-                                <div class="card-body">
-                                    <label asp-for="ReportFile">Upload File:</label>
-                                    <div class="dropzone" id="singleFileUpload">
-                                        <div class="dz-message needsclick">
-                                            <i class="icon-cloud-up"></i>
-                                            <h6>Drop files here or click to upload.</h6>
-                                            <span>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label asp-for="ReportFile" class="control-label"></label>
+                                    <input type="file" asp-for="ReportFile" class="form-control" />
                                     <span asp-validation-for="ReportFile" class="text-danger"></span>
                                 </div>
 

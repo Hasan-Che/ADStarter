@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label for="therapistId">Select Therapist:</label>
                         <select id="therapistId" name="therapistId" class="form-control">
-                            <option value="">Not Assigned</option>
+                            <option value="" disabled selected>Not Assigned</option>
                             @foreach (var therapist in ViewBag.Therapists)
                             {
                                 <option value="@therapist.t_ID">@therapist.t_name</option>

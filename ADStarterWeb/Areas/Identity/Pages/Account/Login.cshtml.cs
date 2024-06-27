@@ -123,7 +123,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin"});
                     }
-                    else if (roles.Contains("CustomerService"))
+                    else if (roles.Contains("Customer Service"))
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "CustomerService"});
                     }

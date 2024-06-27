@@ -1,32 +1,29 @@
-﻿@model List<ADStarter.Models.ViewModels.ParentReportViewModel>
-
+﻿@model List<ADStarter.Models.ViewModels.PendingReportViewModel>
 @{
-    ViewData["Title"] = "Child Report";
+    ViewData["Title"] = "Pending Reports";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
-           <h3>Child Report</h3>
+            <h3>Pending Reports</h3>
         </div>
     </div>
 
     <div class="container mt-4">
         <div class="card">
             <div class="card-header">
-                <h5>Schedule</h5>
+                <h5>Pending Session Reports</h5>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Child Name</th>
-                            <th>Session Date</th>
+                            <th>Report Date</th>
                             <th>Program Name</th>
                             <th>Slot Time</th>
-                            <th>Report Remarks</th>
-                            <th>Report Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -35,20 +32,11 @@
                         {
                             <tr>
                                 <td>@item.ChildName</td>
-                                <td>@item.SessionDateTime.ToString("yyyy-MM-dd")</td>
+                                <td>@item.ReportDateTime.ToString("yyyy-MM-dd")</td>
                                 <td>@item.ProgramName</td>
                                 <td>@item.SlotTime</td>
-                                <td>@item.ReportRemark</td>
-                                <td style="color: @(item.ReportStatus == "Approved" ? "green" : "red")">@item.ReportStatus</td>
                                 <td>
-                                    @if (!string.IsNullOrEmpty(item.ReportFile))
-                                    {
-                                        <a href="@Url.Action("DownloadReport", "ParentReport", new { fileName = item.ReportFile })" class="btn btn-primary">Download Report</a>
-                                    }
-                                    else
-                                    {
-                                        <span>No Report Available</span>
-                                    }
+                                    <a href="@Url.Action("Update", "Report", new { area = "CustomerService", scheduleId = item.ScheduleId })" class="btn btn-primary">Update Report</a>
                                 </td>
                             </tr>
                         }
