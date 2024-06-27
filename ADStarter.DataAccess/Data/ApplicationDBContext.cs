@@ -20,13 +20,12 @@ namespace ADStarter.DataAccess.Data
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Program> Programs { get; set; }
-
         public DbSet<Report> Reports { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Slot> Slots { get; set; }
         public DbSet<Therapist> Therapists { get; set; }
         public DbSet<TreatmentHistory> TreatmentHistories { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

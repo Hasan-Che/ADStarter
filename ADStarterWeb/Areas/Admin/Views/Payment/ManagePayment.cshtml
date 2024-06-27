@@ -34,7 +34,7 @@
                                 </svg>
                             </a>
                         </li>
-                        li class="breadcrumb-item">Billing</li>
+                        <li class="breadcrumb-item">Billing</li>
                         <li class="breadcrumb-item">Payments</li>
                         <li class="breadcrumb-item active">Manage Payments</li>
                     </ol>
@@ -170,7 +170,7 @@
             $('#invoiceDate').text(formattedDate);
 
             // Set default status to "Pending"
-            $('#invoiceStatus').text('Pending');
+            $('#invoiceStatus').text('Due');
 
             // Fetch Programs
             $.ajax({

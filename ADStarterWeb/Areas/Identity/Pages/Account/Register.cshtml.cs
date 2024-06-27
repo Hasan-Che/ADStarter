@@ -146,13 +146,13 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                             returnUrl = Url.Content("~/Parent/Dashboard/Index");
                             break;
                         case "Therapist":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                            returnUrl = Url.Content("~/Therapist/Dashboard/Index");
                             break;
                         case "Admin":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                            returnUrl = Url.Content("~/Admin/Dashboard/Index");
                             break;
                         case "Customer Service":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
+                            returnUrl = Url.Content("~/CustomerService/Dashboard/Index");
                             break;
                         default:
                             returnUrl = Url.Content("~/");

@@ -13,18 +13,18 @@ namespace ADStarter.Models
 
         public double pay_amount { get; set; }
 
+        public double pay_balance { get; set; }
+
         public DateTime pay_date { get; set; }
 
         [StringLength(255)]
-        public string pay_desc { get; set; }
+        public string pay_desc { get; set; } // Status of payment: pending or paid
 
-        public double pay_balance { get; set; }
-
-        public int receipt_id { get; set; }
+        public string stripe_charge_id { get; set; } // Stripe charge ID
 
         public string c_myKid { get; set; }
 
-        public int a_ID { get; set; }
+        public int a_ID { get; set; } // Admin ID used in accessing the list of Payments from the admin side
 
         public int invoice_ID { get; set; }
 

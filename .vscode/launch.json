@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/ADStarter.DataAccess",
-      "program": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/ADStarter.DataAccess/build/Debug/outDebug"
+      "cwd": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/ADStarterWeb",
+      "program": "/Users/hasancheabdullah/Documents/GitHub/ADStarter/ADStarterWeb/build/Debug/outDebug"
     }
   ]
 }

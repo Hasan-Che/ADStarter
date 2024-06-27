@@ -29,10 +29,13 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 return NotFound("Parent not found.");
             }
 
-            var invoices = _unitOfWork.Invoice.GetAll(i => i.Child.parent_ID == parent.parent_ID, includeProperties: "Child,Schedule")
-                                               .ToList();
+            var invoices = _unitOfWork.Invoice.GetAll(
+                i => i.Child.parent_ID == parent.parent_ID,
+                includeProperties: "Child,Schedule,Schedule.Program"
+            ).ToList();
 
             return View(invoices);
         }
+
     }
 }

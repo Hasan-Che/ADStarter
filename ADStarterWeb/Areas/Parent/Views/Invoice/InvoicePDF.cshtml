@@ -1,0 +1,18 @@
+@model ADStarter.Models.Invoice
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice PDF</title>
+</head>
+<body>
+    <h1>Invoice Details</h1>
+    <p><strong>Invoice ID:</strong> @Model.invoice_ID</p>
+    <p><strong>Child Name:</strong> @Model.Child.c_name</p>
+    <p><strong>Program Name:</strong> @Model.Schedule.Program.prog_name</p>
+    <p><strong>Session Date:</strong> @Model.Schedule.session_datetime</p>
+    <p><strong>Due Date:</strong> @Model.due_date</p>
+    <p><strong>Amount (RM):</strong> @Model.invoice_amount</p>
+</body>
+</html>

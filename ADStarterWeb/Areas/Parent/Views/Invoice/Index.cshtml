@@ -37,14 +37,15 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-dashed" id="invoices-table">
+                        <table class="table table-dashed display" id="invoices-table">
                             <thead>
                                 <tr>
-                                    <th>Invoice ID</th>
                                     <th>Child Name</th>
-                                    <th>Schedule Date</th>
-                                    <th>Due Date</th>
-                                    <th>Amount</th>
+                                    <th>Invoice ID</th>
+                                    <th>Program Name</th>
+                                    <th>Session Date</th>
+                                    <th>Payment Due</th>
+                                    <th>Amount (RM)</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -52,16 +53,14 @@
                             @foreach (var invoice in Model)
                             {
                                 <tr>
-                                    <td>@invoice.invoice_ID</td>
                                     <td>@invoice.Child.c_name</td>
-                                    <td>@invoice.Schedule.session_datetime</td>
+                                    <td>@invoice.invoice_ID</td>
+                                    <td>@invoice.Schedule.Program.prog_name</td>
+                                    <td>@invoice.Schedule.session_datetime.Date.ToShortDateString()</td>
                                     <td>@invoice.due_date.ToShortDateString()</td>
                                     <td>@invoice.invoice_amount</td>
                                     <td> 
-                                        <ul class="action"> 
-                                            <li class="edit"> <a href="#"><i class="icon-pencil-alt"></i></a></li>
-                                            <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
-                                        </ul>
+                                        <a class="btn btn-outline-primary" asp-area="Parent" asp-controller="Payment" asp-action="Index" asp-route-invoiceId="@invoice.invoice_ID">Make Payment</a>
                                     </td>
                                 </tr>
                             }
