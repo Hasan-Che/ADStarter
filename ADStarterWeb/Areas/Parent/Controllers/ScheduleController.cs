@@ -115,6 +115,9 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 _unitOfWork.Schedule.Add(schedule);
                 _unitOfWork.Save(); // Save the schedule first to get the generated ID
 
+                // Create the corresponding report
+                CreateReportForSchedule(schedule);
+
                 // Create the corresponding invoice
                 CreateInvoiceForSchedule(schedule);
             }
@@ -122,6 +125,25 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             TempData["Success"] = "Schedules created successfully.";
             return RedirectToAction(nameof(Create));
         }
+
+
+        private void CreateReportForSchedule(Schedule schedule)
+        {
+            var report = new Report
+            {
+                rep_title = null,
+                rep_datetime = DateTime.Now,
+                schedule_ID = schedule.schedule_ID,
+                rep_remark = null,
+                rep_file = null, // Assuming no file associated at creation time
+                rep_status = "Pending"
+            };
+
+            _unitOfWork.Report.Add(report);
+            _unitOfWork.Save();
+        }
+
+
 
         private void CreateInvoiceForSchedule(Schedule schedule)
         {

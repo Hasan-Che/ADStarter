@@ -49,7 +49,6 @@ namespace ADStarter.Models
 
         public virtual TreatmentHistory? TreatmentHistory { get; set; }
         public virtual ICollection<Schedule>? Schedules { get; set; } = new List<Schedule>();
-        public virtual ICollection<Report>? Reports { get; set; } = new List<Report>();
         public virtual ICollection<Invoice>? Invoices { get; set; } = new List<Invoice>();
         public virtual ICollection<Payment>? Payments { get; set; } = new List<Payment>();
     }

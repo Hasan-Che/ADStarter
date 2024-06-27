@@ -6,7 +6,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]
-    public class AdminDashboardController : Controller
+    public class DashboardController : Controller
     {
         public IActionResult Index() 
         {

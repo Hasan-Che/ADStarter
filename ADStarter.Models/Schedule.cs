@@ -40,6 +40,8 @@ namespace ADStarter.Models
         [ForeignKey(nameof(c_myKid))]
         public virtual Child Child { get; set; }
 
+        // Added navigation property for Report
+        public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
         public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
     }
 }

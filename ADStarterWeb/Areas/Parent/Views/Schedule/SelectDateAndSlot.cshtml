@@ -61,7 +61,10 @@
 
                     <input type="hidden" name="ProgramId" value="@Model.ProgramId" />
                     <input type="hidden" name="ChildId" value="@Model.ChildId" />
-                    <button type="submit" class="btn btn-primary">Create Schedule</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary me-3">Create Schedule</button>
+                        <a class="btn btn-secondary" href="@Url.Action("Index", "Dashboard")">Cancel</a>
+                    </div>
                 }
             </div>
         </div>

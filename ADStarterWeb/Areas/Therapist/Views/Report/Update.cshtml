@@ -1,0 +1,124 @@
+﻿@model ADStarter.Models.ViewModels.UpdateReportViewModel
+
+@{
+    ViewData["Title"] = "Update Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Update Report</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Reports</li>
+                        <li class="breadcrumb-item active">Update Report</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Update Report</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (Model != null)
+                        {
+                            <form asp-action="Update" method="post" enctype="multipart/form-data">
+                                <input type="hidden" asp-for="ReportId" />
+
+                                <div class="form-group">
+                                    <label asp-for="ScheduleId">Schedule ID:</label>
+                                    <input asp-for="ScheduleId" class="form-control" readonly />
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="ReportTitle">Report Title:</label>
+                                    <input asp-for="ReportTitle" class="form-control" />
+                                    <span asp-validation-for="ReportTitle" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="ReportDateTime">Report Date and Time:</label>
+                                    <input asp-for="ReportDateTime" class="form-control" />
+                                    <span asp-validation-for="ReportDateTime" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="ReportRemark">Report Remarks:</label>
+                                    <textarea asp-for="ReportRemark" class="form-control"></textarea>
+                                    <span asp-validation-for="ReportRemark" class="text-danger"></span>
+                                </div>
+
+                                <div class="card-body">
+                                    <label asp-for="ReportFile">Upload File:</label>
+                                    <div class="dropzone" id="singleFileUpload">
+                                        <div class="dz-message needsclick">
+                                            <i class="icon-cloud-up"></i>
+                                            <h6>Drop files here or click to upload.</h6>
+                                            <span>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="ReportFile" class="text-danger"></span>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Update Report</button>
+                                <a asp-action="PendingReports" class="btn btn-secondary">Cancel</a>
+                            </form>
+                           
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger">Report not found.</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Plugins JS start-->
+    <script src="../assets/js/sidebar-menu.js"></script>
+    <script src="../assets/js/slick/slick.min.js"></script>
+    <script src="../assets/js/slick/slick.js"></script>
+    <script src="../assets/js/header-slick.js"></script>
+    <script src="../assets/js/dropzone/dropzone.js"></script>
+    <script src="../assets/js/dropzone/dropzone-script.js"></script>
+    <script src="../assets/js/tooltip-init.js"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="../assets/js/script.js"></script>
+
+    <script>
+        Dropzone.options.singleFileUpload = {
+            paramName: "ReportFile",
+            maxFiles: 1,
+            acceptedFiles: ".pdf",
+            init: function () {
+                this.on("success", function (file, response) {
+                    // Handle the response after successful upload
+                });
+                this.on("error", function (file, errorMessage) {
+                    // Handle the error
+                });
+            }
+        };
+    </script>
+}
