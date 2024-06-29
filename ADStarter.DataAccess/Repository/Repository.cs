@@ -17,6 +17,7 @@ namespace ADStarter.DataAccess.Repository
     {
         private readonly ApplicationDBContext _db;
         internal DbSet<T> dbSet;
+
         public Repository(ApplicationDBContext db)
         {
             _db = db;
@@ -29,6 +30,13 @@ namespace ADStarter.DataAccess.Repository
         }
 
         public T Get(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
+            return query.FirstOrDefault();
+        }
+
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
@@ -51,4 +59,5 @@ namespace ADStarter.DataAccess.Repository
             dbSet.RemoveRange(entity);
         }
     }
+
 }

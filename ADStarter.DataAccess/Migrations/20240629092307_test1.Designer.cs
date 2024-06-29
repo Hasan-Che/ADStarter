@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240623053704_hdhd")]
-    partial class hdhd
+    [Migration("20240629092307_test1")]
+    partial class test1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -343,6 +343,9 @@ namespace ADStarter.DataAccess.Migrations
 
                     b.Property<double>("prog_price")
                         .HasColumnType("float");
+
+                    b.Property<int>("prog_step")
+                        .HasColumnType("int");
 
                     b.Property<string>("prog_summary")
                         .HasColumnType("nvarchar(max)");

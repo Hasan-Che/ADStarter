@@ -1,8 +1,10 @@
 ﻿@model ADStarter.Models.Child
 
 <div>
-    <h3>Child Form</h3>
     <div class="row g-3">
+        <div class="form-group">
+            <img class="rounded-circle" alt="Child's Photo" src="@Model.c_photo" style="width: 120px; height: 120px;">
+        </div>
         <div class="col-md-6">
             <label asp-for="c_myKid" class="form-label">Child's MyKid Number</label>
             <input asp-for="c_myKid" class="form-control" />

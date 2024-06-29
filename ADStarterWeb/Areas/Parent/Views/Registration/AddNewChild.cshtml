@@ -1,0 +1,76 @@
+﻿@model ADStarter.Models.Child
+@{
+    ViewData["Title"] = "User Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>Child Form</h5>
+            <span>Please fill in the child's information below.</span>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddNewChild" method="post" class="theme-form needs-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="c_myKid" class="col-form-label pt-0">Child's MyKid Number</label>
+                    <input asp-for="c_myKid" class="form-control" />
+                    <span asp-validation-for="c_myKid" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="c_name" class="col-form-label pt-0">Child's Name</label>
+                    <input asp-for="c_name" class="form-control" />
+                    <span asp-validation-for="c_name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="c_age" class="col-form-label pt-0">Child's Age</label>
+                    <input asp-for="c_age" class="form-control" />
+                    <span asp-validation-for="c_age" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="c_gender" class="col-form-label pt-0">Child's Gender</label>
+                    <input asp-for="c_gender" class="form-control" />
+                    <span asp-validation-for="c_gender" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="c_dob" class="col-form-label pt-0">Child's Date of Birth</label>
+                    <input asp-for="c_dob" type="date" class="form-control" />
+                    <span asp-validation-for="c_dob" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="c_nationality" class="col-form-label pt-0">Child's Nationality</label>
+                    <input asp-for="c_nationality" class="form-control" />
+                    <span asp-validation-for="c_nationality" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="c_religion" class="col-form-label pt-0">Child's Religion</label>
+                    <input asp-for="c_religion" class="form-control" />
+                    <span asp-validation-for="c_religion" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="c_race" class="col-form-label pt-0">Child's Race</label>
+                    <input asp-for="c_race" class="form-control" />
+                    <span asp-validation-for="c_race" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="c_photo" class="col-form-label pt-0">Child's Photo</label>
+                    <input type="file" asp-for="c_photo" class="form-control" />
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-end">
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-secondary" type="button">Cancel</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Plugins JS start-->
+    <script src="~/assets/js/sidebar-menu.js"></script>
+    <script src="~/assets/js/slick/slick.min.js"></script>
+    <script src="~/assets/js/slick/slick.js"></script>
+    <script src="~/assets/js/header-slick.js"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="~/assets/js/script.js"></script>
+}

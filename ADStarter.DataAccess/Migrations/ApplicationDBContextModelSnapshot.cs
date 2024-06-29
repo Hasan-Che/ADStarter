@@ -341,6 +341,9 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<double>("prog_price")
                         .HasColumnType("float");
 
+                    b.Property<int>("prog_step")
+                        .HasColumnType("int");
+
                     b.Property<string>("prog_summary")
                         .HasColumnType("nvarchar(max)");
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class hdhd : Migration
+    public partial class test1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -90,7 +90,8 @@ namespace ADStarter.DataAccess.Migrations
                     prog_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     prog_desc = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     prog_summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    prog_price = table.Column<double>(type: "float", nullable: false)
+                    prog_price = table.Column<double>(type: "float", nullable: false),
+                    prog_step = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
