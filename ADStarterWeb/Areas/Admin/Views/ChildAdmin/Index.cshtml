@@ -33,7 +33,7 @@
                                     <td>@child.Step</td>
                                     <td>@child.TherapistName</td>
                                     <td>
-                                        @if (child.HasInvoices)
+                                        @if (child.HasInvoices && child.HasPayments)
                                         {
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childDetailsModal" data-id="@child.ChildId">
                                                 View Details
@@ -47,7 +47,7 @@
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childDetailsModal" data-id="@child.ChildId">
                                                 View Details
                                             </button>
-                                            <a href="@Url.Action("Edit", "ChildAdmin", new { area = "Admin", id = child.ChildId })" class="btn btn-warning" disabled>
+                                            <a href="@Url.Action("Edit", "ChildAdmin", new { area = "Admin", id = child.ChildId })" class="btn btn-warning" disabled style="background-color: aliceblue;">
                                                 Update Step
                                             </a>
                                         }

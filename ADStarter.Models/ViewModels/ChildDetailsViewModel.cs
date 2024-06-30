@@ -13,7 +13,8 @@ namespace ADStarter.Models.ViewModels
     public int? Step { get; set; }
     public string TherapistName { get; set; }
     public string ChildId { get; set; }
-    public bool HasInvoices { get; set; }  // New property
+    public bool HasInvoices { get; set; }  // Property to check if invoices exist
+    public bool HasPayments { get; set; }  // Property to check if payments exist
 
     public int NewStep { get; set; }
     public int Age { get; set; }
@@ -26,3 +27,4 @@ namespace ADStarter.Models.ViewModels
 }
 
 }
+
