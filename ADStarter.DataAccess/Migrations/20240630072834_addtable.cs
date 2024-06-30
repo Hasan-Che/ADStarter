@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class changetables : Migration
+    public partial class addtable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -111,6 +111,22 @@ namespace ADStarter.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Slots", x => x.slot_ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Therapists",
+                columns: table => new
+                {
+                    t_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    t_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    t_phoneNum = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    t_address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Therapists", x => x.t_ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,49 +274,6 @@ namespace ADStarter.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Therapists",
-                columns: table => new
-                {
-                    t_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    t_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    t_phoneNum = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    t_address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Therapists", x => x.t_ID);
-                    table.ForeignKey(
-                        name: "FK_Therapists_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Announcements",
-                columns: table => new
-                {
-                    ann_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    a_ID = table.Column<int>(type: "int", nullable: false),
-                    ann_title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ann_desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ann_media = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Announcements", x => x.ann_ID);
-                    table.ForeignKey(
-                        name: "FK_Announcements_Admins_a_ID",
-                        column: x => x.a_ID,
-                        principalTable: "Admins",
-                        principalColumn: "a_ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Children",
                 columns: table => new
                 {
@@ -331,6 +304,28 @@ namespace ADStarter.DataAccess.Migrations
                         column: x => x.t_ID,
                         principalTable: "Therapists",
                         principalColumn: "t_ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Announcements",
+                columns: table => new
+                {
+                    ann_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    a_ID = table.Column<int>(type: "int", nullable: false),
+                    ann_title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ann_desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ann_media = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Announcements", x => x.ann_ID);
+                    table.ForeignKey(
+                        name: "FK_Announcements_Admins_a_ID",
+                        column: x => x.a_ID,
+                        principalTable: "Admins",
+                        principalColumn: "a_ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -434,7 +429,8 @@ namespace ADStarter.DataAccess.Migrations
                     schedule_ID = table.Column<int>(type: "int", nullable: false),
                     rep_remark = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     rep_file = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    rep_status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    rep_status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Therapistt_ID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -445,6 +441,11 @@ namespace ADStarter.DataAccess.Migrations
                         principalTable: "Schedules",
                         principalColumn: "schedule_ID",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Reports_Therapists_Therapistt_ID",
+                        column: x => x.Therapistt_ID,
+                        principalTable: "Therapists",
+                        principalColumn: "t_ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -455,12 +456,12 @@ namespace ADStarter.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     parent_ID = table.Column<int>(type: "int", nullable: false),
                     pay_amount = table.Column<double>(type: "float", nullable: false),
+                    pay_balance = table.Column<double>(type: "float", nullable: false),
                     pay_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     pay_desc = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    pay_balance = table.Column<double>(type: "float", nullable: false),
-                    receipt_id = table.Column<int>(type: "int", nullable: false),
+                    stripe_charge_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     c_myKid = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    a_ID = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     invoice_ID = table.Column<int>(type: "int", nullable: false),
                     Therapistt_ID = table.Column<int>(type: "int", nullable: true)
                 },
@@ -468,10 +469,10 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Payments", x => x.pay_ID);
                     table.ForeignKey(
-                        name: "FK_Payments_Admins_a_ID",
-                        column: x => x.a_ID,
-                        principalTable: "Admins",
-                        principalColumn: "a_ID",
+                        name: "FK_Payments_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Payments_Children_c_myKid",
@@ -573,14 +574,14 @@ namespace ADStarter.DataAccess.Migrations
                 column: "schedule_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_a_ID",
-                table: "Payments",
-                column: "a_ID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Payments_c_myKid",
                 table: "Payments",
                 column: "c_myKid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_Id",
+                table: "Payments",
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_invoice_ID",
@@ -603,6 +604,11 @@ namespace ADStarter.DataAccess.Migrations
                 column: "schedule_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reports_Therapistt_ID",
+                table: "Reports",
+                column: "Therapistt_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Schedules_c_myKid",
                 table: "Schedules",
                 column: "c_myKid");
@@ -621,11 +627,6 @@ namespace ADStarter.DataAccess.Migrations
                 name: "IX_Schedules_t_ID",
                 table: "Schedules",
                 column: "t_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Therapists_UserId",
-                table: "Therapists",
-                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -662,13 +663,16 @@ namespace ADStarter.DataAccess.Migrations
                 name: "TreatmentHistories");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
                 name: "Admins");
 
             migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "Invoices");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Schedules");
@@ -687,9 +691,6 @@ namespace ADStarter.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Therapists");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240626072115_changetables")]
-    partial class changetables
+    [Migration("20240630072834_addtable")]
+    partial class addtable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,10 +277,11 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pay_ID"));
 
-                    b.Property<int?>("Therapistt_ID")
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("a_ID")
+                    b.Property<int?>("Therapistt_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("c_myKid")
@@ -305,14 +306,14 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("receipt_id")
-                        .HasColumnType("int");
+                    b.Property<string>("stripe_charge_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("pay_ID");
 
-                    b.HasIndex("Therapistt_ID");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("a_ID");
+                    b.HasIndex("Therapistt_ID");
 
                     b.HasIndex("c_myKid");
 
@@ -367,6 +368,9 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("rep_ID"));
 
+                    b.Property<int?>("Therapistt_ID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("rep_datetime")
                         .HasColumnType("datetime2");
 
@@ -391,6 +395,8 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("rep_ID");
+
+                    b.HasIndex("Therapistt_ID");
 
                     b.HasIndex("schedule_ID");
 
@@ -458,6 +464,7 @@ namespace ADStarter.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("t_ID"));
 
                     b.Property<string>("UserId")
+                        .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("t_address")
@@ -473,8 +480,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.HasKey("t_ID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Therapists");
                 });
@@ -771,15 +776,15 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Payment", b =>
                 {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ADStarter.Models.Therapist", null)
                         .WithMany("Payments")
                         .HasForeignKey("Therapistt_ID");
-
-                    b.HasOne("ADStarter.Models.Admin", "Admin")
-                        .WithMany("Payments")
-                        .HasForeignKey("a_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
 
                     b.HasOne("ADStarter.Models.Child", "Child")
                         .WithMany("Payments")
@@ -798,17 +803,21 @@ namespace ADStarter.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Admin");
-
                     b.Navigation("Child");
 
                     b.Navigation("Invoice");
 
                     b.Navigation("Parent");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Report", b =>
                 {
+                    b.HasOne("ADStarter.Models.Therapist", null)
+                        .WithMany("Reports")
+                        .HasForeignKey("Therapistt_ID");
+
                     b.HasOne("ADStarter.Models.Schedule", "Schedule")
                         .WithMany("Reports")
                         .HasForeignKey("schedule_ID")
@@ -849,15 +858,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.Navigation("Slot");
 
                     b.Navigation("Therapist");
-                });
-
-            modelBuilder.Entity("ADStarter.Models.Therapist", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ADStarter.Models.TreatmentHistory", b =>
@@ -925,8 +925,6 @@ namespace ADStarter.DataAccess.Migrations
             modelBuilder.Entity("ADStarter.Models.Admin", b =>
                 {
                     b.Navigation("Announcements");
-
-                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Child", b =>
@@ -970,6 +968,8 @@ namespace ADStarter.DataAccess.Migrations
             modelBuilder.Entity("ADStarter.Models.Therapist", b =>
                 {
                     b.Navigation("Payments");
+
+                    b.Navigation("Reports");
 
                     b.Navigation("Schedules");
                 });
