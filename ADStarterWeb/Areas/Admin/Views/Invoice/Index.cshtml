@@ -3,6 +3,92 @@
 @{
     ViewData["Title"] = "All Invoices";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var request = Context.Request;
+    bool showAll = request.Query["showAll"] == "true";
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            $('#invoices-table').DataTable();
+
+            // Set the toggle button state based on the showAll variable
+            $('#toggleInvoices').prop('checked', @showAll.ToString().ToLower());
+
+            // Handle the toggle button change event
+            $('#toggleInvoices').on('change', function() {
+                var showAll = $(this).is(':checked');
+                window.location.href = '@Url.Action("Index", "Invoice", new { Area = "Admin" })' + '?showAll=' + showAll;
+            });
+
+            // Edit button click event
+            $('.edit-button').on('click', function() {
+                var invoiceId = $(this).data('id');
+                var row = $(this).closest('tr');
+                var childName = row.find('td:eq(1)').text();
+                var programName = row.find('td:eq(2)').text();
+                var scheduleDate = row.find('td:eq(3)').text();
+                var dueDate = row.find('td:eq(4)').text();
+                var invoiceAmount = row.find('td:eq(5)').text();
+
+                $('#childName').text(childName);
+                $('#programName').text(programName);
+                $('#scheduleDate').val(new Date(scheduleDate).toISOString().substring(0, 10));
+                $('#dueDate').val(new Date(dueDate).toISOString().substring(0, 10));
+                $('#invoiceAmount').val(invoiceAmount);
+                $('#saveInvoiceChanges').data('id', invoiceId);
+            });
+
+            // Save changes button click event
+            $('#saveInvoiceChanges').on('click', function() {
+                var invoiceId = $(this).data('id');
+                var scheduleDate = $('#scheduleDate').val();
+                var dueDate = $('#dueDate').val();
+                var invoiceAmount = $('#invoiceAmount').val();
+
+                $.ajax({
+                    url: '@Url.Action("EditInvoice", "Invoice", new { Area = "Admin" })',
+                    type: 'POST',
+                    data: {
+                        invoiceId: invoiceId,
+                        scheduleDate: scheduleDate,
+                        dueDate: dueDate,
+                        amount: invoiceAmount
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error saving invoice changes:', error);
+                    }
+                });
+            });
+        });
+
+        function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete this invoice?')) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Invoice", new { Area = "Admin" })',
+                    type: 'DELETE',
+                    data: { id: id },
+                    headers: {
+                        RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error deleting invoice:', error);
+                    }
+                });
+            }
+        }
+    </script>
 }
 
 <div class="page-body">
@@ -37,6 +123,10 @@
                     <span></span>
                 </div>
                 <div class="card-body">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="toggleInvoices" @(showAll ? "checked" : "")>
+                        <label class="form-check-label" for="toggleInvoices">Show All Invoices</label>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-dashed display" id="invoices-table">
                             <thead>
@@ -61,18 +151,25 @@
                                         <td>@invoice.due_date.ToShortDateString()</td>
                                         <td>@invoice.invoice_amount.ToString("0.00")</td>
                                         <td>
-                                            <ul class="action text-center">
-                                                <li class="edit">
-                                                    <button class="btn btn-outline-primary edit-button" data-id="@invoice.invoice_ID" data-toggle="modal" data-target="#editInvoiceModal">
-                                                        <i class="icon-pencil-alt"></i>
-                                                    </button>
-                                                </li>
-                                                <li class="delete">
-                                                    <button class="btn btn-outline-danger" type="button" onclick="confirmDelete('@invoice.invoice_ID')">
-                                                        <i class="icon-trash"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
+                                            @if (invoice.Payments.Any(p => p.pay_desc == "Paid"))
+                                            {
+                                                <span>Paid</span>
+                                            }
+                                            else
+                                            {
+                                                <ul class="action text-center">
+                                                    <li class="edit">
+                                                        <button class="btn btn-outline-primary edit-button" data-id="@invoice.invoice_ID" data-toggle="modal" data-target="#editInvoiceModal">
+                                                            <i class="icon-pencil-alt"></i>
+                                                        </button>
+                                                    </li>
+                                                    <li class="delete">
+                                                        <button class="btn btn-outline-danger" type="button" onclick="confirmDelete('@invoice.invoice_ID')">
+                                                            <i class="icon-trash"></i>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            }
                                         </td>
                                     </tr>
                                 }
@@ -131,107 +228,111 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="textarea" class="form-control input-primary BorderLess" id="modalChildName" readonly></td>
-                                            <td><input type="textarea" class="form-control input-primary BorderLess" id="modalProgramName" readonly></td>
-                                            <td><input type="date" class="form-control input-primary BorderLess" id="modalScheduleDate"></td>
-                                            <td><input type="date" class="form-control input-primary BorderLess" id="modalDueDate"></td>
-                                            <td><input type="number" class="form-control input-primary BorderLess" id="modalAmount"></td>
+                                            <td id="childName"></td>
+                                            <td id="programName"></td>
+                                            <td>
+                                                <input type="date" id="scheduleDate" class="form-control">
+                                            </td>
+                                            <td>
+                                                <input type="date" id="dueDate" class="form-control">
+                                            </td>
+                                            <td>
+                                                <input type="number" step="0.01" id="invoiceAmount" class="form-control">
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary" id="saveInvoiceChanges">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" type="button" id="saveChangesButton">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
-@section Scripts {
-    <script>
-        $(document).ready(function() {
-            $('#invoices-table').DataTable();
+<script>
+    $(document).ready(function() {
+        // Initialize DataTable
+        $('#invoices-table').DataTable();
 
-            // Populate and show the edit modal
-            $('.edit-button').on('click', function() {
-                var invoiceId = $(this).data('id');
-                var invoiceRow = $(this).closest('tr');
-                var childName = invoiceRow.find('td').eq(1).text();
-                var programName = invoiceRow.find('td').eq(2).text();
-                var scheduleDate = invoiceRow.find('td').eq(3).text();
-                var dueDate = invoiceRow.find('td').eq(4).text();
-                var amount = invoiceRow.find('td').eq(5).text();
+        // Set the toggle button state based on the showAll variable
+        $('#toggleInvoices').prop('checked', @showAll.ToString().ToLower());
 
-                // Format the dates for the input fields
-                var formattedScheduleDate = formatDateForInput(new Date(scheduleDate));
-                var formattedDueDate = formatDateForInput(new Date(dueDate));
-
-                // Populate the modal fields
-                $('#invoiceDate').text(scheduleDate);
-                $('#paymentDueDate').text(dueDate);
-                $('#modalChildName').val(childName);
-                $('#modalProgramName').val(programName);
-                $('#modalScheduleDate').val(formattedScheduleDate);
-                $('#modalDueDate').val(formattedDueDate);
-                $('#modalAmount').val(amount);
-
-                $('#editInvoiceModal').modal('show');
-            });
-
-            // Handle save changes button click
-            $('#saveChangesButton').on('click', function() {
-                var invoiceId = $('.edit-button[data-id]').data('id');
-                var updatedScheduleDate = $('#modalScheduleDate').val();
-                var updatedDueDate = $('#modalDueDate').val();
-                var updatedAmount = $('#modalAmount').val();
-
-                // Perform the AJAX request to save the changes
-                $.ajax({
-                    url: '@Url.Action("EditInvoice", "Invoice", new { Area = "Admin" })',
-                    type: 'POST',
-                    data: {
-                        invoiceId: invoiceId,
-                        scheduleDate: updatedScheduleDate,
-                        dueDate: updatedDueDate,
-                        amount: updatedAmount
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            // Handle the success response
-                            $('#editInvoiceModal').modal('hide');
-                            location.reload();
-                        } else {
-                            alert(response.message || 'An error occurred while updating the invoice.');
-                        }
-                    }
-                });
-            });
-
-            // Helper function to format date for input[type=date]
-            function formatDateForInput(date) {
-                var d = new Date(date),
-                    month = '' + (d.getMonth() + 1),
-                    day = '' + d.getDate(),
-                    year = d.getFullYear();
-
-                if (month.length < 2) 
-                    month = '0' + month;
-                if (day.length < 2) 
-                    day = '0' + day;
-
-                return [year, month, day].join('-');
-            }
-
-            function confirmDelete(id) {
-            if (confirm('Are you sure you want to delete this invoice?')) {
-                window.location.href = '@Url.Action("Delete", "Invoice", new { Area = "Admin" })?id=' + id;
-            }
-        }
+        // Handle the toggle button change event
+        $('#toggleInvoices').on('change', function() {
+            var showAll = $(this).is(':checked');
+            window.location.href = '@Url.Action("Index", "Invoice", new { Area = "Admin" })' + '?showAll=' + showAll;
         });
-    </script>
-}
+
+        // Edit button click event
+        $('.edit-button').on('click', function() {
+            var invoiceId = $(this).data('id');
+            var row = $(this).closest('tr');
+            var childName = row.find('td:eq(1)').text();
+            var programName = row.find('td:eq(2)').text();
+            var scheduleDate = row.find('td:eq(3)').text();
+            var dueDate = row.find('td:eq(4)').text();
+            var invoiceAmount = row.find('td:eq(5)').text();
+
+            $('#childName').text(childName);
+            $('#programName').text(programName);
+            $('#scheduleDate').val(new Date(scheduleDate).toISOString().substring(0, 10));
+            $('#dueDate').val(new Date(dueDate).toISOString().substring(0, 10));
+            $('#invoiceAmount').val(invoiceAmount);
+            $('#saveInvoiceChanges').data('id', invoiceId);
+        });
+
+        // Save changes button click event
+        $('#saveInvoiceChanges').on('click', function() {
+            var invoiceId = $(this).data('id');
+            var scheduleDate = $('#scheduleDate').val();
+            var dueDate = $('#dueDate').val();
+            var invoiceAmount = $('#invoiceAmount').val();
+
+            $.ajax({
+                url: '@Url.Action("EditInvoice", "Invoice", new { Area = "Admin" })',
+                type: 'POST',
+                data: {
+                    invoiceId: invoiceId,
+                    scheduleDate: scheduleDate,
+                    dueDate: dueDate,
+                    amount: invoiceAmount
+                },
+                success: function(response) {
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error saving invoice changes:', error);
+                }
+            });
+        });
+    });
+
+    function confirmDelete(id) {
+        if (confirm('Are you sure you want to delete this invoice?')) {
+            $.ajax({
+                url: '@Url.Action("Delete", "Invoice", new { Area = "Admin" })',
+                type: 'DELETE',
+                data: { id: id },
+                headers: {
+                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error deleting invoice:', error);
+                }
+            });
+        }
+    }
+</script>
