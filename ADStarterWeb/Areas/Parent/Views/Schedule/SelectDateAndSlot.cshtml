@@ -21,11 +21,28 @@
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
-            <h3>Select Date and Slot</h3>
+            <div class="row">
+                <div class="col-6">
+                    <h3>Select Date and Slot</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Form Widgets</li>
+                        <li class="breadcrumb-item active">Select Date and Slot</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="container mt-4">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
         <div class="card">
             <div class="card-header">
                 <h5>Select Date and Slot</h5>
@@ -36,28 +53,34 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    @for (int i = 0; i < Model.ProgSessionCount; i++)
-                    {
-                        <div class="datepicker-container">
-                            <div class="form-group">
-                                <label>Date @(i + 1)</label>
-                                <input type="text" id="datepicker@(i)" name="SelectedDates[@i]" class="form-control datepicker" readonly />
+                    <div class="row">
+                        @for (int i = 0; i < Model.ProgSessionCount; i++)
+                        {
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label text-sm-end">Date @(i + 1)</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="datepicker@(i)" name="SelectedDates[@i]" class="form-control datepicker-here" data-language="en" readonly />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label text-sm-end">Slot for Date @(i + 1)</label>
+                                    <div class="col-sm-9">
+                                        <select name="SlotIds[@i]" class="form-control">
+                                            <option value="1">9.00 am - 10.00 am</option>
+                                            <option value="2">10.00 am - 11.00 am</option>
+                                            <option value="3">11.00 am - 12.00 pm</option>
+                                            <option value="4">2.00 pm - 3.00 pm</option>
+                                            <option value="5">3.00 pm - 4.00 pm</option>
+                                            <option value="6">4.00 pm - 5.00 pm</option>
+                                            <option value="7">9.00 am - 11.30 am</option>
+                                            <option value="8">2.00 pm - 4.30 pm</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Slot for Date @(i + 1)</label>
-                                <select name="SlotIds[@i]" class="form-control">
-                                    <option value="1">9.00 am - 10.00 am</option>
-                                    <option value="2">10.00 am - 11.00 am</option>
-                                    <option value="3">11.00 am - 12.00 pm</option>
-                                    <option value="4">2.00 pm - 3.00 pm</option>
-                                    <option value="5">3.00 pm - 4.00 pm</option>
-                                    <option value="6">4.00 pm - 5.00 pm</option>
-                                    <option value="7">9.00 am - 11.30 am</option>
-                                    <option value="8">2.00 pm - 4.30 pm</option>
-                                </select>
-                            </div>
-                        </div>
-                    }
+                        }
+                    </div>
 
                     <input type="hidden" name="ProgramId" value="@Model.ProgramId" />
                     <input type="hidden" name="ChildId" value="@Model.ChildId" />
@@ -69,49 +92,45 @@
             </div>
         </div>
     </div>
+    <!-- Container-fluid Ends-->
 </div>
 
 @section Scripts {
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Plugins JS start-->
+    <script src="~/assets/js/sidebar-menu.js"></script>
+    <script src="~/assets/js/slick/slick.min.js"></script>
+    <script src="~/assets/js/slick/slick.js"></script>
+    <script src="~/assets/js/header-slick.js"></script>
+    <script src="~/assets/js/datepicker/date-picker/datepicker.js"></script>
+    <script src="~/assets/js/datepicker/date-picker/datepicker.en.js"></script>
+    <script src="~/assets/js/datepicker/date-picker/datepicker.custom.js"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="~/assets/js/script.js"></script>
+
     <script>
         $(function () {
             let selectedDates = [];
 
-            // Initialize Flatpickr for each date input dynamically
-            $(".datepicker").each(function (index) {
-                flatpickr($(this)[0], {
-                    dateFormat: "Y-m-d", // Set your desired date format here
-                    enableTime: false, // Optionally enable time selection
-                    minDate: "today", // Disable today and previous dates
-                    disable: selectedDates, // Disable selected dates
-                    onChange: function (selectedDatesArray, dateStr, instance) {
-                        const currentDateIndex = selectedDates.indexOf(dateStr);
-
-                        if (currentDateIndex === -1) {
-                            selectedDates.push(dateStr);
-                            updateDisabledDates();
-                        } else {
-                            instance.clear();
-                            alert("This date is already selected. Please choose another date.");
+            $(".datepicker-here").each(function (index) {
+                $(this).datepicker({
+                    language: 'en',
+                    dateFormat: 'yyyy-mm-dd',
+                    minDate: new Date(),
+                    onSelect: function (formattedDate, date, inst) {
+                        if (!selectedDates.includes(formattedDate)) {
+                            selectedDates.push(formattedDate);
                         }
                     }
                 });
             });
 
-            function updateDisabledDates() {
-                $(".datepicker").each(function () {
-                    const fp = $(this)[0]._flatpickr;
-                    fp.set("disable", selectedDates);
-                });
-            }
-
             $('form').on('submit', function (event) {
-                const dates = new Set();
-                let valid = true;
                 let allDatesFilled = true;
+                let dates = new Set();
+                let valid = true;
 
-                $(".datepicker").each(function () {
+                $(".datepicker-here").each(function () {
                     const dateValue = $(this).val();
                     if (!dateValue) {
                         allDatesFilled = false;
@@ -128,10 +147,12 @@
                 });
 
                 if (!allDatesFilled) {
-                    event.preventDefault(); // Prevent form submission
+                    event.preventDefault();
                 }
 
-                return valid; // Prevent form submission if there are duplicate dates or if any date field is empty
+                if (!valid) {
+                    event.preventDefault();
+                }
             });
         });
     </script>
