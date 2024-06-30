@@ -68,7 +68,7 @@
                                                     </button>
                                                 </li>
                                                 <li class="delete">
-                                                    <button class="btn btn-outline-danger">
+                                                    <button class="btn btn-outline-danger" type="button" onclick="confirmDelete('@invoice.invoice_ID')">
                                                         <i class="icon-trash"></i>
                                                     </button>
                                                 </li>
@@ -226,6 +226,12 @@
 
                 return [year, month, day].join('-');
             }
+
+            function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete this invoice?')) {
+                window.location.href = '@Url.Action("Delete", "Invoice", new { Area = "Admin" })?id=' + id;
+            }
+        }
         });
     </script>
 }

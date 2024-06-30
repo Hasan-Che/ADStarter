@@ -53,5 +53,23 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             }
             return Json(new { success = false, message = "Invoice not found" });
         }
+
+        // POST: /Admin/Invoice/Delete/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var invoice = _context.Invoices.Find(id);
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+
+            _context.Invoices.Remove(invoice);
+            _context.SaveChanges();
+
+            TempData["Success"] = "Invoice deleted successfully.";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
