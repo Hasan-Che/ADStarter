@@ -150,6 +150,15 @@
             width: 0;
             transition: width 0.3s;
         }
+
+        .card-body {
+            padding: 20px; /* Adjust the padding value as needed */
+        }
+
+        .form-control {
+            margin-bottom: 10px; /* Adds space between input boxes */
+        }
+
     </style>
 </head>
 
@@ -193,19 +202,16 @@
                         <div class="row mb-2">
                             <div class="profile-title">
                                 <div class="media">
-                                    <img class="img-70 rounded-circle" alt="" src="~/assets/images/user/7.jpg">
+                                    <img class="img-70 rounded-circle" alt="" src="~/assets/images/user/OIG1.jpeg" >
                                     <div class="media-body">
-                                        <h5 class="mb-1">MARK JECNO</h5>
-                                        <p>DESIGNER</p>
+                                        <h5 class="mb-1"></h5>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <form>
-                            <div class="mb-3">
-                                <h6 class="form-label">Bio</h6>
-                                <textarea class="form-control" rows="5">On the other hand, we denounce with righteous indignation</textarea>
-                            </div>
+                            
                             <div class="mb-3">
                                 <label class="form-label">Email-Address</label>
                                 <input class="form-control" placeholder="your-email@domain.com">
@@ -249,7 +255,7 @@
                             </div>
 
                             <div class="step-form" data-step="1">
-                                @Html.Partial("EditFatherForm", Model.Parent)
+                                @Html.Partial("EditFatherForm")
                                 <div class="form-footer">
                                     <button type="button" class="btn btn-primary btn-next">Next</button>
                                 </div>
@@ -257,7 +263,7 @@
 
                             <div class="step-form" data-step="2" style="display: none;">
 
-                                @Html.Partial("EditMotherForm", Model.Parent)
+                                @Html.Partial("EditMotherForm")
                                 <div class="form-footer">
                                     <button type="button" class="btn btn-primary btn-previous">Previous</button>
                                     <button class="btn btn-primary btn-submit" type="submit">Submit</button>
@@ -287,12 +293,11 @@
                         <form method="post" class="needs-validation" enctype="multipart/form-data">
                             <input type="hidden" name="parent_ID" value="@ViewBag.ParentID"/>
                             <div id="step-forms">
-                                @Html.Partial("EditChildForm", Model.Child)
+                                @Html.Partial("EditChildForm")
                             </div>
                             <div class="card-footer text-end">
                                 <button class="btn btn-primary" type="submit">Update Child Details</button>
                             </div>
-
                         </form>
  
                     </div>
@@ -311,7 +316,7 @@
                         <form method="post" class="needs-validation" novalidate>
                             <input type="hidden" name="parent_ID" value="@ViewBag.ParentID" />
                             <div id="step-forms">
-                                @Html.Partial("EditTreatmentHistoryForm", Model.TreatmentHistory)
+                                @Html.Partial("EditTreatmentHistoryForm")
                             </div>
                             <div class="card-footer text-end">
                                 <button class="btn btn-primary" type="submit">Update Treatment History Details</button>

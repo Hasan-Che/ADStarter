@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace ADStarter.DataAccess.Repository.IRepository
         IChildRepository Child { get; }
         ITreatmentHistoryRepository TreatmentHistory { get; }
         void Save();
+        IDbContextTransaction BeginTransaction();
     }
 }

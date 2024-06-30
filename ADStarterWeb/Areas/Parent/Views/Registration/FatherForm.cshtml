@@ -46,7 +46,13 @@
         </div>
         <div class="col-md-6">
             <label asp-for="f_status" class="form-label">Father's Status</label>
-            <input asp-for="f_status" class="form-control" />
+            <select asp-for="f_status" class="form-control">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Separated">Separated</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+            </select>
             <span asp-validation-for="f_status" class="text-danger"></span>
         </div>
         <div class="col-md-6">

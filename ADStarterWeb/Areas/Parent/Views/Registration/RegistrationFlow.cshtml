@@ -124,14 +124,14 @@
                             </div>
 
                             <fieldset class="step-form" data-step="1">
-                                @Html.Partial("EditFatherForm", Model.Parent)
+                                @Html.Partial("FatherForm", Model.Parent)
                                 <div class="f1-buttons">
                                     <button class="btn btn-primary btn-next" type="button">Next</button>
                                 </div>
                             </fieldset>
 
                             <fieldset class="step-form" data-step="2" style="display:none;">
-                                @Html.Partial("EditMotherForm", Model.Parent)
+                                @Html.Partial("MotherForm", Model.Parent)
                                 <div class="f1-buttons">
                                     <button class="btn btn-secondary btn-previous" type="button">Previous</button>
                                     <button class="btn btn-primary btn-next" type="button">Next</button>
@@ -139,7 +139,7 @@
                             </fieldset>
 
                             <fieldset class="step-form" data-step="3" style="display:none;">
-                                @Html.Partial("EditChildForm", Model.Child)
+                                @Html.Partial("ChildForm", Model.Child)
                                 <div class="f1-buttons">
                                     <button class="btn btn-secondary btn-previous" type="button">Previous</button>
                                     <button class="btn btn-primary btn-next" type="button">Next</button>
@@ -147,7 +147,7 @@
                             </fieldset>
 
                             <fieldset class="step-form" data-step="4" style="display:none;">
-                                @Html.Partial("EditTreatmentHistoryForm", Model.TreatmentHistory)
+                                @Html.Partial("TreatmentHistoryForm", Model.TreatmentHistory)
                                 <div class="f1-buttons">
                                     <button class="btn btn-secondary btn-previous" type="button">Previous</button>
                                     <button class="btn btn-primary btn-submit" type="submit">Submit</button>
@@ -162,6 +162,8 @@
 </div>
 
 @section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" ></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const totalSteps = document.querySelectorAll('.f1-step').length;
@@ -230,4 +232,65 @@
             }
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nationalitySelect = document.getElementById('nationalitySelect');
+            const otherNationalityField = document.getElementById('otherNationalityField');
+            const otherNationalitySelect = document.getElementById('otherNationalitySelect');
+            const dobInput = document.getElementById('dobInput');
+            const ageInput = document.getElementById('c_age'); // Ensure this matches the id in the ChildForm
+
+            nationalitySelect.addEventListener('change', function () {
+                if (this.value === 'Other') {
+                    otherNationalityField.classList.remove('d-none');
+                    fetchCountries();
+                } else {
+                    otherNationalityField.classList.add('d-none');
+                }
+            });
+
+            function fetchCountries() {
+                fetch('/assets/json/countries/countries.json')
+                    .then(response => response.json())
+                    .then(countries => {
+                        populateCountries(countries);
+                    })
+                    .catch(error => console.error('Error fetching countries:', error));
+            }
+
+            function populateCountries(countries) {
+                otherNationalitySelect.innerHTML = '<option value="">Select Country</option>';
+                countries.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country;
+                    option.textContent = country;
+                    otherNationalitySelect.appendChild(option);
+                });
+            }
+
+            dobInput.addEventListener('change', function () {
+                var dob = new Date(dobInput.value);
+                var today = new Date();
+                var age = today.getFullYear() - dob.getFullYear();
+                var m = today.getMonth() - dob.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+                ageInput.value = age;
+            });
+
+            var myKidInput = document.querySelector("input[name='c_myKid']");
+
+            myKidInput.addEventListener("input", function () {
+                var validityMessage = '';
+
+                if (!/^\d{12}$/.test(this.value)) {
+                    validityMessage = 'Invalid MyKid number. Must be exactly 12 digits and numeric.';
+                }
+
+                this.setCustomValidity(validityMessage);
+            });
+        });
+    </script>
 }
+

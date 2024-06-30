@@ -13,5 +13,7 @@ namespace ADStarter.Models
         public TreatmentHistory TreatmentHistory { get; set; }
         public IdentityUser UserId { get; set; }  // Add this property
         public int parent_ID { get; set; }  // Add this property
+        public List<ParentChildViewModel> Children { get; set; }
+
     }
 }

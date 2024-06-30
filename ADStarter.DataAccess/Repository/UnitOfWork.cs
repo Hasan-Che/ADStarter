@@ -1,6 +1,7 @@
 ﻿using ADStarter.DataAccess.Data;
 using ADStarter.DataAccess.Repository.IRepository;
 using ADStarter.Models;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,11 @@ namespace ADStarter.DataAccess.Repository
         public void Save()
         {
             _db.SaveChanges(); 
+        }
+
+        public IDbContextTransaction BeginTransaction()
+        {
+            return _db.Database.BeginTransaction();
         }
     }
 }
