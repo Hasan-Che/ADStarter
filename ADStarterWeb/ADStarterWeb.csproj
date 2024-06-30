@@ -48,16 +48,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+
     <Content Update="Areas\CustomerService\Views\Dashboard\UpdateProfile.cshtml">
+
     <Folder Include="wwwroot\images\child\" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Areas\Parent\Views\Registration\EditTreatmentHistoryForm.cshtml">
+
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\images\announcement\" />
   </ItemGroup>
+
+
 </Project>
