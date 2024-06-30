@@ -29,10 +29,25 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 return NotFound("Parent not found.");
             }
 
-            var invoices = _unitOfWork.Invoice.GetAll(i => i.Child.parent_ID == parent.parent_ID, includeProperties: "Child,Schedule")
-                                               .ToList();
+            var invoices = _unitOfWork.Invoice.GetAll(
+                i => i.Child.parent_ID == parent.parent_ID,
+                includeProperties: "Child,Schedule,Schedule.Program,Payments"
+            ).ToList();
 
-            return View(invoices);
+            var invoiceViewModels = invoices.Select(i => new InvoiceViewModel
+            {
+                Invoice_ID = i.invoice_ID,
+                Invoice_Amount = i.invoice_amount,
+                ChildName = i.Child.c_name,
+                Due_Date = i.due_date,
+                ProgramName = i.Schedule.Program.prog_name,
+                Session_Date = i.Schedule.session_datetime,
+                Payments = i.Payments.ToList(),
+                Schedule = i.Schedule,
+                IsPaid = i.Payments.Any(p => p.pay_desc == "Paid")
+            }).ToList();
+
+            return View(invoiceViewModels);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace ADStarter.DataAccess.Data
         public DbSet<Slot> Slots { get; set; }
         public DbSet<Therapist> Therapists { get; set; }
         public DbSet<TreatmentHistory> TreatmentHistories { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -76,12 +76,6 @@ namespace ADStarter.DataAccess.Data
 
             // Configure Payment entity relationships
             modelBuilder.Entity<Payment>()
-                .HasOne(p => p.Admin)
-                .WithMany(a => a.Payments)
-                .HasForeignKey(p => p.a_ID)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Invoice)
                 .WithMany(i => i.Payments)
                 .HasForeignKey(p => p.invoice_ID)
@@ -91,6 +85,12 @@ namespace ADStarter.DataAccess.Data
                 .HasOne(p => p.Child)
                 .WithMany(c => c.Payments)
                 .HasForeignKey(p => p.c_myKid)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Configure Report entity relationships
