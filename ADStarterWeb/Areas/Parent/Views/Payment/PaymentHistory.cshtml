@@ -1,7 +1,7 @@
-@model IEnumerable<ADStarter.Models.InvoiceViewModel>
+@model IEnumerable<ADStarter.Models.Payment>
 
 @{
-    ViewData["Title"] = "My Invoices";
+    ViewData["Title"] = "Payment History";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,7 +10,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>My Invoices</h3>
+                    <h3>Payment History</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -22,7 +22,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">Billing</li>
-                        <li class="breadcrumb-item active">My Invoices</li>
+                        <li class="breadcrumb-item active">Payment History</li>
                     </ol>
                 </div>
             </div>
@@ -32,43 +32,34 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header pb-0 card-no-border">
-                    <h4>View And Manage Your Invoices</h4>
+                    <h4>View Your Payment History</h4>
                     <span></span>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-dashed display" id="invoices-table">
+                        <table class="table table-dashed display" id="payment-history-table">
                             <thead>
                                 <tr>
                                     <th>Child Name</th>
                                     <th>Invoice ID</th>
-                                    <th>Program Name</th>
-                                    <th>Session Date</th>
-                                    <th>Payment Due</th>
+                                    <th>Payment ID</th>
+                                    <th>Payment Date</th>
                                     <th>Amount (RM)</th>
-                                    <th>Action</th>
+                                    <th>Balance</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach (var invoice in Model)
+                            @foreach (var payment in Model)
                             {
                                 <tr>
-                                    <td>@invoice.ChildName</td>
-                                    <td>@invoice.Invoice_ID</td>
-                                    <td>@invoice.ProgramName</td>
-                                    <td>@invoice.Session_Date.Date.ToShortDateString()</td>
-                                    <td>@invoice.Due_Date.ToShortDateString()</td>
-                                    <td>@invoice.Invoice_Amount</td>
-                                    <td> 
-                                        @if (invoice.IsPaid)
-                                        {
-                                            <a class="btn btn-outline-secondary disabled";">Paid</a>
-                                        }
-                                        else
-                                        {
-                                            <a class="btn btn-outline-primary" asp-area="Parent" asp-controller="Payment" asp-action="Index" asp-route-invoiceId="@invoice.Invoice_ID">Make Payment</a>
-                                        }
-                                    </td>
+                                    <td>@payment.Child?.c_name</td>
+                                    <td>@payment.invoice_ID</td>
+                                    <td>@payment.pay_ID</td>
+                                    <td>@payment.pay_date.ToShortDateString()</td>
+                                    <td>@payment.pay_amount</td>
+                                    <td>@payment.pay_balance</td>
+                                    <td>@payment.pay_desc</td>
                                 </tr>
                             }
                             </tbody>
@@ -83,7 +74,7 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
-            $('#invoices-table').DataTable();
+            $('#payment-history-table').DataTable();
         });
     </script>
 }

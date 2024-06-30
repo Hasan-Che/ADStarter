@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class ModDB : Migration
+    public partial class UpdateSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -464,18 +464,17 @@ namespace ADStarter.DataAccess.Migrations
                     pay_desc = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     stripe_charge_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     c_myKid = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    a_ID = table.Column<int>(type: "int", nullable: false),
-                    invoice_ID = table.Column<int>(type: "int", nullable: false),
-                    Therapistt_ID = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    invoice_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.pay_ID);
                     table.ForeignKey(
-                        name: "FK_Payments_Admins_a_ID",
-                        column: x => x.a_ID,
-                        principalTable: "Admins",
-                        principalColumn: "a_ID",
+                        name: "FK_Payments_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Payments_Children_c_myKid",
@@ -495,11 +494,6 @@ namespace ADStarter.DataAccess.Migrations
                         principalTable: "Parents",
                         principalColumn: "parent_ID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Payments_Therapists_Therapistt_ID",
-                        column: x => x.Therapistt_ID,
-                        principalTable: "Therapists",
-                        principalColumn: "t_ID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -577,14 +571,14 @@ namespace ADStarter.DataAccess.Migrations
                 column: "schedule_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_a_ID",
-                table: "Payments",
-                column: "a_ID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Payments_c_myKid",
                 table: "Payments",
                 column: "c_myKid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_Id",
+                table: "Payments",
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_invoice_ID",
@@ -595,11 +589,6 @@ namespace ADStarter.DataAccess.Migrations
                 name: "IX_Payments_parent_ID",
                 table: "Payments",
                 column: "parent_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Payments_Therapistt_ID",
-                table: "Payments",
-                column: "Therapistt_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reports_c_myKid",
@@ -671,10 +660,10 @@ namespace ADStarter.DataAccess.Migrations
                 name: "TreatmentHistories");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "Admins");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Invoices");

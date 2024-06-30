@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace ADStarter.Models
 {
@@ -24,7 +25,7 @@ namespace ADStarter.Models
 
         public string c_myKid { get; set; }
 
-        public int a_ID { get; set; } // Admin ID used in accessing the list of Payments from the admin side
+        public string Id { get; set; } // User ID from AspNetUsers
 
         public int invoice_ID { get; set; }
 
@@ -34,8 +35,8 @@ namespace ADStarter.Models
         [ForeignKey("parent_ID")]
         public virtual Parent Parent { get; set; }
 
-        [ForeignKey(nameof(a_ID))]
-        public virtual Admin Admin { get; set; }
+        [ForeignKey(nameof(Id))]
+        public virtual IdentityUser User { get; set; }
 
         [ForeignKey(nameof(invoice_ID))]
         public virtual Invoice Invoice { get; set; }

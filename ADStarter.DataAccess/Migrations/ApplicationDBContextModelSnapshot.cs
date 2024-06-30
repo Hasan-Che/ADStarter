@@ -274,11 +274,9 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pay_ID"));
 
-                    b.Property<int?>("Therapistt_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("a_ID")
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("c_myKid")
                         .HasColumnType("nvarchar(100)");
@@ -307,9 +305,7 @@ namespace ADStarter.DataAccess.Migrations
 
                     b.HasKey("pay_ID");
 
-                    b.HasIndex("Therapistt_ID");
-
-                    b.HasIndex("a_ID");
+                    b.HasIndex("Id");
 
                     b.HasIndex("c_myKid");
 
@@ -760,13 +756,9 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Payment", b =>
                 {
-                    b.HasOne("ADStarter.Models.Therapist", null)
-                        .WithMany("Payments")
-                        .HasForeignKey("Therapistt_ID");
-
-                    b.HasOne("ADStarter.Models.Admin", "Admin")
-                        .WithMany("Payments")
-                        .HasForeignKey("a_ID")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -787,13 +779,13 @@ namespace ADStarter.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Admin");
-
                     b.Navigation("Child");
 
                     b.Navigation("Invoice");
 
                     b.Navigation("Parent");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Report", b =>
@@ -921,8 +913,6 @@ namespace ADStarter.DataAccess.Migrations
             modelBuilder.Entity("ADStarter.Models.Admin", b =>
                 {
                     b.Navigation("Announcements");
-
-                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Child", b =>
@@ -965,8 +955,6 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Therapist", b =>
                 {
-                    b.Navigation("Payments");
-
                     b.Navigation("Reports");
 
                     b.Navigation("Schedules");

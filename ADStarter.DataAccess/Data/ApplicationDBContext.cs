@@ -74,14 +74,7 @@ namespace ADStarter.DataAccess.Data
                 .Property(c => c.t_ID)
                 .HasDefaultValue(null);
 
-
             // Configure Payment entity relationships
-            modelBuilder.Entity<Payment>()
-                .HasOne(p => p.Admin)
-                .WithMany(a => a.Payments)
-                .HasForeignKey(p => p.a_ID)
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Invoice)
                 .WithMany(i => i.Payments)
@@ -92,6 +85,12 @@ namespace ADStarter.DataAccess.Data
                 .HasOne(p => p.Child)
                 .WithMany(c => c.Payments)
                 .HasForeignKey(p => p.c_myKid)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Configure Report entity relationships
