@@ -130,8 +130,39 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 return RedirectToAction("Index","Dashboard");
         }
 
+        // TREATMENT HISTORY FORM
+        public IActionResult AddNewTreatmentHistoryForm()
+        {
+            if (TempData["c_myKid"] != null)
+            {
+                ViewBag.cmyKid = TempData["c_myKid"];
+                TempData.Keep("c_myKid");
+            }
+            return View();
+        }
 
-        
+        [HttpPost]
+        public IActionResult AddNewTreatmentHistoryForm(ADStarter.Models.TreatmentHistory obj, string submit)
+        {
+            if (TempData["c_myKid"] != null)
+            {
+                var c_myKid = (string)TempData["c_myKid"];
+                obj.c_myKid = c_myKid;
+                _unitOfWork.TreatmentHistory.Add(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Treatment History Detail created successfully";
+
+                if (submit == "Skip")
+                {
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                return RedirectToAction("Index", "Dashboard");
+            }
+
+            TempData["error"] = "Child MyKid not found. Please try again.";
+            return RedirectToAction("Index");
+        }
+
 
         public IActionResult UserEditCopy()
         {
