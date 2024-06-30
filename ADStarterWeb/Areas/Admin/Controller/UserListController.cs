@@ -8,7 +8,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
     [Authorize(Roles = SD.Role_Admin)]
     public class UserListController : Controller
     {
-        public IActionResult UserList()
+        public IActionResult List()
         {
 
             return View();
