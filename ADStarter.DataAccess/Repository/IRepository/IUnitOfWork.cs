@@ -8,7 +8,11 @@ namespace ADStarter.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
+        ITherapistRepository Therapist { get; }
+        IAdminRepository Admin { get; }
         IProgramRepository Program { get; }
+        ICustomerServiceRepository CustomerService { get; }
+        IAnnouncementRepository Announcement { get; }
         void Save();
     }
 }

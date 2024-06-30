@@ -11,7 +11,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>User List</h3>
+                    <h3>Account List</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -22,8 +22,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">Users</li>
-                        <li class="breadcrumb-item active"> User List</li>
+                        <li class="breadcrumb-item">Account</li>
+                        <li class="breadcrumb-item active">Account List</li>
                     </ol>
                 </div>
             </div>
@@ -35,13 +35,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title mb-0">User List</h4>
-                            <div class="card-options">
-                                <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                <a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
-                            </div>
-                        </div>
                         <div class="table-responsive add-project">
                             <table class="table card-table table-vcenter text-nowrap">
                                 <thead>
@@ -62,16 +55,15 @@
                                                 @foreach (var role in user.Roles)
                                                 {
                                                     <span>@role</span>
-
                                                     <br />
                                                 }
                                             </td>
                                             <td class="text-end">
-                                                <a class="btn btn-primary btn-sm" href="@Url.Action("AddDetails", "UserList", new {area = "Admin" })">
-                                                    <i class="fa fa-pencil"></i> Edit
-                                                </a>
-                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "UserList", new { id = user.UserId, area = "Admin" })">
-                                                    <i class="fa fa-trash"></i> Delete
+                                                @{
+                                                    string detailsAction = user.Roles.Contains("Therapist") ? "AddTherapistDetails" : "AddCustomerServiceDetails";
+                                                }
+                                                <a class="btn btn-primary btn-sm" href="@Url.Action(detailsAction, "UserList", new { area = "Admin", userId = user.UserId })">
+                                                    <i class="fa fa-pencil"></i>Add/Manage Details
                                                 </a>
                                             </td>
                                         </tr>
@@ -87,7 +79,7 @@
     <!-- Container-fluid Ends-->
 </div>
 
-@section Scripts {
+@section Script {
     <!-- Plugins JS start-->
     <script src="../assets/js/sidebar-menu.js"></script>
     <script src="../assets/js/slick/slick.min.js"></script>
