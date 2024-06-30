@@ -1,5 +1,7 @@
 ﻿using ADStarter.DataAccess.Data;
 using ADStarter.DataAccess.Repository.IRepository;
+using ADStarter.Models;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +19,9 @@ namespace ADStarter.DataAccess.Repository
         public ICustomerServiceRepository CustomerService { get; private set; }
         public IAdminRepository Admin { get; private set; }
         public IAnnouncementRepository Announcement { get; private set; }
-
+        public IParentRepository Parent { get; private set; }
+        public IChildRepository Child { get; private set; }
+        public ITreatmentHistoryRepository TreatmentHistory { get; private set; }
         public UnitOfWork(ApplicationDBContext db)
         {
             _db = db;
@@ -26,12 +30,20 @@ namespace ADStarter.DataAccess.Repository
             CustomerService = new CustomerServiceRepository(_db);
             Admin = new AdminRepository(_db);
             Announcement = new AnnouncementRepository(_db);
+            Parent = new ParentRepository(_db);
+            Child = new ChildRepository(_db);
+            TreatmentHistory = new TreatmentHistoryRepository(_db);
         }
 
 
         public void Save()
         {
             _db.SaveChanges(); 
+        }
+
+        public IDbContextTransaction BeginTransaction()
+        {
+            return _db.Database.BeginTransaction();
         }
     }
 }

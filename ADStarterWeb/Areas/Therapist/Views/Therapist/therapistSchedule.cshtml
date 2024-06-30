@@ -1,38 +1,4 @@
-﻿@* @model List<ADStarter.Models.ViewModels.TherapistScheduleViewModel>
-
-@{
-    ViewData["Title"] = "Therapist Schedule";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-
-<div class="container">
-    <h1>Therapist Schedule</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Child Name</th>
-                <th>Session Date Time</th>
-                <th>Slot Time</th>
-                <th>Program</th>
-                <th>Slot Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var schedule in Model)
-            {
-                <tr>
-                    <td>@schedule.ChildName</td>
-                    <td>@schedule.SessionDateTime.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td>@schedule.SlotTime</td>
-                    <td>@schedule.ProgramName</td>
-                    <td>@schedule.SlotPrice</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
- *@
+﻿@*
 
  @model List<ADStarter.Models.ViewModels.TherapistScheduleViewModel>
 
@@ -112,3 +78,4 @@
         // Optional: Add any scripts specific to this view
     </script>
 }
+ *@
