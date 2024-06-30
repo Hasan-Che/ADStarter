@@ -34,8 +34,8 @@
                 <div class="col-xl-8">
                     <form method="post" class="card" enctype="multipart/form-data">
                         <input type="hidden" name="userId" value="@id" />
-                        @* <input asp-for="ann_ID" hidden />
-                        <input asp-for="ImageUrl" hidden /> *@
+                        @* <input asp-for="ann_ID" hidden /> *@
+                        <input asp-for="ImageUrl" hidden />
                         <div class="card-header">
                             <h4 class="card-title mb-0">@((Model.ann_ID != 0) ? "Update" : "Create") Announcement</h4>
                             <div class="card-options">
@@ -77,8 +77,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label asp-for="ImageUrl" class="form-label"></label>
-                                        <input type="file" name="file" class="form-control" />
+                                        <label asp-for="ImageUrl" class="ms-2"></label>
+                                        <input type="file" name="file" class="form-control border-0 shadow" />
                                     </div>
                                 </div>
                                 @* <div class="col-md-12">

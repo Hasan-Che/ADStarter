@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240628161431_adddb")]
+    [Migration("20240630103343_adddb")]
     partial class adddb
     {
         /// <inheritdoc />
@@ -76,14 +76,17 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ann_ID"));
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("a_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("ann_desc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ann_media")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("ann_status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ann_title")
                         .HasMaxLength(100)
