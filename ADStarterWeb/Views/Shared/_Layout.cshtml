@@ -40,8 +40,11 @@
             </div>
         </div>
         <partial name="_Script" />
-        @RenderSection("Script", required: false)
-        @* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        @RenderSection("Script", false)
+
+        <script src="../assets/js/theme-customizer/customizer.js"></script>
+        @* @RenderSection("Script", required: false)
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
         <script src="~/assets/js/icons/feather-icon/feather.min.js"></script>
         <script src="~/assets/js/icons/feather-icon/feather-icon.js"></script>
@@ -85,16 +88,13 @@ else
             </div>
         </div>
         <partial name="_Script" />
+        @RenderSection("Script", false)
+
+        <script src="../assets/js/theme-customizer/customizer.js"></script>
         @* @if (IsSectionDefined("scripts"))
         {
             RenderSection("scripts");
-        } *@
-        @* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
-        <script src="~/assets/js/icons/feather-icon/feather.min.js"></script>
-        <script src="~/assets/js/icons/feather-icon/feather-icon.js"></script>
-        <script src="~/assets/js/config.js"></script>
-        <script src="~/assets/js/script.js"></script> *@
+        }
         <script src="../assets/js/sidebar-menu.js"></script>
         <script src="../assets/js/slick/slick.min.js"></script>
         <script src="../assets/js/slick/slick.js"></script>
@@ -104,7 +104,14 @@ else
         <!-- Plugins JS Ends-->
         <!-- Theme js-->
         <script src="../assets/js/script.js"></script>
-        @RenderSection("Script", required: false)
+        <!-- Plugins JS start-->
+        <script src="../assets/js/dropzone/dropzone.js"></script>
+        <script src="../assets/js/dropzone/dropzone-script.js"></script>
+        <script src="../assets/js/tooltip-init.js"></script>
+        <!-- Plugins JS Ends-->
+        <!-- Theme js-->
+        <script src="../assets/js/script.js"></script>
+        @RenderSection("Script", required: false) *@
     </body>
 }
 </html>
