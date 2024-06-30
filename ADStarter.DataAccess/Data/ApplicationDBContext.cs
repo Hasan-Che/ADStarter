@@ -11,7 +11,7 @@ namespace ADStarter.DataAccess.Data
             : base(options)
         {
         }
-        
+
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Child> Children { get; set; }
@@ -71,7 +71,7 @@ namespace ADStarter.DataAccess.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Schedule>()
-                .Property(c => c.t_ID)
+                .Property(s => s.t_ID)
                 .HasDefaultValue(null);
 
             // Configure Payment entity relationships
@@ -95,15 +95,9 @@ namespace ADStarter.DataAccess.Data
 
             // Configure Report entity relationships
             modelBuilder.Entity<Report>()
-                .HasOne(r => r.Child)
-                .WithMany(c => c.Reports)
-                .HasForeignKey(r => r.c_myKid)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Report>()
-                .HasOne(r => r.Therapist)
-                .WithMany(t => t.Reports)
-                .HasForeignKey(r => r.t_ID)
+                .HasOne(r => r.Schedule)
+                .WithMany(s => s.Reports)
+                .HasForeignKey(r => r.schedule_ID)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

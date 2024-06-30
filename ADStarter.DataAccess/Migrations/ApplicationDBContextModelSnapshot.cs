@@ -360,24 +360,32 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("rep_ID"));
 
-                    b.Property<string>("c_myKid")
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<DateTime>("rep_datetime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("rep_file")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("rep_remark")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("rep_status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("rep_title")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("t_ID")
+                    b.Property<int>("schedule_ID")
                         .HasColumnType("int");
 
                     b.HasKey("rep_ID");
 
-                    b.HasIndex("c_myKid");
-
-                    b.HasIndex("t_ID");
+                    b.HasIndex("schedule_ID");
 
                     b.ToTable("Reports");
                 });
@@ -443,6 +451,7 @@ namespace ADStarter.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("t_ID"));
 
                     b.Property<string>("UserId")
+                        .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("t_address")
@@ -458,8 +467,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.HasKey("t_ID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Therapists");
                 });
@@ -790,20 +797,13 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Report", b =>
                 {
-                    b.HasOne("ADStarter.Models.Child", "Child")
+                    b.HasOne("ADStarter.Models.Schedule", "Schedule")
                         .WithMany("Reports")
-                        .HasForeignKey("c_myKid")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("ADStarter.Models.Therapist", "Therapist")
-                        .WithMany("Reports")
-                        .HasForeignKey("t_ID")
+                        .HasForeignKey("schedule_ID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Child");
-
-                    b.Navigation("Therapist");
+                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Schedule", b =>
@@ -921,8 +921,6 @@ namespace ADStarter.DataAccess.Migrations
 
                     b.Navigation("Payments");
 
-                    b.Navigation("Reports");
-
                     b.Navigation("Schedules");
 
                     b.Navigation("TreatmentHistory");
@@ -946,6 +944,8 @@ namespace ADStarter.DataAccess.Migrations
             modelBuilder.Entity("ADStarter.Models.Schedule", b =>
                 {
                     b.Navigation("Invoices");
+
+                    b.Navigation("Reports");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Slot", b =>
@@ -955,8 +955,6 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Therapist", b =>
                 {
-                    b.Navigation("Reports");
-
                     b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618

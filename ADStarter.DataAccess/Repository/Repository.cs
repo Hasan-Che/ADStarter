@@ -88,5 +88,6 @@ namespace ADStarter.DataAccess.Repository
 
             return query.ToList();
         }
+
     }
 }

@@ -22,6 +22,7 @@ namespace ADStarter.DataAccess.Repository
         public ITherapistRepository Therapist { get; private set; }
         public ITreatmentHistoryRepository TreatmentHistory { get; private set; }
         public IInvoiceRepository Invoice { get; private set; }
+        public IReportRepository Report { get; private set; }
         public UnitOfWork(ApplicationDBContext db)
         {
             _db = db;
@@ -33,6 +34,7 @@ namespace ADStarter.DataAccess.Repository
             Therapist = new TherapistRepository(_db);
             TreatmentHistory = new TreatmentHistoryRepository(_db);
             Invoice = new InvoiceRepository(_db);
+            Report = new ReportRepository(_db);
         }
         
 
