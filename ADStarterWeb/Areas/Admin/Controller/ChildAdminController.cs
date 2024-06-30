@@ -29,12 +29,14 @@ namespace ADStarterWeb.Areas.Admin.Controllers
                     ChildName = c.c_name,
                     Step = c.c_step,
                     TherapistName = c.Therapist.t_name,
-                    ChildId = c.c_myKid
+                    ChildId = c.c_myKid,
+                    HasInvoices = _context.Invoices.Any(i => i.ChildId == c.c_myKid)  // Populate the new property
                 })
                 .ToListAsync();
 
             return View(children);
         }
+
 
         public async Task<IActionResult> Details(string id)
         {
