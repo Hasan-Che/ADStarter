@@ -30,14 +30,15 @@ namespace ADStarterWeb.Areas.Admin.Controllers
                     Step = c.c_step,
                     TherapistName = c.Therapist.t_name,
                     ChildId = c.c_myKid,
-                    HasInvoices = _context.Invoices.Any(i => i.c_myKid == c.c_myKid),
-                    HasPayments = _context.Payments.Any(p => p.c_myKid  == c.c_myKid)  // Check if payments exist
+                    CanUpdateStep = !_context.Invoices
+                        .Where(i => i.c_myKid == c.c_myKid)
+                        .Any(i => !_context.Payments
+                        .Any(p => p.invoice_ID == i.invoice_ID))
                 })
                 .ToListAsync();
 
             return View(children);
         }
-
 
         public async Task<IActionResult> Details(string id)
         {

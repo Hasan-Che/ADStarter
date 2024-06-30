@@ -26,35 +26,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var child in Model)
-                            {
-                                <tr>
-                                    <td>@child.ChildName</td>
-                                    <td>@child.Step</td>
-                                    <td>@child.TherapistName</td>
-                                    <td>
-                                        @if (child.HasInvoices && child.HasPayments)
-                                        {
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childDetailsModal" data-id="@child.ChildId">
-                                                View Details
-                                            </button>
-                                            <a href="@Url.Action("Edit", "ChildAdmin", new { area = "Admin", id = child.ChildId })" class="btn btn-warning">
-                                                Update Step
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childDetailsModal" data-id="@child.ChildId">
-                                                View Details
-                                            </button>
-                                            <a href="@Url.Action("Edit", "ChildAdmin", new { area = "Admin", id = child.ChildId })" class="btn btn-warning" disabled style="background-color: aliceblue;">
-                                                Update Step
-                                            </a>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
+    @foreach (var child in Model)
+    {
+        <tr>
+            <td>@child.ChildName</td>
+            <td>@child.Step</td>
+            <td>@child.TherapistName</td>
+            <td>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childDetailsModal" data-id="@child.ChildId">
+                    View Details
+                </button>
+                @if (child.CanUpdateStep)
+                {
+                    <a href="@Url.Action("Edit", "ChildAdmin", new { area = "Admin", id = child.ChildId })" class="btn btn-warning">
+                        Update Step
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="btn btn-warning disabled" style="background-color: aliceblue;">
+                        Update Step
+                    </a>
+                }
+            </td>
+        </tr>
+    }
+</tbody>
                     </table>
                 </div>
             </div>
