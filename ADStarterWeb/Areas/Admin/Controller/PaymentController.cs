@@ -15,23 +15,6 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult CreateInvoice()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult CreateInvoice([FromBody] Invoice invoice)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Invoices.Add(invoice);
-                _context.SaveChanges();
-                return Ok(new { success = true, message = "Invoice created successfully" });
-            }
-            return BadRequest(new { success = false, message = "Invalid data" });
-        }
-
         public IActionResult ManageInvoice()
         {
             return View();

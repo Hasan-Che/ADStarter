@@ -32,7 +32,7 @@ namespace ADStarter.Models
         public virtual Therapist? Therapist { get; set; }
 
         [ForeignKey(nameof(prog_ID))]
-        public virtual Program Program { get; set; }
+        public virtual Program? Program { get; set; }
 
         [ForeignKey(nameof(slot_ID))]
         public virtual Slot Slot { get; set; }
