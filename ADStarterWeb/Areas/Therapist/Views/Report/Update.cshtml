@@ -67,13 +67,7 @@
 
                                 <div class="form-group">
                                     <label asp-for="ReportFile" class="control-label">Upload Report File:</label>
-                                    <div class="dropzone dz-clickable" id="singleFileUpload">
-                                        <div class="dz-message needsclick">
-                                            <i class="icon-cloud-up"></i>
-                                            <h6>Drop files here or click to upload.</h6>
-                                            <span>(This is a single file dropzone. Multiple files are <strong>not</strong> going to upload.)</span>
-                                        </div>
-                                    </div>
+                                    <input type="file" name="ReportFile" class="form-control-file" />
                                     <span asp-validation-for="ReportFile" class="text-danger"></span>
                                 </div>
 
@@ -100,32 +94,8 @@
     <script src="~/assets/js/slick/slick.min.js"></script>
     <script src="~/assets/js/slick/slick.js"></script>
     <script src="~/assets/js/header-slick.js"></script>
-    <script src="~/assets/js/dropzone/dropzone.js"></script>
-    <script src="~/assets/js/dropzone/dropzone-script.js"></script>
     <script src="~/assets/js/tooltip-init.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="~/assets/js/script.js"></script>
-
-    <script>
-        Dropzone.options.singleFileUpload = {
-            url: '@Url.Action("UploadReportFile", "Reports")', // Replace with your upload URL
-            paramName: "ReportFile",
-            maxFiles: 1,
-            acceptedFiles: ".pdf",
-            init: function () {
-                this.on("success", function (file, response) {
-                    // Handle the response after successful upload
-                    console.log("File uploaded successfully");
-                });
-                this.on("error", function (file, errorMessage) {
-                    // Handle the error
-                    console.log("File upload error: " + errorMessage);
-                });
-            }
-        };
-
-        Dropzone.autoDiscover = false;
-        var singleFileUploadDropzone = new Dropzone("#singleFileUpload", Dropzone.options.singleFileUpload);
-    </script>
 }

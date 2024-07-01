@@ -125,7 +125,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     }
                     else if (roles.Contains("Customer Service"))
                     {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Customer Service" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "CustomerService" });
                     }
                     else if (roles.Contains("Therapist"))
                     {
