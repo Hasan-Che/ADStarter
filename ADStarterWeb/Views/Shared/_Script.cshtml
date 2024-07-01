@@ -19,4 +19,12 @@
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="~/assets/js/script.js"></script>
-<!-- login js-->
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<!-- DataTable custom init -->
+<script>
+    $(document).ready(function() {
+        $('#invoices-table').DataTable();
+    });
+</script>

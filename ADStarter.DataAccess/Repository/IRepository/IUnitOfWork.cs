@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ADStarter.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         ITherapistRepository Therapist { get; }
         IAdminRepository Admin { get; }
@@ -15,8 +15,13 @@ namespace ADStarter.DataAccess.Repository.IRepository
         ICustomerServiceRepository CustomerService { get; }
         IAnnouncementRepository Announcement { get; }
         IParentRepository Parent { get; }
+        IScheduleRepository Schedule { get; }
         IChildRepository Child { get; }
+        ISlotRepository Slot { get; }
+        ITherapistRepository Therapist { get; }
         ITreatmentHistoryRepository TreatmentHistory { get; }
+        IInvoiceRepository Invoice { get; }
+        IReportRepository Report { get; }
         void Save();
         IDbContextTransaction BeginTransaction();
     }

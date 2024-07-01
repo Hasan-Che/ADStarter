@@ -1,0 +1,54 @@
+﻿@* @model List<ADStarter.Models.ViewModels.ChildListViewModel>
+
+@{
+    ViewData["Title"] = "Select Child";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Select a Child</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">Select Child</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Select a Child</h1>
+                <form asp-action="ViewSchedule" method="get">
+                    <div class="form-group">
+                        <label for="childId">Select Child:</label>
+                        <select class="form-control" id="childId" name="childId">
+                            <option value="">-- Select a Child --</option>
+                            @foreach (var child in Model)
+                            {
+                                <option value="@child.ChildId">@child.ChildName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Display Schedule</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+ *@

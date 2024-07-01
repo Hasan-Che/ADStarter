@@ -32,10 +32,9 @@ namespace ADStarter.Models
         [Required(ErrorMessage = "State is required")]
         public string t_state { get; set; }
 
-        public IdentityUser User { get; set; }
+        [StringLength(450)]
+        public string UserId { get; set; }
 
         public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
-        public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
-        public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
     }
 }

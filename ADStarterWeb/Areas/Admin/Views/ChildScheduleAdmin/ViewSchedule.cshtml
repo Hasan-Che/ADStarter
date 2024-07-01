@@ -1,0 +1,74 @@
+﻿@* @model ADStarter.Models.ViewModels.ChildScheduleDisplayViewModel
+
+@{
+    ViewData["Title"] = "Child Schedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Child Schedule - @Model.ChildName</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">Child Schedule</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        @if (Model.Schedules != null && Model.Schedules.Any())
+        {
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4>@Model.ChildName's Schedule</h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Slot Time</th>
+                                    <th>Program Name</th>
+                                    <th>Therapist Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var schedule in Model.Schedules.OrderBy(s => s.SessionDate))
+                                {
+                                    <tr>
+                                        <td>@schedule.SessionDate.ToShortDateString()</td>
+                                        <td>@schedule.SlotTime</td>
+                                        <td>@schedule.ProgramName</td>
+                                        <td>@schedule.TherapistName</td>
+                                        <td>
+                                            <a asp-action="EditSchedule" asp-route-id="@schedule.Session_ID" class="btn btn-sm btn-primary">Edit</a>
+                                            <a asp-action="DeleteSchedule" asp-route-id="@schedule.Session_ID" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>No schedules available for this child.</p>
+        }
+    </div>
+</div>
+ *@

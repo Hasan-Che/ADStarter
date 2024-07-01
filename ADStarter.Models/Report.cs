@@ -13,16 +13,23 @@ namespace ADStarter.Models
         [StringLength(100)]
         public string rep_title { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime rep_datetime { get; set; }
 
-        public string c_myKid { get; set; }
+        public int schedule_ID { get; set; }
 
-        public int t_ID { get; set; }
+        [ForeignKey(nameof(schedule_ID))]
+        public virtual Schedule Schedule { get; set; }
 
-        [ForeignKey(nameof(c_myKid))]
-        public virtual Child Child { get; set; }
+        // Added properties
+        [StringLength(500)]
+        public string rep_remark { get; set; }
 
-        [ForeignKey(nameof(t_ID))]
-        public virtual Therapist Therapist { get; set; }
+        [StringLength(255)]
+        public string rep_file { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string rep_status { get; set; } = "Pending"; // Default value set to 'Pending'
     }
 }

@@ -49,19 +49,11 @@
                             <span>Program</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Therapist" asp-controller="Therapist" asp-action="TherapistSchedule">Schedule</a></li>
+                            <li><a asp-area="Therapist" asp-controller="Report" asp-action="UpcomingSchedules">Upcoming Schedules</a></li>
+                            <li><a asp-area="Therapist" asp-controller="Report" asp-action="PendingReports">Schedule</a></li>
+                            <li><a asp-area="Therapist" asp-controller="AssignedChild" asp-action="Index">Assigned Child</a></li>
+                          
                         </ul>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-task"></use>
-                            </svg>
-                            <span>Billing</span>
-                        </a>
                     </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">

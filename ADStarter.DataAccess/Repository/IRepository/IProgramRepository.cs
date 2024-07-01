@@ -11,4 +11,5 @@ namespace ADStarter.DataAccess.Repository.IRepository
     {
         void Update(Program obj);
     }
+
 }
