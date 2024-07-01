@@ -89,13 +89,26 @@
 </div>
 
 @section Scripts {
-    <!-- Plugins JS start-->
-    <script src="~/assets/js/sidebar-menu.js"></script>
-    <script src="~/assets/js/slick/slick.min.js"></script>
-    <script src="~/assets/js/slick/slick.js"></script>
-    <script src="~/assets/js/header-slick.js"></script>
-    <script src="~/assets/js/tooltip-init.js"></script>
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="~/assets/js/script.js"></script>
+
+    <script>
+        Dropzone.options.singleFileUpload = {
+            url: '@Url.Action("UploadReportFile", "Reports")', // Replace with your upload URL
+            paramName: "ReportFile",
+            maxFiles: 1,
+            acceptedFiles: ".pdf",
+            init: function () {
+                this.on("success", function (file, response) {
+                    // Handle the response after successful upload
+                    console.log("File uploaded successfully");
+                });
+                this.on("error", function (file, errorMessage) {
+                    // Handle the error
+                    console.log("File upload error: " + errorMessage);
+                });
+            }
+        };
+
+        Dropzone.autoDiscover = false;
+        var singleFileUploadDropzone = new Dropzone("#singleFileUpload", Dropzone.options.singleFileUpload);
+    </script>
 }
