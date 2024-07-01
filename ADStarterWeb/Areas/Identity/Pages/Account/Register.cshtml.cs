@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -140,25 +141,22 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                     }
 
-                    switch (userRole)
+                    if (userRoles.Contains("Admin"))
                     {
-                        case "Parent":
-                            returnUrl = Url.Content("~/Parent/Dashboard/Index");
-                            break;
-                        case "Therapist":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                            break;
-                        case "Admin":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                            break;
-                        case "Customer Service":
-                            returnUrl = Url.Content("~/Admin/AdminDashboard/Index");
-                            break;
-                        default:
-                            returnUrl = Url.Content("~/");
-                            break;
+                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
                     }
-
+                    else if (userRoles.Contains("Customer Service"))
+                    {
+                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+                    }
+                    else if (userRoles.Contains("Therapist"))
+                    {
+                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+                    }
+                    else if (userRoles.Contains("Parent"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Parent" });
+                    }
                     return LocalRedirect(returnUrl);
                 }
 

@@ -1,156 +1,479 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ADStarter.Models.ViewModels;
 using ADStarter.DataAccess.Data;
-using Microsoft.EntityFrameworkCore;
 using ADStarter.Models;
+using System.Security.Claims;
+using ADStarter.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Identity;
+using ADStarter.DataAccess.Repository.IRepository;
+using ADStarter.Models;
+using ADStarter.Models.ViewModels;
 using ADStarter.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ADStarterWeb.Areas.Parent.Controllers
 {
     [Area("Parent")]
-    [Authorize(Roles = SD.Role_Parent)]
     public class RegistrationController : Controller
     {
-        private readonly ApplicationDBContext _db;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        private int _id = 11;
-
-        public RegistrationController(ApplicationDBContext db)
+        public RegistrationController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
         {
-            _db = db; 
+            _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
-
-        [HttpGet]
-        public IActionResult ParentForm()
+        public IActionResult RegistrationFlow()
         {
-            return View(new ParentViewModel());
-        }
-
-        [HttpPost]
-        public IActionResult ParentForm(ParentViewModel model)
-        {
-            if (ModelState.IsValid)
+            var model = new ParentChildViewModel
             {
-                var parent = new ADStarter.Models.Parent
-                {
-                    // Map properties from ParentViewModel to Parent entity
-                    f_name = model.f_name,
-                    f_phoneNum = model.f_phoneNum,
-                    f_race = model.f_race,
-                    f_address = model.f_address,
-                    f_Waddress = model.f_Waddress,
-                    f_email = model.f_email,
-                    f_occupation = model.f_occupation,
-                    f_status = model.f_status,
-                    m_name = model.m_name,
-                    m_phoneNum = model.m_phoneNum,
-                    m_race = model.m_race,
-                    m_address = model.m_address,
-                    m_Waddress = model.m_Waddress,
-                    m_email = model.m_email,
-                    m_status = model.m_status,
-                    fm_income = model.fm_income,
-                };
+                Parent = new ADStarter.Models.Parent(),
+                Child = new ADStarter.Models.Child(),
+                TreatmentHistory = new ADStarter.Models.TreatmentHistory()
 
-                _db.Parents.Add(parent);
-                _db.SaveChanges();
+            };
 
-                TempData["ParentID"] = parent.parent_ID;
-                TempData.Keep("ParentID");
+            ViewBag.ParentID = model.Parent.parent_ID; // Assuming ParentID is a property of Parent
 
-                return RedirectToAction("ChildForm");
-            }
             return View(model);
         }
 
-
-        [HttpGet]
-        public IActionResult ChildForm()
+        [HttpPost]
+        public IActionResult RegistrationFlow(ParentChildViewModel model, ADStarter.Models.Parent parent, ADStarter.Models.Child child, ADStarter.Models.TreatmentHistory history, string action, IFormFile? file)
         {
-            if (TempData["ParentID"] == null)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("ParentForm");
+                // Save Parent information
+                parent.UserId = userId;
+                _unitOfWork.Parent.Add(parent);
+                _unitOfWork.Save();
+                TempData["success"] = "Parent Detail created successfully";
+
+                // Save Child information with photo upload
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
+
+                    using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    child.c_photo = @"\images\child\" + c_photo;
+                }
+                if (child.c_nationality == "Other")
+                {
+                    child.c_nationality = Request.Form["c_otherNationality"]; // Assign directly from form input
+                }
+
+                child.parent_ID = parent.parent_ID; // Assuming parent_ID is set after save
+                _unitOfWork.Child.Add(child);
+                _unitOfWork.Save();
+                TempData["success"] = "Child Detail created successfully";
+
+                // Save Treatment History information
+                history.c_myKid = child.c_myKid; // Assuming c_myKid is set after save
+                _unitOfWork.TreatmentHistory.Add(history);
+                _unitOfWork.Save();
+                TempData["success"] = "Treatment History Detail created successfully";
+
+                return RedirectToAction("Index", "Dashboard");
             }
 
-            var parentID = (int)TempData["ParentID"];
-            var childViewModel = new ChildViewModel
-            {
-                parent_ID = parentID,
-                c_status = "Step One" // Set default value here
-            };
-
-            TempData.Keep("ParentID"); // Retain TempData for the next request
-            return View(childViewModel);
+            // If any part fails, handle errors here
+            TempData["error"] = "Error in Registration Flow. Please try again.";
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public IActionResult ChildForm(ChildViewModel model, string action)
+
+
+
+        //CHILD FORM
+        public IActionResult AddNewChild()
         {
-            if (action == "skip")
+            return View();
+        }
+
+        // POST: /Parent/Registration/AddNewChild
+        // POST: /Parent/Registration/AddNewChild
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddNewChild(Child obj, IFormFile? file, string userId)
+        {
+            userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var parent = _unitOfWork.Parent.GetFirstOrDefault(p => p.UserId == userId);
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+            if (parent == null)
             {
-                return RedirectToAction(nameof(Index), "Dashboard");
+                ModelState.AddModelError("", "Parent not found."); // Example of server-side validation
             }
 
             if (ModelState.IsValid)
             {
-                var child = new Child
+                try
                 {
-                    // Map properties from ChildViewModel to Child entity
-                    parent_ID = model.parent_ID,
-                    c_myKid = model.c_myKid,
-                    prog_ID = model.prog_ID,
-                    c_name = model.c_name,
-                    c_age = model.c_age,
-                    c_gender = model.c_gender,
-                    c_dob = model.c_dob,
-                    c_nationality = model.c_nationality,
-                    c_religion = model.c_religion,
-                    c_race = model.c_race,
-                    c_status = model.c_status
-                };
+                    // Handle file upload and other operations
+                    if (file != null)
+                    {
+                        string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
 
-                _db.Children.Add(child);
-                _db.SaveChanges();
+                        using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
+                        {
+                            file.CopyTo(fileStream);
+                        }
+                        obj.c_photo = @"\images\child\" + c_photo;
+                    }
 
-                TempData["ChildData"] = child;
-                return RedirectToAction("TreatmentHistoryForm");
-            }
+                    if (obj.c_nationality == "Other")
+                    {
+                        obj.c_nationality = Request.Form["c_otherNationality"]; // Assign directly from form input
+                    }
 
-            // Log ModelState errors for debugging
-            foreach (var modelState in ModelState.Values)
-            {
-                foreach (var error in modelState.Errors)
+                    obj.parent_ID = parent.parent_ID;
+
+                    // Check if c_myKid already exists in the database
+                    var existingChild = _unitOfWork.Child.GetFirstOrDefault(c => c.c_myKid == obj.c_myKid);
+                    if (existingChild != null)
+                    {
+                        ModelState.AddModelError("", "A child with the same ID already exists."); // Add specific error message
+                        return View(obj); // Return the view with the model to show validation errors
+                    }
+
+                    _unitOfWork.Child.Add(obj);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Child Detail created successfully";
+                    TempData["c_myKid"] = obj.c_myKid;
+
+                    return RedirectToAction("AddNewTreatmentHistoryForm", "Registration");
+                }
+                catch (Exception ex)
                 {
-                    Console.WriteLine(error.ErrorMessage);
+                    ModelState.AddModelError("", "Error occurred while processing request: " + ex.Message); // Catch all other exceptions
+
+                    // Return the view with the model to show validation errors
+                    return View(obj);
                 }
             }
 
-            TempData.Keep("ParentID"); // Retain TempData for the next request
-            return View(model);
+            // If model state is not valid, return the view with validation errors
+            return View(obj);
         }
 
-        [HttpGet]
-        public IActionResult TreatmentHistoryForm()
+
+
+
+        // TREATMENT HISTORY FORM
+        public IActionResult AddNewTreatmentHistoryForm()
         {
-            return View(new TreatmentHistoryViewModel());
+            if (TempData["c_myKid"] != null)
+            {
+                ViewBag.cmyKid = TempData["c_myKid"];
+                TempData.Keep("c_myKid");
+            }
+            return View();
         }
 
         [HttpPost]
-        public IActionResult TreatmentHistoryForm(TreatmentHistoryViewModel model)
+        public IActionResult AddNewTreatmentHistoryForm(ADStarter.Models.TreatmentHistory obj, string submit)
         {
-            if (ModelState.IsValid)
+            if (TempData["c_myKid"] != null)
             {
-                var parentData = TempData["ParentData"] as ParentViewModel;
-                var childData = TempData["ChildData"] as ChildViewModel;
+                var c_myKid = (string)TempData["c_myKid"];
+                obj.c_myKid = c_myKid;
+                _unitOfWork.TreatmentHistory.Add(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Treatment History Detail created successfully";
 
-                // Save Parent, Child, and TreatmentHistory data to the database
-                // Your save logic here
-
-                return RedirectToAction(nameof(Index), "Dashboard");
+                if (submit == "Skip")
+                {
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                return RedirectToAction("Index", "Dashboard");
             }
 
-            return View(model);
+            TempData["error"] = "Child MyKid not found. Please try again.";
+            return RedirectToAction("Index");
+        }
+
+
+        public IActionResult UserEditCopy()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Retrieve the parent record for the current user
+            var parent = _unitOfWork.Parent.GetFirstOrDefault(p => p.UserId == userId);
+            if (parent == null)
+            {
+                return NotFound(); // Parent not found, return 404
+            }
+
+            // Retrieve child records associated with the parent
+            var child = _unitOfWork.Child.GetFirstOrDefault(c => c.parent_ID == parent.parent_ID);
+
+            if (child == null)
+            {
+                return NotFound(); // Child not found for the parent, return 404
+            }
+
+            var treatmenthistory = _unitOfWork.TreatmentHistory.GetFirstOrDefault(th => th.c_myKid == child.c_myKid);
+
+            // Prepare the view model
+            var viewModel = new ParentChildViewModel
+            {
+                Parent = parent,
+                Child = child,
+                TreatmentHistory = treatmenthistory
+            };
+
+            return View(viewModel); // Pass the view model to the view
+        }
+
+        // EDIT
+        public IActionResult UserEdit()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Retrieve the parent record for the current user
+            var parent = _unitOfWork.Parent.GetFirstOrDefault(p => p.UserId == userId);
+            if (parent == null)
+            {
+                return NotFound(); // Parent not found, return 404
+            }
+
+            // Retrieve child records associated with the parent
+            var children = _unitOfWork.Child.GetAll().Where(c => c.parent_ID == parent.parent_ID).ToList();
+            if (!children.Any())
+            {
+                return NotFound(); // No children found for the parent, return 404
+            }
+
+            // Retrieve treatment history records for each child
+            var treatmentHistories = children.Select(child => new ParentChildViewModel
+            {
+                Child = child,
+                TreatmentHistory = _unitOfWork.TreatmentHistory.GetFirstOrDefault(th => th.c_myKid == child.c_myKid)
+            }).ToList();
+
+            // Prepare the view model
+            var viewModel = new ParentChildViewModel
+            {
+                Parent = parent,
+                Children = treatmentHistories
+            };
+
+            ViewBag.UserId = userId;
+            ViewBag.Parent = parent;
+            return View(viewModel); // Pass the view model to the view
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult UserEdit(ADStarter.Models.ParentChildViewModel obj, string action, IFormFile? file)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Retrieve parent, child, and treatment history entities
+            var Parent = _unitOfWork.Parent.GetFirstOrDefault(p => p.UserId == userId);
+            var Child = Parent != null ? _unitOfWork.Child.GetFirstOrDefault(c => c.parent_ID == Parent.parent_ID) : null;
+            var History = Child != null ? _unitOfWork.TreatmentHistory.GetFirstOrDefault(th => th.c_myKid == Child.c_myKid) : null;
+
+            // Update Parent information if Parent is not null
+            if (obj.Parent != null)
+            {
+                Parent.f_ID = obj.Parent.f_ID;
+                Parent.m_ID = obj.Parent.m_ID;
+                Parent.f_name = obj.Parent.f_name;
+                Parent.f_phoneNum = obj.Parent.f_phoneNum;
+                Parent.f_race = obj.Parent.f_race;
+                Parent.f_address = obj.Parent.f_address;
+                Parent.f_Waddress = obj.Parent.f_Waddress;
+                Parent.f_email = obj.Parent.f_email;
+                Parent.f_occupation = obj.Parent.f_occupation;
+                Parent.f_status = obj.Parent.f_status;
+                Parent.m_name = obj.Parent.m_name;
+                Parent.m_phoneNum = obj.Parent.m_phoneNum;
+                Parent.m_race = obj.Parent.m_race;
+                Parent.m_address = obj.Parent.m_address;
+                Parent.m_Waddress = obj.Parent.m_Waddress;
+                Parent.m_email = obj.Parent.m_email;
+                Parent.m_status = obj.Parent.m_status;
+                Parent.fm_income = obj.Parent.fm_income;
+                _unitOfWork.Parent.Update(Parent);
+                _unitOfWork.Save();
+                TempData["successParent"] = "Parent Detail updated successfully";
+            }
+            else
+            {
+                TempData["errorParent"] = "Parent not found.";
+            }
+
+            // Update Child information if Child is not null
+            if (obj.Child != null)
+            {
+                Child.parent_ID = Parent.parent_ID; // Assuming parent_ID is correctly set after parent update
+                Child.c_name = obj.Child.c_name;
+                Child.c_age = obj.Child.c_age;
+                Child.c_gender = obj.Child.c_gender;
+                Child.c_dob = obj.Child.c_dob;
+                Child.c_nationality = obj.Child.c_nationality;
+                Child.c_religion = obj.Child.c_religion;
+                Child.c_race = obj.Child.c_race;
+                Child.c_step = obj.Child.c_step;
+                _unitOfWork.Child.Update(Child);
+                _unitOfWork.Save();
+                TempData["successChild"] = "Child Detail updated successfully";
+            }
+            else
+            {
+                TempData["errorChild"] = "Child not found.";
+            }
+
+            // Update Treatment History information if History is not null
+            if (obj.TreatmentHistory != null)
+            {
+                History.c_myKid = Child.c_myKid; // Assuming c_myKid is correctly set after child update
+                History.th_deadline = obj.TreatmentHistory.th_deadline;
+                History.th_recommendation = obj.TreatmentHistory.th_recommendation;
+                History.th_diagnosis = obj.TreatmentHistory.th_diagnosis;
+                History.th_pediatrician = obj.TreatmentHistory.th_pediatrician;
+                History.th_prevTherapy = obj.TreatmentHistory.th_prevTherapy;
+                _unitOfWork.TreatmentHistory.Update(History);
+                _unitOfWork.Save();
+                TempData["successTreatmentHistory"] = "Treatment History Detail updated successfully";
+            }
+            else
+            {
+                TempData["errorTreatmentHistory"] = "Treatment History not found.";
+            }
+
+            // Handle file upload if applicable (for c_photo)
+            if (file != null && Child != null)
+            {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
+
+                // Ensure the directory exists
+                if (!Directory.Exists(c_photoPath))
+                {
+                    Directory.CreateDirectory(c_photoPath);
+                }
+
+                try
+                {
+                    using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    Child.c_photo = @"\images\child\" + c_photo; // Update c_photo path
+                    _unitOfWork.Child.Update(Child);
+                    _unitOfWork.Save();
+                }
+                catch (Exception ex)
+                {
+                    // Handle file upload error
+                    ModelState.AddModelError("", "File upload failed: " + ex.Message);
+                    return RedirectToAction("Index", "Dashboard");
+                }
+            }
+
+            return RedirectToAction("Index", "Dashboard");
+        }
+
+
+
+        // DELETE PARENT
+        public IActionResult Delete(int? parent_ID)
+        {
+            if (parent_ID == null || parent_ID == 0)
+            {
+                return NotFound();
+            }
+            ADStarter.Models.Parent? parentFromDb = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
+            if (parentFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(parentFromDb);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? parent_ID)
+        {
+            ADStarter.Models.Parent? obj = _unitOfWork.Parent.Get(u => u.parent_ID == parent_ID);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Parent.Remove(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "ParentDetail deleted successfully";
+            return RedirectToAction("Index");
         }
     }
 }
+
+
+//// TREATMENT HISTORY FORM
+//public IActionResult TreatmentHistoryForm()
+//{
+//    if (TempData["c_myKid"] != null)
+//    {
+//        ViewBag.cmyKid = TempData["c_myKid"];
+//        TempData.Keep("c_myKid");
+//    }
+//    return View();
+//}
+
+//[HttpPost]
+//public IActionResult TreatmentHistoryForm(ADStarter.Models.TreatmentHistory obj, string submit)
+//{
+//    if (TempData["c_myKid"] != null)
+//    {
+//        var c_myKid = (string)TempData["c_myKid"];
+//        obj.c_myKid = c_myKid;
+//        _unitOfWork.TreatmentHistory.Add(obj);
+//        _unitOfWork.Save();
+//        TempData["success"] = "Treatment History Detail created successfully";
+
+//        if (submit == "Skip")
+//        {
+//            return RedirectToAction("Index", "Dashboard");
+//        }
+//        return RedirectToAction("Index", "Dashboard");
+//    }
+
+//    TempData["error"] = "Child MyKid not found. Please try again.";
+//    return RedirectToAction("Index");
+//}
+
+// PARENT FORM
+//public IActionResult ParentForm()
+//{
+//    return View();
+//}
+
+//[HttpPost]
+//public IActionResult ParentForm(ADStarter.Models.Parent obj)
+//{
+//    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+//    obj.UserId = userId;
+//    _unitOfWork.Parent.Add(obj);
+//    _unitOfWork.Save();
+//    TempData["success"] = "Parent Detail created successfully";
+//    TempData["parent_ID"] = obj.parent_ID;
+//    return RedirectToAction("ChildForm");
+//}

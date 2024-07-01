@@ -17,6 +17,7 @@ namespace ADStarter.DataAccess.Repository
     {
         private readonly ApplicationDBContext _db;
         internal DbSet<T> dbSet;
+
         public Repository(ApplicationDBContext db)
         {
             _db = db;
@@ -29,6 +30,13 @@ namespace ADStarter.DataAccess.Repository
         }
 
         public T Get(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
+            return query.FirstOrDefault();
+        }
+
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
@@ -50,5 +58,45 @@ namespace ADStarter.DataAccess.Repository
         {
             dbSet.RemoveRange(entity);
         }
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            return query.FirstOrDefault();
+        }
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, string includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            return query.ToList();
+        }
+
     }
+
 }

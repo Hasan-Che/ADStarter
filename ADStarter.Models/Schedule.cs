@@ -14,9 +14,10 @@ namespace ADStarter.Models
         [Key]
         public int schedule_ID { get; set; }
 
-        public int session_ID { get; set; }
+        // Removed property
+        // public int session_ID { get; set; }
 
-        public int t_ID { get; set; }
+        public int? t_ID { get; set; }
 
         public DateTime session_datetime { get; set; }
 
@@ -24,19 +25,14 @@ namespace ADStarter.Models
 
         public int slot_ID { get; set; }
 
-        public int c_myKid { get; set; }
+        public string c_myKid { get; set; }
 
-        // New property for slot price
-        public double slot_price { get; set; }
-
-        [ForeignKey(nameof(session_ID))]
-        public virtual SessionPrice SessionPrice { get; set; }
-
+       
         [ForeignKey(nameof(t_ID))]
-        public virtual Therapist Therapist { get; set; }
+        public virtual Therapist? Therapist { get; set; }
 
         [ForeignKey(nameof(prog_ID))]
-        public virtual Program Program { get; set; }
+        public virtual Program? Program { get; set; }
 
         [ForeignKey(nameof(slot_ID))]
         public virtual Slot Slot { get; set; }
@@ -44,6 +40,8 @@ namespace ADStarter.Models
         [ForeignKey(nameof(c_myKid))]
         public virtual Child Child { get; set; }
 
+        // Added navigation property for Report
+        public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
         public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
     }
 }

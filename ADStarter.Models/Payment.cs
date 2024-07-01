@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace ADStarter.Models
 {
@@ -13,18 +14,18 @@ namespace ADStarter.Models
 
         public double pay_amount { get; set; }
 
+        public double pay_balance { get; set; }
+
         public DateTime pay_date { get; set; }
 
         [StringLength(255)]
-        public string pay_desc { get; set; }
+        public string pay_desc { get; set; } // Status of payment: pending or paid
 
-        public double pay_balance { get; set; }
+        public string stripe_charge_id { get; set; } // Stripe charge ID
 
-        public int receipt_id { get; set; }
+        public string c_myKid { get; set; }
 
-        public int c_myKid { get; set; }
-
-        public int a_ID { get; set; }
+        public string Id { get; set; } // User ID from AspNetUsers
 
         public int invoice_ID { get; set; }
 
@@ -34,8 +35,8 @@ namespace ADStarter.Models
         [ForeignKey("parent_ID")]
         public virtual Parent Parent { get; set; }
 
-        [ForeignKey(nameof(a_ID))]
-        public virtual Admin Admin { get; set; }
+        [ForeignKey(nameof(Id))]
+        public virtual IdentityUser User { get; set; }
 
         [ForeignKey(nameof(invoice_ID))]
         public virtual Invoice Invoice { get; set; }

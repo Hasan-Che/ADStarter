@@ -1,0 +1,59 @@
+﻿@model List<ADStarter.Models.ViewModels.ChildScheduleViewModel>
+
+@{
+    ViewData["Title"] = "Child Schedules";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h3>Child Schedules</h3>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Child Name</th>
+                            <th>Therapist Name</th>
+                            <th>Session Date</th>
+                            <th>Slot Time</th>
+                            <th>Program Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ChildName</td>
+                                <td>@item.TherapistName</td>
+                                <td>@item.SessionDate.ToString("yyyy-MM-dd")</td>
+                                <td>@item.SlotTime</td>
+                                <td>@item.ProgramName</td>
+                                <td>
+                                    <a class="btn btn-warning" href="@Url.Action("Edit", new { id = item.ScheduleId })">Edit</a>
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete('@item.ScheduleId')">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete this schedule?')) {
+                window.location.href = '@Url.Action("Delete", "AdminSchedule")?id=' + id;
+            }
+        }
+    </script>
+}

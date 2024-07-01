@@ -12,9 +12,15 @@ namespace ADStarter.Models
         [Key]
         public int parent_ID { get; set; }
 
-        public int f_ID { get; set; }
+        [Required(ErrorMessage = "The IC number is required.")]
+        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid MyKid number. Must be exactly 12 digits.")]
+        [StringLength(100)]
+        public string f_ID { get; set; }
 
-        public int m_ID { get; set; }
+        [Required(ErrorMessage = "The IC number is required.")]
+        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid MyKid number. Must be exactly 12 digits.")]
+        [StringLength(100)]
+        public string m_ID { get; set; }
 
         [StringLength(100)]
         public string f_name { get; set; }
@@ -64,8 +70,8 @@ namespace ADStarter.Models
         public double fm_income { get; set; }
 
 
-        public IdentityUser User { get; set; }
+        public string UserId { get; set; }
 
-        public virtual ICollection<Child> Children { get; set; } = new List<Child>();
+        public virtual ICollection<Child>? Children { get; set; } = new List<Child>();
     }
 }

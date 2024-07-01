@@ -17,10 +17,11 @@ namespace ADStarter.Models
 
         public string prog_summary { get; set; }
 
-        public double prog_price { get; set; }
-
-        public virtual ICollection<Child> Children { get; set; } = new List<Child>();
-        public virtual ICollection<SessionPrice> SessionPrices { get; set; } = new List<SessionPrice>();
+        // New properties
+        public int prog_sessionCount { get; set; }
+        public int prog_step { get; set; }
+        public double prog_WeekdayPrice { get; set; }
+        public double prog_WeekendPrice { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
     }
 }

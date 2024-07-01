@@ -7,7 +7,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Main Page</h3>
+                    <h3>Admin Dashboard</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -28,13 +28,13 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row widget-grid">
-            <div class="col-xxl-4 col-sm-6 box-col-6">
+            <div class="col-xxl-4 col-sm-6 box-col-8">
                 <div class="card profile-box">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body">
                                 <div class="greeting-user">
-                                    <h4 class="f-w-600">Welcome to cuba</h4>
+                                    <h4 class="f-w-600">Welcome to ADventure Rehabilitatin System</h4>
                                     <p>Here whats happing in your account today</p>
                                     <div class="whatsnew-btn"><a class="btn btn-outline-white">Whats New !</a></div>
                                 </div>
@@ -76,16 +76,18 @@
                                 <div class="widget-content">
                                     <div class="widget-round secondary">
                                         <div class="bg-round">
-                                            <svg class="svg-fill">
-                                                <use href="../assets/svg/icon-sprite.svg#cart"> </use>
+                                            @* <i class="fa fa-child"></i> *@
+                                            <svg class="svg-fill fa fa-child">
+                                                
+                                                <use href="/assets/svg/icon-sprite.svg#customers"> </use>
                                             </svg>
                                             <svg class="half-circle svg-fill">
-                                                <use href="../assets/svg/icon-sprite.svg#halfcircle"></use>
+                                                <use href="/assets/svg/icon-sprite.svg#halfcircle"></use>
                                             </svg>
                                         </div>
                                     </div>
                                     <div>
-                                        <h4>10,000</h4><span class="f-light">Purchase</span>
+                                        <h4>100</h4><span class="f-light">Children</span>
                                     </div>
                                 </div>
                                 <div class="font-secondary f-w-500"><i class="icon-arrow-up icon-rotate me-1"></i><span>+50%</span></div>
@@ -98,18 +100,18 @@
                                         <div class="widget-round primary">
                                             <div class="bg-round">
                                                 <svg class="svg-fill">
-                                                    <use href="../assets/svg/icon-sprite.svg#tag"> </use>
+                                                    <use href="/assets/svg/icon-sprite.svg#user-visitor"> </use>
                                                 </svg>
                                                 <svg class="half-circle svg-fill">
-                                                    <use href="../assets/svg/icon-sprite.svg#halfcircle"></use>
+                                                    <use href="/assets/svg/icon-sprite.svg#halfcircle"></use>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div>
-                                            <h4>4,200</h4><span class="f-light">Sales</span>
+                                            <h4>80</h4><span class="f-light">Parent</span>
                                         </div>
                                     </div>
-                                    <div class="font-primary f-w-500"><i class="icon-arrow-up icon-rotate me-1"></i><span>+70%</span></div>
+                                    <div class="font-primary f-w-500"><i class="icon-arrow-up icon-rotate me-1"></i><span>+50%</span></div>
                                 </div>
                             </div>
                         </div>
@@ -125,15 +127,15 @@
                                     <div class="widget-round warning">
                                         <div class="bg-round">
                                             <svg class="svg-fill">
-                                                <use href="../assets/svg/icon-sprite.svg#return-box"> </use>
+                                                <use href="/assets/svg/icon-sprite.svg#return-box"> </use>
                                             </svg>
                                             <svg class="half-circle svg-fill">
-                                                <use href="../assets/svg/icon-sprite.svg#halfcircle"></use>
+                                                <use href="/assets/svg/icon-sprite.svg#halfcircle"></use>
                                             </svg>
                                         </div>
                                     </div>
                                     <div>
-                                        <h4>7000</h4><span class="f-light">Sales return</span>
+                                        <h4>10</h4><span class="f-light">Therapist</span>
                                     </div>
                                 </div>
                                 <div class="font-warning f-w-500"><i class="icon-arrow-down icon-rotate me-1"></i><span>-20%</span></div>
@@ -146,15 +148,15 @@
                                         <div class="widget-round success">
                                             <div class="bg-round">
                                                 <svg class="svg-fill">
-                                                    <use href="../assets/svg/icon-sprite.svg#rate"> </use>
+                                                    <use href="/assets/svg/icon-sprite.svg#rate"> </use>
                                                 </svg>
                                                 <svg class="half-circle svg-fill">
-                                                    <use href="../assets/svg/icon-sprite.svg#halfcircle"></use>
+                                                    <use href="/assets/svg/icon-sprite.svg#halfcircle"></use>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div>
-                                            <h4>5700</h4><span class="f-light">Purchase rate</span>
+                                            <h4>5</h4><span class="f-light">Customer Service</span>
                                         </div>
                                     </div>
                                     <div class="font-success f-w-500"><i class="icon-arrow-up icon-rotate me-1"></i><span>+70%</span></div>
@@ -556,20 +558,21 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
-@section Script{
-    <script src="../assets/js/clock.js"></script>
-    <script src="../assets/js/chart/apex-chart/apex-chart.js"></script>
-    <script src="../assets/js/chart/apex-chart/stock-prices.js"></script>
-    <script src="../assets/js/chart/apex-chart/moment.min.js"></script>
-    <script src="../assets/js/notify/bootstrap-notify.min.js"></script>
-    <script src="../assets/js/dashboard/default.js"></script>
-    <script src="../assets/js/notify/index.js"></script>
-    <script src="../assets/js/typeahead/handlebars.js"></script>
-    <script src="../assets/js/typeahead/typeahead.bundle.js"></script>
-    <script src="../assets/js/typeahead/typeahead.custom.js"></script>
-    <script src="../assets/js/typeahead-search/handlebars.js"></script>
-    <script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
-    <script src="../assets/js/height-equal.js"></script>
-    <script src="../assets/js/animation/wow/wow.min.js"></script>
+
+@section Scripts{
+    <script src="~/assets/js/clock.js"></script>
+    <script src="~/assets/js/chart/apex-chart/apex-chart.js"></script>
+    <script src="~/assets/js/chart/apex-chart/stock-prices.js"></script>
+    <script src="~/assets/js/chart/apex-chart/moment.min.js"></script>
+    <script src="~/assets/js/notify/bootstrap-notify.min.js"></script>
+    <script src="~/assets/js/dashboard/default.js"></script>
+    <script src="~/assets/js/notify/index.js"></script>
+    <script src="~/assets/js/typeahead/handlebars.js"></script>
+    <script src="~/assets/js/typeahead/typeahead.bundle.js"></script>
+    <script src="~/assets/js/typeahead/typeahead.custom.js"></script>
+    <script src="~/assets/js/typeahead-search/handlebars.js"></script>
+    <script src="~/assets/js/typeahead-search/typeahead-custom.js"></script>
+    <script src="~/assets/js/height-equal.js"></script>
+    <script src="~/assets/js/animation/wow/wow.min.js"></script>
     <script>new WOW().init();</script>
 }
