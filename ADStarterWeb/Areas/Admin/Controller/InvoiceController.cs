@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class InvoiceController : Controller
+    public class InvoiceController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly ApplicationDBContext _context;
 

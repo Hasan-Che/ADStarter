@@ -39,7 +39,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" asp-area="Parent" asp-controller="Registration" asp-action="ChildForm">
+                        <a class="sidebar-link sidebar-title link-nav" asp-area="Parent" asp-controller="Registration" asp-action="AddNewChild">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
                             </svg>
@@ -76,6 +76,21 @@
                                 <use href="/assets/svg/icon-sprite.svg#fill-task"></use>
                             </svg>
                             <span>Billing</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Parent" asp-controller="Invoice" asp-action="Index">Invoices</a></li>
+                            <li><a class="nav-link" asp-area="Parent" asp-controller="Payment" asp-action="PaymentHistory">Payment History</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-task"></use>
+                            </svg>
+                            <span>Child</span>
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a asp-area="Parent" asp-controller="Invoice" asp-action="Index">Invoices</a></li>

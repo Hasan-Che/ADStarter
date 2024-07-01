@@ -28,7 +28,7 @@ namespace ADStarterWeb.Areas.Therapist.Controllers
         public IActionResult Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var therapist = _context.Therapists.FirstOrDefault(t => t.UserId == userId);
+            var therapist = _context.Therapists.FirstOrDefault(t => t.User.Id == userId);
 
             if (therapist == null)
             {

@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240629092307_test1.Designer.cs
-    [Migration("20240629092307_test1")]
+    [Migration("20240701053244_test1")]
     partial class test1
-========
-    [Migration("20240630181211_DbUpdate")]
-    partial class DbUpdate
->>>>>>>> origin/HaWanMain:ADStarter.DataAccess/Migrations/20240630181211_DbUpdate.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,9 +36,30 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("a_city")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("a_name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("a_phoneNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("a_state")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("a_street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("a_zip")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("a_ID");
 
@@ -60,14 +76,17 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ann_ID"));
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("a_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("ann_desc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ann_media")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("ann_status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ann_title")
                         .HasMaxLength(100)
@@ -145,9 +164,30 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("cs_city")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("cs_name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("cs_phoneNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cs_state")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cs_street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cs_zip")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("cs_ID");
 
@@ -352,9 +392,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int>("prog_step")
                         .HasColumnType("int");
 
-                    b.Property<int>("prog_step")
-                        .HasColumnType("int");
-
                     b.Property<string>("prog_summary")
                         .HasColumnType("nvarchar(max)");
 
@@ -462,22 +499,36 @@ namespace ADStarter.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("t_ID"));
 
                     b.Property<string>("UserId")
-                        .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("t_address")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<string>("t_city")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("t_name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("t_phoneNum")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("t_state")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("t_street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("t_zip")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("t_ID");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Therapists");
                 });
@@ -848,6 +899,15 @@ namespace ADStarter.DataAccess.Migrations
                     b.Navigation("Slot");
 
                     b.Navigation("Therapist");
+                });
+
+            modelBuilder.Entity("ADStarter.Models.Therapist", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ADStarter.Models.TreatmentHistory", b =>

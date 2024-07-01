@@ -15,8 +15,9 @@
   </ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\Delete.js" />
-  </ItemGroup>
-  <ItemGroup> -->
+  </ItemGroup> -->
+	
+  <ItemGroup> 
     <None Include="wwwroot\js\delete.js" />
     <None Include="wwwroot\js\photoswipe\photoswipe-ui-default.min.js" />
     <None Include="wwwroot\js\photoswipe\photoswipe.js" />

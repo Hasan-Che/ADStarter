@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class TherapistAdminController : Controller
+    public class TherapistAdminController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ApplicationDBContext _context; // Assuming your DbContext is named AppDbContext

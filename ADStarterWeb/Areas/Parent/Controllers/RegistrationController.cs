@@ -128,7 +128,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 TempData["success"] = "Child Detail created successfully";
                 TempData["c_myKid"] = obj.c_myKid;
 
-                return RedirectToAction("Index","Dashboard");
+                return RedirectToAction("AddNewTreatmentHistoryForm","Registration");
         }
 
         // TREATMENT HISTORY FORM

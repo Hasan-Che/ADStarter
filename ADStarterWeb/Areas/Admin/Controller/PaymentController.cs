@@ -6,7 +6,7 @@ using System.Linq;
 namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class PaymentController : Controller
+    public class PaymentController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly ApplicationDBContext _context;
 
