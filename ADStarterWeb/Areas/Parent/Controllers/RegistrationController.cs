@@ -11,6 +11,8 @@ using ADStarter.Models.ViewModels;
 using ADStarter.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace ADStarterWeb.Areas.Parent.Controllers
@@ -101,35 +103,75 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             return View();
         }
 
+        // POST: /Parent/Registration/AddNewChild
+        // POST: /Parent/Registration/AddNewChild
         [HttpPost]
-        public IActionResult AddNewChild(ADStarter.Models.Child obj, string action, IFormFile? file, string userId)
+        [ValidateAntiForgeryToken]
+        public IActionResult AddNewChild(Child obj, IFormFile? file, string userId)
         {
             userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var parent = _unitOfWork.Parent.GetFirstOrDefault(p => p.UserId == userId);
             string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null)
-                {
-                    string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
 
-                    using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
+            if (parent == null)
+            {
+                ModelState.AddModelError("", "Parent not found."); // Example of server-side validation
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Handle file upload and other operations
+                    if (file != null)
                     {
-                        file.CopyTo(fileStream);
-                    }
-                    obj.c_photo = @"\images\child\" + c_photo;
-                }
-                if (obj.c_nationality == "Other")
-                {
-                    obj.c_nationality = Request.Form["c_otherNationality"]; // Assign directly from form input
-                }
-            obj.parent_ID = parent.parent_ID;
-                _unitOfWork.Child.Add(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Child Detail created successfully";
-                TempData["c_myKid"] = obj.c_myKid;
+                        string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
 
-                return RedirectToAction("AddNewTreatmentHistoryForm","Registration");
+                        using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
+                        {
+                            file.CopyTo(fileStream);
+                        }
+                        obj.c_photo = @"\images\child\" + c_photo;
+                    }
+
+                    if (obj.c_nationality == "Other")
+                    {
+                        obj.c_nationality = Request.Form["c_otherNationality"]; // Assign directly from form input
+                    }
+
+                    obj.parent_ID = parent.parent_ID;
+
+                    // Check if c_myKid already exists in the database
+                    var existingChild = _unitOfWork.Child.GetFirstOrDefault(c => c.c_myKid == obj.c_myKid);
+                    if (existingChild != null)
+                    {
+                        ModelState.AddModelError("", "A child with the same ID already exists."); // Add specific error message
+                        return View(obj); // Return the view with the model to show validation errors
+                    }
+
+                    _unitOfWork.Child.Add(obj);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Child Detail created successfully";
+                    TempData["c_myKid"] = obj.c_myKid;
+
+                    return RedirectToAction("AddNewTreatmentHistoryForm", "Registration");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Error occurred while processing request: " + ex.Message); // Catch all other exceptions
+
+                    // Return the view with the model to show validation errors
+                    return View(obj);
+                }
+            }
+
+            // If model state is not valid, return the view with validation errors
+            return View(obj);
         }
+
+
+
 
         // TREATMENT HISTORY FORM
         public IActionResult AddNewTreatmentHistoryForm()
