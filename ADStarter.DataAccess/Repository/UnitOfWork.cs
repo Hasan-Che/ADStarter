@@ -1,7 +1,11 @@
 ﻿using ADStarter.DataAccess.Data;
 using ADStarter.DataAccess.Repository.IRepository;
 using ADStarter.Models;
+
 using Microsoft.EntityFrameworkCore;
+
+using Microsoft.EntityFrameworkCore.Storage;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +19,10 @@ namespace ADStarter.DataAccess.Repository
     {
         private ApplicationDBContext _db;
         public IProgramRepository Program { get; private set; }
+        public ITherapistRepository Therapist { get; private set; }
+        public ICustomerServiceRepository CustomerService { get; private set; }
+        public IAdminRepository Admin { get; private set; }
+        public IAnnouncementRepository Announcement { get; private set; }
         public IParentRepository Parent { get; private set; }
         public IScheduleRepository Schedule { get; private set; }
         public IChildRepository Child { get; private set; }
@@ -27,6 +35,10 @@ namespace ADStarter.DataAccess.Repository
         {
             _db = db;
             Program = new ProgramRepository(_db);
+            Therapist = new TherapistRepository(_db);
+            CustomerService = new CustomerServiceRepository(_db);
+            Admin = new AdminRepository(_db);
+            Announcement = new AnnouncementRepository(_db);
             Parent = new ParentRepository(_db);
             Slot = new SlotRepository(_db);
             Schedule = new ScheduleRepository(_db);
@@ -36,15 +48,22 @@ namespace ADStarter.DataAccess.Repository
             Invoice = new InvoiceRepository(_db);
             Report = new ReportRepository(_db);
         }
-        
+
 
         public void Save()
         {
             _db.SaveChanges(); 
         }
+
         public void Dispose()
         {
             _db.Dispose();
+
+
+        public IDbContextTransaction BeginTransaction()
+        {
+            return _db.Database.BeginTransaction();
+
         }
     }
 }

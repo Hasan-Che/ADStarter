@@ -1,6 +1,6 @@
 ﻿@model ADStarter.Models.Parent
 
-<div id="mother-form" style="display: none;">
+<div id="mother-form">
     <h3>Mother's Information</h3>
     <div class="row g-3">
         <div class="col-md-6">
@@ -40,10 +40,14 @@
         </div>
         <div class="col-md-6">
             <label asp-for="m_status" class="form-label">Mother's Status</label>
-            <input asp-for="m_status" class="form-control" />
+            <select asp-for="m_status" class="form-control">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Separated">Separated</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+            </select>
             <span asp-validation-for="m_status" class="text-danger"></span>
         </div>
     </div>
-    <button type="button" class="btn btn-secondary mt-3" onclick="showFatherForm()">Previous</button>
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </div>

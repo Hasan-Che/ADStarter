@@ -11,6 +11,13 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <Content Remove="wwwroot\js\Delete.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\Delete.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\js\delete.js" />
     <None Include="wwwroot\js\photoswipe\photoswipe-ui-default.min.js" />
     <None Include="wwwroot\js\photoswipe\photoswipe.js" />
     <None Include="wwwroot\js\photoswipe\photoswipe.min.js" />
@@ -43,4 +50,17 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Areas\Parent\Views\Registration\EditTreatmentHistoryForm.cshtml">
+
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\announcement\" />
+  </ItemGroup>
+
+
 </Project>

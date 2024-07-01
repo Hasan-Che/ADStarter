@@ -41,18 +41,18 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
+                                <use href="/assets/svg/icon-sprite.svg#stroke-user"></use>
                             </svg>
                             <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
+                                <use href="/assets/svg/icon-sprite.svg#fill-user"></use>
                             </svg>
-                            <span>Add User</span>
+                            <span>Account</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Identity"asp-page="/Account/Register">Add New User Identity</a></li>
+                            <li><a asp-area="Identity"asp-page="/Account/Register">Add New Account</a></li>
                             @* <li><a asp-area="Admin" asp-controller="AddUser" asp-action="Add">Add New User</a></li> *@
-                            <li><a asp-area="Admin" asp-controller="UserList" asp-action="List">View User List</a></li>
-                            <li><a asp-area="Admin" asp-page="/AddUser/Add">Add New User Default</a></li>
+                            <li><a asp-area="Admin" asp-controller="UserList" asp-action="List">Account List</a></li>
+                            @* <li><a asp-area="Admin" asp-page="/AddUser/Add">Add New User Default</a></li> *@
                         </ul>
                     </li>
                     <li class="sidebar-list">
@@ -73,7 +73,8 @@
                             <li><a asp-area="Admin" asp-controller="ChildAdmin" asp-action="Index">Child Info</a></li>
 
                         </ul>
-                    <li class="sidebar-list">
+
+                        <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
@@ -99,6 +100,34 @@
                                 </ul>
                             </li>
                         </ul>
+                    </li>
+
+
+                        
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#notification"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-none"></use>
+                            </svg>
+                            <span>Announcement</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Admin" asp-controller="Announcement" asp-action="Manage">Manage Announcement</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-faq"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-faq"></use>
+                            </svg>
+                            <span>FAQ</span>
+                        </a>
                     </li>
                 </ul>
             </div>

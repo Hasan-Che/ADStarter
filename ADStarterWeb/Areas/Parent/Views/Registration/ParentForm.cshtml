@@ -17,6 +17,7 @@
                 <div class="card">
                     <div class="card-body">
                         <form asp-action="ParentForm" method="post" class="needs-validation" novalidate>
+                            <input type="hidden" name="parent_ID" value="@ViewBag.ParentID" />
                             <div id="step-forms">
                                 @Html.Partial("FatherForm", Model)
                                 @Html.Partial("MotherForm", Model)
@@ -29,7 +30,7 @@
     </div>
 </div>
 
-@section Scripts {
+@section Script {
     <script>
         function showMotherForm() {
             document.getElementById('father-form').style.display = 'none';
