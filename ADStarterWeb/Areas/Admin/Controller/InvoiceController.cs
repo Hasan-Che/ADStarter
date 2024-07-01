@@ -79,12 +79,20 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             var invoice = _context.Invoices.FirstOrDefault(i => i.invoice_ID == invoiceId);
             if (invoice != null)
             {
-                invoice.Schedule.session_datetime = scheduleDate;
                 invoice.due_date = dueDate;
                 invoice.invoice_amount = amount;
 
-                _context.SaveChanges();
-                return Json(new { success = true });
+                try
+                {
+                    _context.SaveChanges();
+                    return Json(new { success = true });
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception for debugging purposes
+                    Console.WriteLine(ex.Message);
+                    return Json(new { success = false, message = "Failed to save changes" });
+                }
             }
             return Json(new { success = false, message = "Invoice not found" });
         }
