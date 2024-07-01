@@ -29,7 +29,11 @@ namespace ADStarterWeb.Areas.Admin.Controllers
                     ChildName = c.c_name,
                     Step = c.c_step,
                     TherapistName = c.Therapist.t_name,
-                    ChildId = c.c_myKid
+                    ChildId = c.c_myKid,
+                    CanUpdateStep = !_context.Invoices
+                        .Where(i => i.c_myKid == c.c_myKid)
+                        .Any(i => !_context.Payments
+                        .Any(p => p.invoice_ID == i.invoice_ID))
                 })
                 .ToListAsync();
 

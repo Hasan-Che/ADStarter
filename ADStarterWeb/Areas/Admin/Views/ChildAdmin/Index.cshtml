@@ -16,7 +16,6 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <!-- Zero Configuration DataTables Template -->
                     <table class="display" id="childTable">
                         <thead>
                             <tr>
@@ -27,30 +26,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var child in Model)
-                            {
-                                <tr>
-                                    <td>@child.ChildName</td>
-                                    <td>@child.Step</td>
-                                    <td>@child.TherapistName</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childDetailsModal" data-id="@child.ChildId">
-                                            View Details
-                                        </button>
-                                        <a href="@Url.Action("Edit", "ChildAdmin", new { area = "Admin", id = child.ChildId })" class="btn btn-warning">
-                                            Update Step
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
+    @foreach (var child in Model)
+    {
+        <tr>
+            <td>@child.ChildName</td>
+            <td>@child.Step</td>
+            <td>@child.TherapistName</td>
+            <td>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childDetailsModal" data-id="@child.ChildId">
+                    View Details
+                </button>
+                @if (child.CanUpdateStep)
+                {
+                    <a href="@Url.Action("Edit", "ChildAdmin", new { area = "Admin", id = child.ChildId })" class="btn btn-warning">
+                        Update Step
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="btn btn-warning disabled" style="background-color: aliceblue;">
+                        Update Step
+                    </a>
+                }
+            </td>
+        </tr>
+    }
+</tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
     <div class="modal fade" id="childDetailsModal" tabindex="-1" role="dialog" aria-labelledby="childDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -72,15 +79,12 @@
 </div>
 
 @section Scripts {
-    <!-- Include necessary scripts -->
     <script src="~/assets/js/sidebar-menu.js"></script>
     <script src="~/assets/js/slick/slick.min.js"></script>
     <script src="~/assets/js/slick/slick.js"></script>
     <script src="~/assets/js/header-slick.js"></script>
     <script src="~/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="~/assets/js/datatable/datatables/datatable.custom.js"></script>
-    <!-- End of included scripts -->
-    <!-- Initialize DataTables and Modal -->
     <script>
         $(document).ready(function () {
             $('#childTable').DataTable();
