@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addtable : Migration
+    public partial class abarudwad : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -315,7 +315,7 @@ namespace ADStarter.DataAccess.Migrations
                     a_ID = table.Column<int>(type: "int", nullable: false),
                     ann_title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     ann_desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ann_media = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    ann_media = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
