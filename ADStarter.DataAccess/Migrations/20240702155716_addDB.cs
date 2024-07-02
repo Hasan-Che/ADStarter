@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addDb : Migration
+    public partial class addDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -328,7 +328,7 @@ namespace ADStarter.DataAccess.Migrations
                     c_nationality = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     c_religion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     c_race = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    c_step = table.Column<int>(type: "int", nullable: true),
+                    c_step = table.Column<int>(type: "int", nullable: true, defaultValue: 1),
                     c_photo = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
@@ -448,7 +448,8 @@ namespace ADStarter.DataAccess.Migrations
                     schedule_ID = table.Column<int>(type: "int", nullable: false),
                     rep_remark = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     rep_file = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    rep_status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    rep_status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Therapistt_ID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -459,6 +460,11 @@ namespace ADStarter.DataAccess.Migrations
                         principalTable: "Schedules",
                         principalColumn: "schedule_ID",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Reports_Therapists_Therapistt_ID",
+                        column: x => x.Therapistt_ID,
+                        principalTable: "Therapists",
+                        principalColumn: "t_ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -475,7 +481,8 @@ namespace ADStarter.DataAccess.Migrations
                     stripe_charge_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     c_myKid = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    invoice_ID = table.Column<int>(type: "int", nullable: false)
+                    invoice_ID = table.Column<int>(type: "int", nullable: false),
+                    Therapistt_ID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -504,6 +511,11 @@ namespace ADStarter.DataAccess.Migrations
                         principalTable: "Parents",
                         principalColumn: "parent_ID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Payments_Therapists_Therapistt_ID",
+                        column: x => x.Therapistt_ID,
+                        principalTable: "Therapists",
+                        principalColumn: "t_ID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -601,9 +613,19 @@ namespace ADStarter.DataAccess.Migrations
                 column: "parent_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Payments_Therapistt_ID",
+                table: "Payments",
+                column: "Therapistt_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reports_schedule_ID",
                 table: "Reports",
                 column: "schedule_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reports_Therapistt_ID",
+                table: "Reports",
+                column: "Therapistt_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Schedules_c_myKid",
