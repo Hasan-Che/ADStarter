@@ -216,32 +216,26 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             }
 
             // Retrieve child records associated with the parent
-            var children = _unitOfWork.Child.GetAll().Where(c => c.parent_ID == parent.parent_ID).ToList();
-            if (!children.Any())
+            var child = _unitOfWork.Child.GetFirstOrDefault(c => c.parent_ID == parent.parent_ID);
+
+            if (child == null)
             {
-                return NotFound(); // No children found for the parent, return 404
+                return NotFound(); // Child not found for the parent, return 404
             }
 
-            // Retrieve treatment history records for each child
-            var treatmentHistories = children.Select(child => new ParentChildViewModel
-            {
-                Child = child,
-                TreatmentHistory = _unitOfWork.TreatmentHistory.GetFirstOrDefault(th => th.c_myKid == child.c_myKid)
-            }).ToList();
+            var treatmenthistory = _unitOfWork.TreatmentHistory.GetFirstOrDefault(th => th.c_myKid == child.c_myKid);
 
             // Prepare the view model
             var viewModel = new ParentChildViewModel
             {
                 Parent = parent,
-                Children = treatmentHistories
+                Child = child,
+                TreatmentHistory = treatmenthistory
             };
-
             ViewBag.UserId = userId;
             ViewBag.Parent = parent;
             return View(viewModel); // Pass the view model to the view
         }
-
-
 
 
         [HttpPost]
