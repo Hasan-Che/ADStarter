@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ADStarter.DataAccess.Repository.IRepository;
+using ADStarter.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
+using Microsoft.AspNetCore.Mvc;
 using ADStarter.Models.ViewModels;
 using ADStarter.DataAccess.Data;
 using ADStarter.Models;
@@ -11,8 +17,6 @@ using ADStarter.Models.ViewModels;
 using ADStarter.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace ADStarterWeb.Areas.Parent.Controllers
@@ -103,75 +107,35 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             return View();
         }
 
-        // POST: /Parent/Registration/AddNewChild
-        // POST: /Parent/Registration/AddNewChild
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AddNewChild(Child obj, IFormFile? file, string userId)
+        public IActionResult AddNewChild(ADStarter.Models.Child obj, string action, IFormFile? file, string userId)
         {
             userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var parent = _unitOfWork.Parent.GetFirstOrDefault(p => p.UserId == userId);
             string wwwRootPath = _webHostEnvironment.WebRootPath;
-
-            if (parent == null)
+            if (file != null)
             {
-                ModelState.AddModelError("", "Parent not found."); // Example of server-side validation
-            }
+                string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
 
-            if (ModelState.IsValid)
+                using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                obj.c_photo = @"\images\child\" + c_photo;
+            }
+            if (obj.c_nationality == "Other")
             {
-                try
-                {
-                    // Handle file upload and other operations
-                    if (file != null)
-                    {
-                        string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
-
-                        using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
-                        {
-                            file.CopyTo(fileStream);
-                        }
-                        obj.c_photo = @"\images\child\" + c_photo;
-                    }
-
-                    if (obj.c_nationality == "Other")
-                    {
-                        obj.c_nationality = Request.Form["c_otherNationality"]; // Assign directly from form input
-                    }
-
-                    obj.parent_ID = parent.parent_ID;
-
-                    // Check if c_myKid already exists in the database
-                    var existingChild = _unitOfWork.Child.GetFirstOrDefault(c => c.c_myKid == obj.c_myKid);
-                    if (existingChild != null)
-                    {
-                        ModelState.AddModelError("", "A child with the same ID already exists."); // Add specific error message
-                        return View(obj); // Return the view with the model to show validation errors
-                    }
-
-                    _unitOfWork.Child.Add(obj);
-                    _unitOfWork.Save();
-                    TempData["success"] = "Child Detail created successfully";
-                    TempData["c_myKid"] = obj.c_myKid;
-
-                    return RedirectToAction("AddNewTreatmentHistoryForm", "Registration");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "Error occurred while processing request: " + ex.Message); // Catch all other exceptions
-
-                    // Return the view with the model to show validation errors
-                    return View(obj);
-                }
+                obj.c_nationality = Request.Form["c_otherNationality"]; // Assign directly from form input
             }
+            obj.parent_ID = parent.parent_ID;
+            _unitOfWork.Child.Add(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Child Detail created successfully";
+            TempData["c_myKid"] = obj.c_myKid;
 
-            // If model state is not valid, return the view with validation errors
-            return View(obj);
+            return RedirectToAction("AddNewTreatmentHistoryForm", "Registration");
         }
-
-
-
 
         // TREATMENT HISTORY FORM
         public IActionResult AddNewTreatmentHistoryForm()
@@ -425,55 +389,3 @@ namespace ADStarterWeb.Areas.Parent.Controllers
         }
     }
 }
-
-
-//// TREATMENT HISTORY FORM
-//public IActionResult TreatmentHistoryForm()
-//{
-//    if (TempData["c_myKid"] != null)
-//    {
-//        ViewBag.cmyKid = TempData["c_myKid"];
-//        TempData.Keep("c_myKid");
-//    }
-//    return View();
-//}
-
-//[HttpPost]
-//public IActionResult TreatmentHistoryForm(ADStarter.Models.TreatmentHistory obj, string submit)
-//{
-//    if (TempData["c_myKid"] != null)
-//    {
-//        var c_myKid = (string)TempData["c_myKid"];
-//        obj.c_myKid = c_myKid;
-//        _unitOfWork.TreatmentHistory.Add(obj);
-//        _unitOfWork.Save();
-//        TempData["success"] = "Treatment History Detail created successfully";
-
-//        if (submit == "Skip")
-//        {
-//            return RedirectToAction("Index", "Dashboard");
-//        }
-//        return RedirectToAction("Index", "Dashboard");
-//    }
-
-//    TempData["error"] = "Child MyKid not found. Please try again.";
-//    return RedirectToAction("Index");
-//}
-
-// PARENT FORM
-//public IActionResult ParentForm()
-//{
-//    return View();
-//}
-
-//[HttpPost]
-//public IActionResult ParentForm(ADStarter.Models.Parent obj)
-//{
-//    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-//    obj.UserId = userId;
-//    _unitOfWork.Parent.Add(obj);
-//    _unitOfWork.Save();
-//    TempData["success"] = "Parent Detail created successfully";
-//    TempData["parent_ID"] = obj.parent_ID;
-//    return RedirectToAction("ChildForm");
-//}
