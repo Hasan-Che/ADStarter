@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ProgramController : Controller
+    public class ProgramController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 

@@ -35,6 +35,7 @@
                 $('#childName').text(childName);
                 $('#programName').text(programName);
                 $('#scheduleDate').val(new Date(scheduleDate).toISOString().substring(0, 10));
+                $('#scheduleDate').prop('readonly', true);
                 $('#dueDate').val(new Date(dueDate).toISOString().substring(0, 10));
                 $('#invoiceAmount').val(invoiceAmount);
                 $('#saveInvoiceChanges').data('id', invoiceId);

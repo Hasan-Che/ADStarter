@@ -49,32 +49,27 @@
                             <span>Account</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Identity"asp-page="/Account/Register">Add New Account</a></li>
+                            <li><a asp-area="Identity" asp-page="/Account/Register">Add New Account</a></li>
                             @* <li><a asp-area="Admin" asp-controller="AddUser" asp-action="Add">Add New User</a></li> *@
                             <li><a asp-area="Admin" asp-controller="UserList" asp-action="List">Account List</a></li>
                             @* <li><a asp-area="Admin" asp-page="/AddUser/Add">Add New User Default</a></li> *@
                         </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
                             <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
+                                <use href="/assets/svg/icon-sprite.svg#notification"></use>
                             </svg>
                             <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
+                                <use href="/assets/svg/icon-sprite.svg#fill-none"></use>
                             </svg>
-                            <span>Program</span>
+                            <span>Announcement</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Admin" asp-controller="Program" asp-action="ListPrograms">List Of Programs</a></li>
-                            <li><a asp-area="Admin" asp-controller="TherapistAdmin" asp-action="Index">Therapist Schedule</a></li>
-                            <li><a asp-area="Admin" asp-controller="AdminSchedule" asp-action="Index">Child Schedule</a></li>
-                            <li><a asp-area="Admin" asp-controller="AdminChild" asp-action="Index">Child Assigned Therapist</a></li>
-                            <li><a asp-area="Admin" asp-controller="ChildAdmin" asp-action="Index">Child Info</a></li>
-
+                            <li><a asp-area="Admin" asp-controller="Announcement" asp-action="Manage">Manage Announcement</a></li>
                         </ul>
-
-                        <li class="sidebar-list">
+                    </li>
+                    <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
@@ -95,29 +90,29 @@
                             <li>
                                 <a class="submenu-title">Payments<span class="sub-arrow"><i class="fa fa-angle-right"></i></span></a>
                                 <ul class="nav-sub-childmenu submenu-content">
-                                    <li><a asp-area="Admin" asp-controller="Payment" asp-action="ManagePayment">Manage Payments</a></li>
                                     <li><a asp-area="Admin" asp-controller="Payment" asp-action="HistoryPayment">Payment History</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
-
-
-                        
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#notification"></use>
+                                <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
                             </svg>
                             <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-none"></use>
+                                <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
-                            <span>Announcement</span>
+                            <span>Program</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Admin" asp-controller="Announcement" asp-action="Manage">Manage Announcement</a></li>
+                            <li><a asp-area="Admin" asp-controller="Program" asp-action="ListPrograms">List Of Programs</a></li>
+                            <li><a asp-area="Admin" asp-controller="TherapistAdmin" asp-action="Index">Therapist Schedule</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminSchedule" asp-action="Index">Child Schedule</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminChild" asp-action="Index">Child Assigned Therapist</a></li>
+                            <li><a asp-area="Admin" asp-controller="ChildAdmin" asp-action="Index">Child Info</a></li>
+
                         </ul>
-                    </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
                             <svg class="stroke-icon">

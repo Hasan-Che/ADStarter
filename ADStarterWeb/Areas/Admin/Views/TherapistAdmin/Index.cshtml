@@ -31,7 +31,7 @@
                                 <tr>
                                     <td>@therapist.t_name</td>
                                     <td>@therapist.t_phoneNum</td>
-                                    <td>@therapist.t_address</td>
+                                    <td>@therapist.t_city</td>
                                     <td>
                                         <a href="@Url.Action("ViewTherapistSchedule", "TherapistAdmin", new { area = "Admin", id = therapist.t_ID })" class="btn btn-primary">
                                             View Schedule
@@ -48,12 +48,6 @@
 </div>
 
 @section Scripts {
-    <script src="~/assets/js/sidebar-menu.js"></script>
-    <script src="~/assets/js/slick/slick.min.js"></script>
-    <script src="~/assets/js/slick/slick.js"></script>
-    <script src="~/assets/js/header-slick.js"></script>
-    <script src="~/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/assets/js/datatable/datatables/datatable.custom.js"></script>
 
     <script>
         $(document).ready(function () {

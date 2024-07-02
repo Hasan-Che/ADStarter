@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminChildController : Controller
+    public class AdminChildController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly ApplicationDBContext _context;
 

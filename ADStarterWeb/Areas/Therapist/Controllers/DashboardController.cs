@@ -1,3 +1,4 @@
+
 ﻿using ADStarter.DataAccess.Repository.IRepository;
 using ADStarter.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +9,7 @@ namespace ADStarterWeb.Areas.Therapist.Controllers
 {
     [Area("Therapist")]
     [Authorize(Roles = SD.Role_Therapist)]
+
     public class DashboardController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

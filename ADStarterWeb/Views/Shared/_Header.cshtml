@@ -148,13 +148,25 @@
                             </div>
                         </div>
                         <ul class="profile-dropdown onhover-show-div">
-                            <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>
+                            @if (User.IsInRole(SD.Role_Parent))
+                            {
+                                <li><a asp-area="Parent" asp-controller="Registration" asp-action="UserEdit"><i data-feather="user"></i><span>Account </span></a></li>
+                            }@if (User.IsInRole(SD.Role_Admin))
+                            {
+                                <li><a asp-area="Admin" asp-controller="AdminDashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
+                            }@if (User.IsInRole(SD.Role_Therapist))
+                            {
+                                <li><a asp-area="Therapist" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
+                            }@if (User.IsInRole(SD.Role_Customer_service))
+                            {
+                                <li><a asp-area="Customer Service" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
+                            }
                             <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
                             <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
                             <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
                             <li>
                                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Parent/LandingPage/landingPage">
-                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">LOGOUT</button>
+                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">LOGOUT</button>
                                 </form>
                             </li>
                         </ul>

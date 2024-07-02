@@ -45,6 +45,10 @@ namespace ADStarter.DataAccess.Data
                 .Property(c => c.t_ID)
                 .HasDefaultValue(null);
 
+            modelBuilder.Entity<Child>()
+                .Property(c => c.c_step)
+                .HasDefaultValue(1);
+
             // Configure Schedule entity relationships
             modelBuilder.Entity<Schedule>()
                 .HasOne(s => s.Therapist)

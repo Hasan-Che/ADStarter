@@ -1,11 +1,8 @@
 ﻿using ADStarter.DataAccess.Data;
 using ADStarter.DataAccess.Repository.IRepository;
 using ADStarter.Models;
-
-using Microsoft.EntityFrameworkCore;
-
 using Microsoft.EntityFrameworkCore.Storage;
-
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,8 +23,7 @@ namespace ADStarter.DataAccess.Repository
         public IParentRepository Parent { get; private set; }
         public IScheduleRepository Schedule { get; private set; }
         public IChildRepository Child { get; private set; }
-        public ISlotRepository Slot { get; private set; }
-        public ITherapistRepository Therapist { get; private set; }
+        public ISlotRepository Slot { get; private set; } 
         public ITreatmentHistoryRepository TreatmentHistory { get; private set; }
         public IInvoiceRepository Invoice { get; private set; }
         public IReportRepository Report { get; private set; }
@@ -55,15 +51,14 @@ namespace ADStarter.DataAccess.Repository
             _db.SaveChanges(); 
         }
 
-        public void Dispose()
-        {
-            _db.Dispose();
-
 
         public IDbContextTransaction BeginTransaction()
         {
             return _db.Database.BeginTransaction();
-
+        }
+        public void Dispose()
+        {
+            _db.Dispose();
         }
     }
 }

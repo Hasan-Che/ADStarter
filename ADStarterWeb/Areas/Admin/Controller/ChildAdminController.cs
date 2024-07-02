@@ -11,7 +11,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]
-    public class ChildAdminController : Controller
+    public class ChildAdminController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly ApplicationDBContext _context;
 

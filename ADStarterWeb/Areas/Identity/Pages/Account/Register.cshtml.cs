@@ -141,25 +141,22 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                     }
 
-                    switch (userRole)
+                    if (userRoles.Contains("Admin"))
                     {
-                        case "Parent":
-                            returnUrl = Url.Content("~/Parent/Dashboard/Index");
-                            break;
-                        case "Therapist":
-                            returnUrl = Url.Content("~/Therapist/Dashboard/Index");
-                            break;
-                        case "Admin":
-                            returnUrl = Url.Content("~/Admin/Dashboard/Index");
-                            break;
-                        case "Customer Service":
-                            returnUrl = Url.Content("~/CustomerService/Dashboard/Index");
-                            break;
-                        default:
-                            returnUrl = Url.Content("~/");
-                            break;
+                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
                     }
-
+                    else if (userRoles.Contains("Customer Service"))
+                    {
+                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+                    }
+                    else if (userRoles.Contains("Therapist"))
+                    {
+                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+                    }
+                    else if (userRoles.Contains("Parent"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Parent" });
+                    }
                     return LocalRedirect(returnUrl);
                 }
 

@@ -33,7 +33,7 @@ namespace ADStarter.Models
         public string t_state { get; set; }
 
         [StringLength(450)]
-        public string UserId { get; set; }
+        public IdentityUser User { get; set; }
 
         public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
 

@@ -27,7 +27,7 @@ namespace ADStarterWeb.Areas.Therapist.Controllers
         public IActionResult PendingReports()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get current user's ID
-            var therapist = _context.Therapists.FirstOrDefault(t => t.UserId == userId);
+            var therapist = _context.Therapists.FirstOrDefault(t => t.User.Id == userId);
 
             if (therapist == null)
             {
@@ -126,7 +126,7 @@ namespace ADStarterWeb.Areas.Therapist.Controllers
         public IActionResult UpcomingSchedules()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var therapist = _context.Therapists.FirstOrDefault(t => t.UserId == userId);
+            var therapist = _context.Therapists.FirstOrDefault(t => t.User.Id == userId);
 
             if (therapist == null)
             {

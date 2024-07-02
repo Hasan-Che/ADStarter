@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ADStarter.DataAccess.Repository.IRepository;
+using ADStarter.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
+using Microsoft.AspNetCore.Mvc;
 using ADStarter.Models.ViewModels;
 using ADStarter.DataAccess.Data;
 using ADStarter.Models;
@@ -11,6 +17,7 @@ using ADStarter.Models.ViewModels;
 using ADStarter.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace ADStarterWeb.Areas.Parent.Controllers
 {
@@ -106,28 +113,28 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var parent = _unitOfWork.Parent.GetFirstOrDefault(p => p.UserId == userId);
             string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null)
-                {
-                    string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
+            if (file != null)
+            {
+                string c_photo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                string c_photoPath = Path.Combine(wwwRootPath, @"images\child");
 
-                    using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-                    obj.c_photo = @"\images\child\" + c_photo;
-                }
-                if (obj.c_nationality == "Other")
+                using (var fileStream = new FileStream(Path.Combine(c_photoPath, c_photo), FileMode.Create))
                 {
-                    obj.c_nationality = Request.Form["c_otherNationality"]; // Assign directly from form input
+                    file.CopyTo(fileStream);
                 }
+                obj.c_photo = @"\images\child\" + c_photo;
+            }
+            if (obj.c_nationality == "Other")
+            {
+                obj.c_nationality = Request.Form["c_otherNationality"]; // Assign directly from form input
+            }
             obj.parent_ID = parent.parent_ID;
-                _unitOfWork.Child.Add(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Child Detail created successfully";
-                TempData["c_myKid"] = obj.c_myKid;
+            _unitOfWork.Child.Add(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Child Detail created successfully";
+            TempData["c_myKid"] = obj.c_myKid;
 
-                return RedirectToAction("Index","Dashboard");
+            return RedirectToAction("AddNewTreatmentHistoryForm", "Registration");
         }
 
         // TREATMENT HISTORY FORM
@@ -209,32 +216,26 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             }
 
             // Retrieve child records associated with the parent
-            var children = _unitOfWork.Child.GetAll().Where(c => c.parent_ID == parent.parent_ID).ToList();
-            if (!children.Any())
+            var child = _unitOfWork.Child.GetFirstOrDefault(c => c.parent_ID == parent.parent_ID);
+
+            if (child == null)
             {
-                return NotFound(); // No children found for the parent, return 404
+                return NotFound(); // Child not found for the parent, return 404
             }
 
-            // Retrieve treatment history records for each child
-            var treatmentHistories = children.Select(child => new ParentChildViewModel
-            {
-                Child = child,
-                TreatmentHistory = _unitOfWork.TreatmentHistory.GetFirstOrDefault(th => th.c_myKid == child.c_myKid)
-            }).ToList();
+            var treatmenthistory = _unitOfWork.TreatmentHistory.GetFirstOrDefault(th => th.c_myKid == child.c_myKid);
 
             // Prepare the view model
             var viewModel = new ParentChildViewModel
             {
                 Parent = parent,
-                Children = treatmentHistories
+                Child = child,
+                TreatmentHistory = treatmenthistory
             };
-
             ViewBag.UserId = userId;
             ViewBag.Parent = parent;
             return View(viewModel); // Pass the view model to the view
         }
-
-
 
 
         [HttpPost]
@@ -382,55 +383,3 @@ namespace ADStarterWeb.Areas.Parent.Controllers
         }
     }
 }
-
-
-//// TREATMENT HISTORY FORM
-//public IActionResult TreatmentHistoryForm()
-//{
-//    if (TempData["c_myKid"] != null)
-//    {
-//        ViewBag.cmyKid = TempData["c_myKid"];
-//        TempData.Keep("c_myKid");
-//    }
-//    return View();
-//}
-
-//[HttpPost]
-//public IActionResult TreatmentHistoryForm(ADStarter.Models.TreatmentHistory obj, string submit)
-//{
-//    if (TempData["c_myKid"] != null)
-//    {
-//        var c_myKid = (string)TempData["c_myKid"];
-//        obj.c_myKid = c_myKid;
-//        _unitOfWork.TreatmentHistory.Add(obj);
-//        _unitOfWork.Save();
-//        TempData["success"] = "Treatment History Detail created successfully";
-
-//        if (submit == "Skip")
-//        {
-//            return RedirectToAction("Index", "Dashboard");
-//        }
-//        return RedirectToAction("Index", "Dashboard");
-//    }
-
-//    TempData["error"] = "Child MyKid not found. Please try again.";
-//    return RedirectToAction("Index");
-//}
-
-// PARENT FORM
-//public IActionResult ParentForm()
-//{
-//    return View();
-//}
-
-//[HttpPost]
-//public IActionResult ParentForm(ADStarter.Models.Parent obj)
-//{
-//    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-//    obj.UserId = userId;
-//    _unitOfWork.Parent.Add(obj);
-//    _unitOfWork.Save();
-//    TempData["success"] = "Parent Detail created successfully";
-//    TempData["parent_ID"] = obj.parent_ID;
-//    return RedirectToAction("ChildForm");
-//}

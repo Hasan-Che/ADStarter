@@ -10,7 +10,7 @@ using System.Linq;
 namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminScheduleController : Controller
+    public class AdminScheduleController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
