@@ -18,7 +18,6 @@
                     <div class="card-body">
                         <form asp-action="AddNewChild" method="post" class="needs-validation" enctype="multipart/form-data">
                             <div class="row g-3">
-
                                 <div class="col-md-6">
                                     <label asp-for="c_myKid" class="form-label">Child's MyKid Number</label>
                                     <input asp-for="c_myKid" class="form-control" placeholder="000000100000" />
@@ -33,7 +32,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label asp-for="c_age" class="form-label">Child's Age</label>
-                                    <input asp-for="c_age" class="form-control" readonly id="ageInput" />
+                                    <input asp-for="c_age" class="form-control" readonly id="ageInput" placeholder="Please fill in the Date of Birth part" />
                                     <span asp-validation-for="c_age" class="text-danger"></span>
                                 </div>
                             </div>
@@ -150,6 +149,9 @@
                     age--;
                 }
                 ageInput.value = age;
+                if (!dobInput.value) {
+                    ageInput.value = "Please fill in the Date of Birth part";
+                }
             });
 
             var myKidInput = document.querySelector("input[name='c_myKid']");
