@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ADStarter.Models.ViewModels.DashboardVM
+@{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -78,7 +79,7 @@
                                         <div class="bg-round">
                                             @* <i class="fa fa-child"></i> *@
                                             <svg class="svg-fill fa fa-child">
-                                                
+
                                                 <use href="/assets/svg/icon-sprite.svg#customers"> </use>
                                             </svg>
                                             <svg class="half-circle svg-fill">
@@ -87,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <h4>100</h4><span class="f-light">Children</span>
+                                        <h4>@Model.NumberOfChildren</h4><span class="f-light">Children</span>
                                     </div>
                                 </div>
                                 <div class="font-secondary f-w-500"><i class="icon-arrow-up icon-rotate me-1"></i><span>+50%</span></div>
@@ -108,7 +109,7 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <h4>80</h4><span class="f-light">Parent</span>
+                                            <h4>@Model.NumberOfParent</h4><span class="f-light">Parent</span>
                                         </div>
                                     </div>
                                     <div class="font-primary f-w-500"><i class="icon-arrow-up icon-rotate me-1"></i><span>+50%</span></div>
@@ -135,7 +136,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <h4>10</h4><span class="f-light">Therapist</span>
+                                        <h4>@Model.NumberOfTherapist</h4><span class="f-light">Therapist</span>
                                     </div>
                                 </div>
                                 <div class="font-warning f-w-500"><i class="icon-arrow-down icon-rotate me-1"></i><span>-20%</span></div>
@@ -156,7 +157,7 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <h4>5</h4><span class="f-light">Customer Service</span>
+                                            <h4>@Model.NumberOfCustomerService</h4><span class="f-light">Customer Service</span>
                                         </div>
                                     </div>
                                     <div class="font-success f-w-500"><i class="icon-arrow-up icon-rotate me-1"></i><span>+70%</span></div>
@@ -172,7 +173,7 @@
                         <div class="card widget-1 widget-with-chart">
                             <div class="card-body">
                                 <div>
-                                    <h4 class="mb-1">1,80k</h4><span class="f-light">Orders</span>
+                                    <h4 class="mb-1">@Model.TotalInvoiceAmount</h4><span class="f-light">Orders</span>
                                 </div>
                                 <div class="order-chart">
                                     <div id="orderchart"></div>
@@ -184,7 +185,7 @@
                         <div class="card widget-1 widget-with-chart">
                             <div class="card-body">
                                 <div>
-                                    <h4 class="mb-1">6,90k</h4><span class="f-light">Profit</span>
+                                    <h4 class="mb-1">@Model.TotalPaidAmount</h4><span class="f-light">Profit</span>
                                 </div>
                                 <div class="profit-chart">
                                     <div id="profitchart"></div>

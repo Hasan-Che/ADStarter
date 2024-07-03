@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Announcement>
+@{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -193,89 +194,42 @@
                 </div>
             </div>
             <div class="col-xxl-8 col-lg-12 box-col-12">
-                <div class="card">
-                    <div class="card-header card-no-border">
-                        <h5>Overall balance</h5>
-                    </div>
-                    <div class="card-body pt-0">
-                        <div class="row m-0 overall-card">
-                            <div class="col-xl-9 col-md-12 col-sm-7 p-0">
-                                <div class="chart-right">
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            <div class="card-body p-0">
-                                                <ul class="balance-data">
-                                                    <li><span class="circle bg-warning"> </span><span class="f-light ms-1">Earning</span></li>
-                                                    <li><span class="circle bg-primary"> </span><span class="f-light ms-1">Expense</span></li>
-                                                </ul>
-                                                <div class="current-sale-container">
-                                                    <div id="chart-currently"></div>
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Announcement</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="owl-carousel owl-theme" id="owl-carousel-16">
+                                @foreach (var announcement in Model)
+                                {
+                                    @if (announcement.ann_status == "Active")
+                                    {
+                                        <div class="item" style="margin-right:20px">
+                                            <div class="col-xl-12">
+                                                <div class="card">
+                                                    <div class="blog-box blog-list row">
+                                                        <div class="col-sm-5">
+                                                            <img class="img-fluid sm-100-w" src="@announcement.ImageUrl" alt="" />
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                            <div class="blog-details">
+                                                                <h6>@announcement.ann_title</h6>
+                                                                <div class="blog-bottom-content">
+                                                                    <ul class="blog-social">
+                                                                        <li>by: Admin</li>
+                                                                    </ul>
+                                                                    <hr>
+                                                                    <p class="mt-0">@announcement.ann_desc</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-12 col-sm-5 p-0">
-                                <div class="row g-sm-4 g-2">
-                                    <div class="col-xl-12 col-md-4">
-                                        <div class="light-card balance-card widget-hover">
-                                            <div class="svg-box">
-                                                <svg class="svg-fill">
-                                                    <use href="../assets/svg/icon-sprite.svg#income"></use>
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <span class="f-light">Income</span>
-                                                <h6 class="mt-1 mb-0">$22,678</h6>
-                                            </div>
-                                            <div class="ms-auto text-end">
-                                                <div class="dropdown icon-dropdown">
-                                                    <button class="btn dropdown-toggle" id="incomedropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="icon-more-alt"></i></button>
-                                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="incomedropdown"><a class="dropdown-item" href="#">Today</a><a class="dropdown-item" href="#">Tomorrow</a><a class="dropdown-item" href="#">Yesterday </a></div>
-                                                </div><span class="font-success">+$456</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-md-4">
-                                        <div class="light-card balance-card widget-hover">
-                                            <div class="svg-box">
-                                                <svg class="svg-fill">
-                                                    <use href="../assets/svg/icon-sprite.svg#expense"></use>
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <span class="f-light">Expense</span>
-                                                <h6 class="mt-1 mb-0">$12,057</h6>
-                                            </div>
-                                            <div class="ms-auto text-end">
-                                                <div class="dropdown icon-dropdown">
-                                                    <button class="btn dropdown-toggle" id="expensedropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="icon-more-alt"></i></button>
-                                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="expensedropdown"><a class="dropdown-item" href="#">Today</a><a class="dropdown-item" href="#">Tomorrow</a><a class="dropdown-item" href="#">Yesterday </a></div>
-                                                </div><span class="font-danger">+$256</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-md-4">
-                                        <div class="light-card balance-card widget-hover">
-                                            <div class="svg-box">
-                                                <svg class="svg-fill">
-                                                    <use href="../assets/svg/icon-sprite.svg#doller-return"></use>
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <span class="f-light">Cashback</span>
-                                                <h6 class="mt-1 mb-0">8,475</h6>
-                                            </div>
-                                            <div class="ms-auto text-end">
-                                                <div class="dropdown icon-dropdown">
-                                                    <button class="btn dropdown-toggle" id="cashbackdropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="icon-more-alt"></i></button>
-                                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cashbackdropdown"><a class="dropdown-item" href="#">Today</a><a class="dropdown-item" href="#">Tomorrow</a><a class="dropdown-item" href="#">Yesterday </a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    }
+                                }
                             </div>
                         </div>
                     </div>
@@ -572,4 +526,31 @@
     <script src="~/assets/js/height-equal.js"></script>
     <script src="~/assets/js/animation/wow/wow.min.js"></script>
     <script>new WOW().init();</script>
+    <!-- Owl Carousel -->
+    <script src="~/assets/js/owlcarousel/owl.carousel.js"></script>
+    <script src="~/assets/js/owlcarousel/owl-custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            var owl = $('#owl-carousel-16');
+
+            owl.owlCarousel({
+                items: 1,
+                margin: 10,
+                autoHeight: false,
+                nav: false,
+                loop: true,       // Enable looping
+                autoplay: true,   // Enable autoplay
+                autoplayTimeout: 3000, // Time between each autoplay slide
+                autoplayHoverPause: true // Pause autoplay on hover
+            });
+
+            // Optional: Play and stop buttons for manual control
+            $('.play').on('click', function () {
+                owl.trigger('play.owl.autoplay', [1000]);
+            });
+            $('.stop').on('click', function () {
+                owl.trigger('stop.owl.autoplay');
+            });
+        });
+    </script>
 }

@@ -39,7 +39,6 @@
                             <table class="table card-table table-vcenter text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>User ID</th>
                                         <th>Email</th>
                                         <th>Role(s)</th>
                                         <th></th> <!-- Added for action buttons -->
@@ -49,7 +48,6 @@
                                     @foreach (var user in Model)
                                     {
                                         <tr>
-                                            <td>@user.UserId</td>
                                             <td>@user.Email</td>
                                             <td>
                                                 @foreach (var role in user.Roles)
