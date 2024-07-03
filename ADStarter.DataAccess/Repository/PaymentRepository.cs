@@ -9,17 +9,17 @@ using System.Linq.Expressions;
 
 namespace ADStarter.DataAccess.Repository
 {
-    public class InvoiceRepository : Repository<Invoice>, IInvoiceRepository
+    public class PaymentRepository : Repository<Payment>, IPaymentRepository
     {
         private readonly ApplicationDBContext _db;
 
-        public InvoiceRepository(ApplicationDBContext db) : base(db)
+        public PaymentRepository(ApplicationDBContext db) : base(db)
         {
             _db = db;
         }
-        public double GetTotalInvoiceAmount()
+        public double GetTotalPaidAmount()
         {
-            return _db.Invoices.Sum(i => i.invoice_amount);
+            return _db.Payments.Sum(i => i.pay_amount);
         }
     }
 }
