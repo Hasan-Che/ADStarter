@@ -27,6 +27,7 @@ namespace ADStarter.DataAccess.Repository
         public ITreatmentHistoryRepository TreatmentHistory { get; private set; }
         public IInvoiceRepository Invoice { get; private set; }
         public IReportRepository Report { get; private set; }
+        public IPaymentRepository Payment { get; private set; }
         public UnitOfWork(ApplicationDBContext db)
         {
             _db = db;
@@ -43,6 +44,7 @@ namespace ADStarter.DataAccess.Repository
             TreatmentHistory = new TreatmentHistoryRepository(_db);
             Invoice = new InvoiceRepository(_db);
             Report = new ReportRepository(_db);
+            Payment = new PaymentRepository(_db);
         }
 
 

@@ -114,9 +114,10 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
-                    //var userId = user.Id; // Get the user ID
-                    //HttpContext.Session.SetString("UserId", userId);
                     var roles = await _signInManager.UserManager.GetRolesAsync(user);
+
+                    // Set success message in TempData
+                    TempData["SuccessMessage"] = "You have successfully logged in!";
 
                     // Redirect based on role with user ID
                     if (roles.Contains("Admin"))
@@ -133,7 +134,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     }
                     else if (roles.Contains("Parent"))
                     {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Parent"});
+                        return RedirectToAction("Index", "Dashboard", new { area = "Parent" });
                     }
                     return LocalRedirect(returnUrl);
                 }
@@ -156,6 +157,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
 
     }
 }

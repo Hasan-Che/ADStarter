@@ -28,8 +28,23 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             var adminDetails = _unitOfWork.Admin.Get(filter: a => a.User.Id == user.Id); // Replace with actual method to fetch admin detail
             if (adminDetails != null)
             {
-                // Admin details exist, show dashboard
-                return View();
+                var numberOfChildren = _unitOfWork.Child.GetAll().Count();
+                var numberOfParent = _unitOfWork.Parent.GetAll().Count();
+                var numberOfTherapist = _unitOfWork.Therapist.GetAll().Count();
+                var numberOfCustomerService = _unitOfWork.CustomerService.GetAll().Count();
+                var totalInvoiceAmount = _unitOfWork.Invoice.GetTotalInvoiceAmount();
+                var totalPaidAmount = _unitOfWork.Payment.GetTotalPaidAmount();
+                var viewModel = new ADStarter.Models.ViewModels.DashboardVM
+                {
+                    NumberOfChildren = numberOfChildren,
+                    NumberOfParent = numberOfParent,
+                    NumberOfTherapist = numberOfTherapist,
+                    NumberOfCustomerService = numberOfCustomerService,
+                    TotalInvoiceAmount = totalInvoiceAmount,
+                    TotalPaidAmount = totalPaidAmount
+                };
+                // Admin details exist, show dashboard with number of children
+                return View(viewModel);
             }
             else
             {

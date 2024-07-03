@@ -132,9 +132,10 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
                     var userRoles = await _userManager.GetRolesAsync(user);
                     string userRole = userRoles.FirstOrDefault();
+                    TempData["SuccessMessage"] = "New User Created Successfully";
                     if (User.IsInRole(SD.Role_Admin))
                     {
-                        TempData["success"] = "New User Created Successfully";
+                        TempData["SuccessMessage"] = "New User Created Successfully";
                     }
                     else
                     {

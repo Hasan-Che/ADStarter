@@ -88,7 +88,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
                 history.c_myKid = child.c_myKid; // Assuming c_myKid is set after save
                 _unitOfWork.TreatmentHistory.Add(history);
                 _unitOfWork.Save();
-                TempData["success"] = "Treatment History Detail created successfully";
+                TempData["SuccessMessage"] = "New Account created successfully";
 
                 return RedirectToAction("Index", "Dashboard");
             }

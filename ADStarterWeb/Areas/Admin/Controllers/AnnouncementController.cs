@@ -69,32 +69,7 @@ namespace ADStarterWeb.Areas.Admin.Controller
                 var adminDetails = _unitOfWork.Admin.Get(filter: a => a.User.Id == user.Id);
                 var announcement = _unitOfWork.Announcement.Get(filter: ann => ann.ann_ID == userId);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
-                //if (file != null)
-                //{
-                //    string ImageUrl = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                //    string productPath = Path.Combine(wwwRootPath, @"images\announcement");
-
-                //    //Ensure the directory exists
-                //    if (!Directory.Exists(productPath))
-                //    {
-                //        Directory.CreateDirectory(productPath);
-                //    }
-
-                //    try
-                //    {
-                //        using (var fileStream = new FileStream(Path.Combine(productPath, ImageUrl), FileMode.Create))
-                //        {
-                //            file.CopyTo(fileStream);
-                //        }
-                //        obj.ImageUrl = @"\images\announcement\" + ImageUrl;
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        // Handle the error
-                //        ModelState.AddModelError("", "File upload failed: " + ex.Message);
-                //        return View(obj);
-                //    }
-                //}
+        
                 if (file != null)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
@@ -118,6 +93,7 @@ namespace ADStarterWeb.Areas.Admin.Controller
                 {
                     obj.a_ID = adminDetails.a_ID;
                     _unitOfWork.Announcement.Add(obj);
+                    //TempData["SuccessMessage"] = "Announcement added successfully";
                 }
                 else
                 {
@@ -128,9 +104,10 @@ namespace ADStarterWeb.Areas.Admin.Controller
                     obj.a_ID = adminDetails.a_ID;
                     //_db.Entry(obj).State = EntityState.Detached;
                     _unitOfWork.Announcement.Update(announcement);
+                    //TempData["SuccessMessage"] = "Announcement updated successfully";
                 }
                 _unitOfWork.Save();
-                TempData["success"] = "Product added successfully";
+                TempData["SuccessNotification"] = "Announcement updated successfully";
                 return RedirectToAction("Manage");
             }
             else

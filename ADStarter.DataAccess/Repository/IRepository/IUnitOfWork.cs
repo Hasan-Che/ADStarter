@@ -21,6 +21,7 @@ namespace ADStarter.DataAccess.Repository.IRepository
         ITreatmentHistoryRepository TreatmentHistory { get; }
         IInvoiceRepository Invoice { get; }
         IReportRepository Report { get; }
+        IPaymentRepository Payment { get; }
         void Save();
         IDbContextTransaction BeginTransaction();
     }

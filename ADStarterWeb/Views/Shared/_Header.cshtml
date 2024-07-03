@@ -2,7 +2,7 @@
 @inject UserManager<IdentityUser> UserManager
 <div class="page-header">
     <div class="header-wrapper row m-0">
-        <form class="form-inline search-full col" action="#" method="get">
+        @* <form class="form-inline search-full col" action="#" method="get">
             <div class="form-group w-100">
                 <div class="Typeahead Typeahead--twitterUsers">
                     <div class="u-posRelative">
@@ -12,12 +12,12 @@
                     <div class="Typeahead-menu"></div>
                 </div>
             </div>
-        </form>
-        <div class="header-logo-wrapper col-auto p-0">
+        </form> *@
+        @* <div class="header-logo-wrapper col-auto p-0">
             <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="~/assets/images/logo/logo.png" alt=""></a></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
-        </div>
-        <div class="left-header col-xxl-5 col-xl-6 col-lg-5 col-md-4 col-sm-3 p-0">
+        </div> *@
+        @* <div class="left-header col-xxl-5 col-xl-6 col-lg-5 col-md-4 col-sm-3 p-0">
             <div class="notification-slider">
                 <div class="d-flex h-100">
                     <img src="~/assets/images/giftools.gif" alt="gif">
@@ -28,7 +28,7 @@
                     <h6 class="mb-0 f-w-400"><span class="f-light">Something you love is now on sale! </span></h6><a class="ms-1" href="https://1.envato.market/3GVzd" target="_blank">Buy now !</a>
                 </div>
             </div>
-        </div>
+        </div> *@
         <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
             <ul class="nav-menus">
                 <li class="language-nav">
@@ -164,11 +164,10 @@
                             <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
                             <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
                             <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
-                            <li>
-                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Parent/LandingPage/landingPage">
-                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">LOGOUT</button>
-                                </form>
-                            </li>
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Parent/LandingPage/landingPage">
+                                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">LOGOUT</button>
+                            </form>
+
                         </ul>
                     }
                 </li>
