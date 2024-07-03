@@ -10,7 +10,7 @@ namespace ADStarter.Models
     {
         [Key]
         [Required(ErrorMessage = "The MyKid number is required.")]
-        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid MyKid number. Must be exactly 12 digits.")]
+        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid fill. Must follow MyKid format.")]
         [StringLength(100)]
         public string c_myKid { get; set; }
 
