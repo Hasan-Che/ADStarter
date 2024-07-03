@@ -63,7 +63,7 @@
                                 <td>@child.parent_ID</td>
                                 <td>@(child.Therapist != null ? child.Therapist.t_name : "Not Assigned")</td>
                                 <td>
-                                    <a asp-controller="AdminChild" asp-action="AssignTherapist" asp-route-id="@child.c_myKid" class="btn btn-primary">Assign/Update Therapist</a>
+                                    <a asp-controller="AdminChild" asp-action="AssignTherapist" asp-route-id="@child.c_myKid" class="btn btn-primary"><i class="fa fa-plus"></i>  Assign Therapist</a>
                                 </td>
                             </tr>
                         }

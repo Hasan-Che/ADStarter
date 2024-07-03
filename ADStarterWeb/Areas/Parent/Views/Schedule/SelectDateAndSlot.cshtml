@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <style>
     .datepicker-container {
         display: inline-block; /* Ensure containers flow horizontally */
@@ -49,7 +54,7 @@
                 <span>Select date(s) and slot(s) for scheduling.</span>
             </div>
             <div class="card-body">
-                @using (Html.BeginForm("CreateSchedule", "Schedule", FormMethod.Post))
+                @using (Html.BeginForm("CreateSchedule", "Schedule", FormMethod.Post, new { id = "createScheduleForm" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -114,7 +119,7 @@
                 });
             });
 
-            $('form').on('submit', function (event) {
+            $('#createScheduleForm').on('submit', function (event) {
                 let allDatesFilled = true;
                 let dates = new Set();
                 let valid = true;
@@ -123,24 +128,40 @@
                     const dateValue = $(this).val();
                     if (!dateValue) {
                         allDatesFilled = false;
-                        alert("All dates must be chosen.");
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'All dates must be chosen.',
+                        });
                         valid = false;
                         return false;
                     }
                     if (dates.has(dateValue)) {
-                        alert("Duplicate dates are not allowed. Please select different dates.");
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Duplicate dates are not allowed. Please select different dates.',
+                        });
                         valid = false;
                         return false;
                     }
                     dates.add(dateValue);
                 });
 
-                if (!allDatesFilled) {
+                if (!allDatesFilled || !valid) {
                     event.preventDefault();
-                }
+                } else {
+                    event.preventDefault(); // Prevent the form from submitting immediately
 
-                if (!valid) {
-                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Schedule created successfully!',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#createScheduleForm').off('submit').submit(); // Submit the form
+                        }
+                    });
                 }
             });
         });

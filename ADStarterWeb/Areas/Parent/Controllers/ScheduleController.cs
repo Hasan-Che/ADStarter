@@ -123,7 +123,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
             }
 
             TempData["Success"] = "Schedules created successfully.";
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction("Index", "Dashboard");
         }
 
 

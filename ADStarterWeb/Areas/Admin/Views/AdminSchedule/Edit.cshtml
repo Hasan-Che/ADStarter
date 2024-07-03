@@ -69,13 +69,18 @@
             </div>
         </div>
     </div>
+
+    <!-- SweetAlert success message placeholder -->
+    <div id="sweetAlertSuccess" style="display: none;"></div>
 </div>
 
 @section Scripts {
-    
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="~/assets/js/script.js"></script>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(document).ready(function () {
@@ -101,6 +106,20 @@
                     }, false);
                 }, false);
             })();
-        });
+
+            // SweetAlert for success message
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: '@TempData["SuccessMessage"]',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+            </text>
+        }
+                });
     </script>
 }
