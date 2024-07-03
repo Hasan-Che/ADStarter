@@ -13,12 +13,12 @@ namespace ADStarter.Models
         public int parent_ID { get; set; }
 
         [Required(ErrorMessage = "The IC number is required.")]
-        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid MyKid number. Must be exactly 12 digits.")]
+        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid fill. Must follow IC format.")]
         [StringLength(100)]
         public string f_ID { get; set; }
 
         [Required(ErrorMessage = "The IC number is required.")]
-        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid MyKid number. Must be exactly 12 digits.")]
+        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid fill. Must follow IC format.")]
         [StringLength(100)]
         public string m_ID { get; set; }
 
