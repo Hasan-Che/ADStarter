@@ -106,7 +106,7 @@ namespace ADStarterWeb.Areas.Parent.Controllers
 
                     _context.Payments.Add(payment);
                     await _context.SaveChangesAsync();
-
+                    TempData["Success"] = "Your payment has succcessfuly been made";
                     return RedirectToAction("Index", "Invoice");
                 }
                 else
