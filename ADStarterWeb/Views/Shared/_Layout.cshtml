@@ -32,6 +32,7 @@
                     {
                         <partial name="_SidePenal" />
                     }
+                    @* <partial name="_Notifications" /> *@
                     @RenderBody()
                     <partial name="IconMarkup" />
                     <partial name="_Footer" />
@@ -39,7 +40,8 @@
             </div>
         </div>
         <partial name="_Script" />
-        @RenderSection("Script", required: false)
+        @RenderSection("Scripts", false)
+        
     </body>
 }
 else
@@ -77,10 +79,9 @@ else
             </div>
         </div>
         <partial name="_Script" />
-        @if (IsSectionDefined("scripts"))
-        {
-            @RenderSection("scripts")
-        }
+        @RenderSection("Scripts", false)
+
+     
     </body>
 }
 </html>

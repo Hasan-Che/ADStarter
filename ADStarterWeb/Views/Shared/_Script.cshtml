@@ -19,4 +19,31 @@
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="~/assets/js/script.js"></script>
-<!-- login js-->
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script src="~/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+<script src="~/assets/js/datatable/datatables/datatable.custom.js"></script>
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/assets/js/sweet-alert/sweetalert.min.js"></script>
+<script src="~/assets/js/sweet-alert/app.js"></script>
+<!-- Datepicker -->
+<script src="~/assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="~/assets/js/datepicker/date-picker/datepicker.en.js"></script>
+<script src="~/assets/js/datepicker/date-picker/datepicker.custom.js"></script>
+<!-- Form Wizard -->
+<script src="~/assets/js/form-wizard/form-wizard-three.js"></script>
+<script src="~/assets/js/form-wizard/jquery.backstretch.min.js"></script>
+<script src="~/assets/js/tooltip-init.js"></script>
+<script src="~/assets/js/form-wizard/form-wizard-two.js"></script>
+<!-- Dropzone -->
+<script src="~/assets/js/dropzone/dropzone.js"></script>
+<script src="~/assets/js/dropzone/dropzone-script.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#invoices-table').DataTable();
+    });
+</script>

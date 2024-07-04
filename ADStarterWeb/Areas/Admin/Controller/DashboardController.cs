@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using ADStarter.Utility;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ADStarterWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class DashboardController : Controller
+    [Authorize(Roles = SD.Role_Admin)]
+    public class DashboardController : Microsoft.AspNetCore.Mvc.Controller
     {
-        public IActionResult Index()
+        public IActionResult Index() 
         {
+
             return View();
         }
     }

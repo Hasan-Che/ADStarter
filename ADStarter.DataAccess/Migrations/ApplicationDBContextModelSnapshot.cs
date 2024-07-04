@@ -33,9 +33,30 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("a_city")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("a_name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("a_phoneNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("a_state")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("a_street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("a_zip")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("a_ID");
 
@@ -52,14 +73,17 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ann_ID"));
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("a_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("ann_desc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ann_media")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("ann_status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ann_title")
                         .HasMaxLength(100)
@@ -111,7 +135,7 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int?>("c_step")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(1);
 
                     b.Property<int>("parent_ID")
                         .HasColumnType("int");
@@ -139,9 +163,30 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("cs_city")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("cs_name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("cs_phoneNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cs_state")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cs_street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cs_zip")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("cs_ID");
 
@@ -276,11 +321,9 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pay_ID"));
 
-                    b.Property<int?>("Therapistt_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("a_ID")
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("c_myKid")
                         .HasColumnType("nvarchar(100)");
@@ -304,14 +347,12 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("receipt_id")
-                        .HasColumnType("int");
+                    b.Property<string>("stripe_charge_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("pay_ID");
 
-                    b.HasIndex("Therapistt_ID");
-
-                    b.HasIndex("a_ID");
+                    b.HasIndex("Id");
 
                     b.HasIndex("c_myKid");
 
@@ -330,6 +371,12 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("prog_ID"));
 
+                    b.Property<double>("prog_WeekdayPrice")
+                        .HasColumnType("float");
+
+                    b.Property<double>("prog_WeekendPrice")
+                        .HasColumnType("float");
+
                     b.Property<string>("prog_desc")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -338,8 +385,8 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<double>("prog_price")
-                        .HasColumnType("float");
+                    b.Property<int>("prog_sessionCount")
+                        .HasColumnType("int");
 
                     b.Property<int>("prog_step")
                         .HasColumnType("int");
@@ -360,24 +407,32 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("rep_ID"));
 
-                    b.Property<string>("c_myKid")
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<DateTime>("rep_datetime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("rep_file")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("rep_remark")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("rep_status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("rep_title")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("t_ID")
+                    b.Property<int>("schedule_ID")
                         .HasColumnType("int");
 
                     b.HasKey("rep_ID");
 
-                    b.HasIndex("c_myKid");
-
-                    b.HasIndex("t_ID");
+                    b.HasIndex("schedule_ID");
 
                     b.ToTable("Reports");
                 });
@@ -390,16 +445,10 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("schedule_ID"));
 
-                    b.Property<int?>("SessionPricesession_ID")
-                        .HasColumnType("int");
-
                     b.Property<string>("c_myKid")
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("prog_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("session_ID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("session_datetime")
@@ -408,58 +457,20 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int>("slot_ID")
                         .HasColumnType("int");
 
-                    b.Property<double>("slot_price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("t_ID")
+                    b.Property<int?>("t_ID")
                         .HasColumnType("int");
 
                     b.HasKey("schedule_ID");
 
-                    b.HasIndex("SessionPricesession_ID");
-
                     b.HasIndex("c_myKid");
 
                     b.HasIndex("prog_ID");
-
-                    b.HasIndex("session_ID");
 
                     b.HasIndex("slot_ID");
 
                     b.HasIndex("t_ID");
 
                     b.ToTable("Schedules");
-                });
-
-            modelBuilder.Entity("ADStarter.Models.SessionPrice", b =>
-                {
-                    b.Property<int>("session_ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("session_ID"));
-
-                    b.Property<int>("prog_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("session_bilangan")
-                        .HasColumnType("int");
-
-                    b.Property<string>("session_day")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("session_name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<double>("sp_price")
-                        .HasColumnType("float");
-
-                    b.HasKey("session_ID");
-
-                    b.HasIndex("prog_ID");
-
-                    b.ToTable("SessionPrices");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Slot", b =>
@@ -489,17 +500,30 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("t_address")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<string>("t_city")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("t_name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("t_phoneNum")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("t_state")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("t_street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("t_zip")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("t_ID");
 
@@ -800,13 +824,9 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Payment", b =>
                 {
-                    b.HasOne("ADStarter.Models.Therapist", null)
-                        .WithMany("Payments")
-                        .HasForeignKey("Therapistt_ID");
-
-                    b.HasOne("ADStarter.Models.Admin", "Admin")
-                        .WithMany("Payments")
-                        .HasForeignKey("a_ID")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -827,39 +847,28 @@ namespace ADStarter.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Admin");
-
                     b.Navigation("Child");
 
                     b.Navigation("Invoice");
 
                     b.Navigation("Parent");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Report", b =>
                 {
-                    b.HasOne("ADStarter.Models.Child", "Child")
+                    b.HasOne("ADStarter.Models.Schedule", "Schedule")
                         .WithMany("Reports")
-                        .HasForeignKey("c_myKid")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("ADStarter.Models.Therapist", "Therapist")
-                        .WithMany("Reports")
-                        .HasForeignKey("t_ID")
+                        .HasForeignKey("schedule_ID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Child");
-
-                    b.Navigation("Therapist");
+                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Schedule", b =>
                 {
-                    b.HasOne("ADStarter.Models.SessionPrice", null)
-                        .WithMany("Schedules")
-                        .HasForeignKey("SessionPricesession_ID");
-
                     b.HasOne("ADStarter.Models.Child", "Child")
                         .WithMany("Schedules")
                         .HasForeignKey("c_myKid")
@@ -868,12 +877,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.HasOne("ADStarter.Models.Program", "Program")
                         .WithMany("Schedules")
                         .HasForeignKey("prog_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ADStarter.Models.SessionPrice", "SessionPrice")
-                        .WithMany()
-                        .HasForeignKey("session_ID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -886,29 +889,15 @@ namespace ADStarter.DataAccess.Migrations
                     b.HasOne("ADStarter.Models.Therapist", "Therapist")
                         .WithMany("Schedules")
                         .HasForeignKey("t_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Child");
 
                     b.Navigation("Program");
 
-                    b.Navigation("SessionPrice");
-
                     b.Navigation("Slot");
 
                     b.Navigation("Therapist");
-                });
-
-            modelBuilder.Entity("ADStarter.Models.SessionPrice", b =>
-                {
-                    b.HasOne("ADStarter.Models.Program", "Program")
-                        .WithMany("SessionPrices")
-                        .HasForeignKey("prog_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Program");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Therapist", b =>
@@ -985,8 +974,6 @@ namespace ADStarter.DataAccess.Migrations
             modelBuilder.Entity("ADStarter.Models.Admin", b =>
                 {
                     b.Navigation("Announcements");
-
-                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Child", b =>
@@ -994,8 +981,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.Navigation("Invoices");
 
                     b.Navigation("Payments");
-
-                    b.Navigation("Reports");
 
                     b.Navigation("Schedules");
 
@@ -1015,18 +1000,13 @@ namespace ADStarter.DataAccess.Migrations
             modelBuilder.Entity("ADStarter.Models.Program", b =>
                 {
                     b.Navigation("Schedules");
-
-                    b.Navigation("SessionPrices");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Schedule", b =>
                 {
                     b.Navigation("Invoices");
-                });
 
-            modelBuilder.Entity("ADStarter.Models.SessionPrice", b =>
-                {
-                    b.Navigation("Schedules");
+                    b.Navigation("Reports");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Slot", b =>
@@ -1036,10 +1016,6 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Therapist", b =>
                 {
-                    b.Navigation("Payments");
-
-                    b.Navigation("Reports");
-
                     b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618

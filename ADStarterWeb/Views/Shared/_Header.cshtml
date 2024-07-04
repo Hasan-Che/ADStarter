@@ -1,4 +1,6 @@
-﻿<div class="page-header">
+﻿@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<div class="page-header">
     <div class="header-wrapper row m-0">
         <form class="form-inline search-full col" action="#" method="get">
             <div class="form-group w-100">
@@ -32,7 +34,7 @@
                 <li class="language-nav">
                     <div class="translate_wrapper">
                         <div class="current_lang">
-                            <div class="lang"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">EN                               </span></div>
+                            <div class="lang"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">EN</span></div>
                         </div>
                         <div class="more_lang">
                             <div class="lang selected" data-value="en"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">English<span> (US)</span></span></div>
@@ -112,7 +114,7 @@
                         </svg><span class="badge rounded-pill badge-secondary">4 </span>
                     </div>
                     <div class="onhover-show-div notification-dropdown">
-                        <h6 class="f-18 mb-0 dropdown-title">Notitications                               </h6>
+                        <h6 class="f-18 mb-0 dropdown-title">Notitications</h6>
                         <ul>
                             <li class="b-l-primary border-4">
                                 <p>Delivery processing <span class="font-danger">10 min.</span></p>
@@ -131,20 +133,44 @@
                     </div>
                 </li>
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
-                    <div class="media profile-media">
-                        <img class="b-r-10" src="/assets/images/dashboard/profile.png" alt="">
-                        <div class="media-body">
-                            <span>Emay Walter</span>
-                            <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        var user = await UserManager.GetUserAsync(User);
+                        var roles = await UserManager.GetRolesAsync(user);
+                        var role = roles.FirstOrDefault();
+
+
+                        <div class="media profile-media">
+                            <img class="b-r-10" src="/assets/images/dashboard/profile.png" alt="">
+                            <div class="media-body">
+                                <span>Hello @UserManager.GetUserName(User)!</span>
+                                <p class="mb-0 font-roboto">@role <i class="middle fa fa-angle-down"></i></p>
+                            </div>
                         </div>
-                    </div>
-                    <ul class="profile-dropdown onhover-show-div">
-                        <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>
-                        <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                        <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
-                        <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
-                        <li><a href="#"><i data-feather="settings"></i><span>Logout</span></a></li>
-                    </ul>
+                        <ul class="profile-dropdown onhover-show-div">
+                            @if (User.IsInRole(SD.Role_Parent))
+                            {
+                                <li><a asp-area="Parent" asp-controller="Registration" asp-action="UserEdit"><i data-feather="user"></i><span>Account </span></a></li>
+                            }@if (User.IsInRole(SD.Role_Admin))
+                            {
+                                <li><a asp-area="Admin" asp-controller="AdminDashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
+                            }@if (User.IsInRole(SD.Role_Therapist))
+                            {
+                                <li><a asp-area="Therapist" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
+                            }@if (User.IsInRole(SD.Role_Customer_service))
+                            {
+                                <li><a asp-area="Customer Service" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
+                            }
+                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
+                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
+                            <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
+                            <li>
+                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Parent/LandingPage/landingPage">
+                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">LOGOUT</button>
+                                </form>
+                            </li>
+                        </ul>
+                    }
                 </li>
             </ul>
         </div>
