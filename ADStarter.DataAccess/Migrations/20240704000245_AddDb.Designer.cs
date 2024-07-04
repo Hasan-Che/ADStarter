@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240702155716_addDB")]
-    partial class addDB
+    [Migration("20240704000245_AddDb")]
+    partial class AddDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -328,9 +328,6 @@ namespace ADStarter.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("Therapistt_ID")
-                        .HasColumnType("int");
-
                     b.Property<string>("c_myKid")
                         .HasColumnType("nvarchar(100)");
 
@@ -359,8 +356,6 @@ namespace ADStarter.DataAccess.Migrations
                     b.HasKey("pay_ID");
 
                     b.HasIndex("Id");
-
-                    b.HasIndex("Therapistt_ID");
 
                     b.HasIndex("c_myKid");
 
@@ -415,9 +410,6 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("rep_ID"));
 
-                    b.Property<int?>("Therapistt_ID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("rep_datetime")
                         .HasColumnType("datetime2");
 
@@ -442,8 +434,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("rep_ID");
-
-                    b.HasIndex("Therapistt_ID");
 
                     b.HasIndex("schedule_ID");
 
@@ -843,10 +833,6 @@ namespace ADStarter.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ADStarter.Models.Therapist", null)
-                        .WithMany("Payments")
-                        .HasForeignKey("Therapistt_ID");
-
                     b.HasOne("ADStarter.Models.Child", "Child")
                         .WithMany("Payments")
                         .HasForeignKey("c_myKid")
@@ -875,10 +861,6 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Report", b =>
                 {
-                    b.HasOne("ADStarter.Models.Therapist", null)
-                        .WithMany("Reports")
-                        .HasForeignKey("Therapistt_ID");
-
                     b.HasOne("ADStarter.Models.Schedule", "Schedule")
                         .WithMany("Reports")
                         .HasForeignKey("schedule_ID")
@@ -1037,10 +1019,6 @@ namespace ADStarter.DataAccess.Migrations
 
             modelBuilder.Entity("ADStarter.Models.Therapist", b =>
                 {
-                    b.Navigation("Payments");
-
-                    b.Navigation("Reports");
-
                     b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618

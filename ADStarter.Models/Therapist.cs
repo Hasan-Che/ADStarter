@@ -37,12 +37,5 @@ namespace ADStarter.Models
 
         public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
 
-
-      
-        public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
-        public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
-
-
     }
 }
