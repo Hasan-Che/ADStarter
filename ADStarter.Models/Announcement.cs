@@ -15,8 +15,9 @@ namespace ADStarter.Models
         public string ann_title { get; set; }
 
         public string ann_desc { get; set; }
+        public string ann_status { get; set; }
 
-        public byte[] ann_media { get; set; }
+        public string ImageUrl { get; set; }
 
         [ForeignKey(nameof(a_ID))]
         public virtual Admin Admin { get; set; }

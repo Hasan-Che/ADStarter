@@ -1,13 +1,17 @@
-﻿@{
-    ViewData["Title"] = "User Edit";
+﻿@using ADStarter.Models.ViewModels
+@model List<UserRolesViewModel>
+
+@{
+    ViewData["Title"] = "User List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Edit Profile</h3>
+                    <h3>Account List</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -18,8 +22,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">Users</li>
-                        <li class="breadcrumb-item active"> Edit Profile</li>
+                        <li class="breadcrumb-item">Account</li>
+                        <li class="breadcrumb-item active">Account List</li>
                     </ol>
                 </div>
             </div>
@@ -31,57 +35,37 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title mb-0">Add projects And Upload</h4>
-                            <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
-                        </div>
                         <div class="table-responsive add-project">
                             <table class="table card-table table-vcenter text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Project Name</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Price</th>
-                                        <th></th>
+                                        <th>Email</th>
+                                        <th>Role(s)</th>
+                                        <th></th> <!-- Added for action buttons -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents </a></td>
-                                        <td>28 May 2018</td>
-                                        <td><span class="status-icon bg-success"></span> Completed</td>
-                                        <td>$56,908</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents</a></td>
-                                        <td>12 June 2018</td>
-                                        <td><span class="status-icon bg-danger"></span> On going</td>
-                                        <td>$45,087</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents</a></td>
-                                        <td>12 July 2018</td>
-                                        <td><span class="status-icon bg-warning"></span> Pending</td>
-                                        <td>$60,123</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents</a></td>
-                                        <td>14 June 2018</td>
-                                        <td><span class="status-icon bg-warning"></span> Pending</td>
-                                        <td>$70,435</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="text-inherit" href="#">Untrammelled prevents</a></td>
-                                        <td>25 June 2018</td>
-                                        <td><span class="status-icon bg-success"></span> Completed</td>
-                                        <td>$15,987</td>
-                                        <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a class="btn btn-primary btn-sm" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-transparent btn-sm" href="javascript:void(0)"><i class="fa fa-link"></i> Update</a><a class="icon" href="javascript:void(0)"></a><a class="btn btn-danger btn-sm" href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a></td>
-                                    </tr>
+                                    @foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <td>@user.Email</td>
+                                            <td>
+                                                @foreach (var role in user.Roles)
+                                                {
+                                                    <span>@role</span>
+                                                    <br />
+                                                }
+                                            </td>
+                                            <td class="text-end">
+                                                @{
+                                                    string detailsAction = user.Roles.Contains("Therapist") ? "AddTherapistDetails" : "AddCustomerServiceDetails";
+                                                }
+                                                <a class="btn btn-primary btn-sm" href="@Url.Action(detailsAction, "UserList", new { area = "Admin", userId = user.UserId })">
+                                                    <i class="fa fa-pencil"></i>Add/Manage Details
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -92,13 +76,3 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
-@section Script{
-    <!-- Plugins JS start-->
-    <script src="../assets/js/sidebar-menu.js"></script>
-    <script src="../assets/js/slick/slick.min.js"></script>
-    <script src="../assets/js/slick/slick.js"></script>
-    <script src="../assets/js/header-slick.js"></script>
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-}

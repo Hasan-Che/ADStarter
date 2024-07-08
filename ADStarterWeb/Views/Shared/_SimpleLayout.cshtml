@@ -48,10 +48,8 @@
         <!-- scrollbar js-->
         <!-- Sidebar jquery-->
         <script src="~/assets/js/config.js"></script>
-        @if (IsSectionDefined("scripts"))
-        {
-            RenderSection("scripts");
-        }
+        <partial name="_Script" />
+        @RenderSection("Scripts", false)
         <!-- Theme js-->
         <script src="~/assets/js/script.js"></script>
         <!-- login js-->

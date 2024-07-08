@@ -1,66 +1,37 @@
-﻿@model ADStarter.Models.ViewModels.TreatmentHistoryViewModel
+﻿@model ADStarter.Models.TreatmentHistory
 
-@{
-    ViewData["Title"] = "Treatment History Form";
-    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure consistent layout usage
-}
-<div class="page-body">
-    <div class="container-fluid">
-        <div class="page-title">
-            <h3>Treatment History Form</h3>
+<div>
+    <h3>Treatment History Form</h3>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="th_pediatrician" class="form-label">Pediatrician</label>
+            <input asp-for="th_pediatrician" class="form-control" />
+            <span asp-validation-for="th_pediatrician" class="text-danger"></span>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form asp-action="TreatmentHistoryForm" method="post" class="needs-validation" novalidate>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label asp-for="th_pediatrician" class="form-label">Pediatrician</label>
-                                    <input asp-for="th_pediatrician" class="form-control" />
-                                    <span asp-validation-for="th_pediatrician" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="th_recommendation" class="form-label">Recommendation</label>
-                                    <input asp-for="th_recommendation" class="form-control" />
-                                    <span asp-validation-for="th_recommendation" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="th_deadline" class="form-label">Deadline</label>
-                                    <input asp-for="th_deadline" type="date" class="form-control" />
-                                    <span asp-validation-for="th_deadline" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="th_diagnosis" class="form-label">Diagnosis</label>
-                                    <input asp-for="th_diagnosis" class="form-control" />
-                                    <span asp-validation-for="th_diagnosis" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="th_prevTherapy" class="form-label">Previous Therapy</label>
-                                    <input asp-for="th_prevTherapy" class="form-control" />
-                                    <span asp-validation-for="th_prevTherapy" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-6">
+            <label asp-for="th_recommendation" class="form-label">Recommendation</label>
+            <input asp-for="th_recommendation" class="form-control" />
+            <span asp-validation-for="th_recommendation" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="th_deadline" class="form-label">Deadline</label>
+            <input asp-for="th_deadline" type="date" class="form-control" value="0" />
+            <span asp-validation-for="th_deadline" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="th_diagnosis" class="form-label">Diagnosis</label>
+            <input asp-for="th_diagnosis" class="form-control" />
+            <span asp-validation-for="th_diagnosis" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="th_prevTherapy" class="form-label">Previous Therapy</label>
+            <input asp-for="th_prevTherapy" class="form-control" />
+            <span asp-validation-for="th_prevTherapy" class="text-danger"></span>
         </div>
     </div>
 </div>
 
-@section Scripts {
+@section Script {
     <script>
         // Add any necessary script logic here
     </script>

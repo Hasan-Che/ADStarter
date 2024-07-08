@@ -1,8 +1,8 @@
-﻿@model ADStarter.Models.ViewModels.ParentViewModel
+﻿@model Parent
 
 @{
     ViewData["Title"] = "Parent Registration Form";
-    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure consistent layout usage
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="page-body">
@@ -17,111 +17,10 @@
                 <div class="card">
                     <div class="card-body">
                         <form asp-action="ParentForm" method="post" class="needs-validation" novalidate>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label asp-for="parent_ID" class="form-label">Parent ID</label>
-                                    <input asp-for="parent_ID" class="form-control" />
-                                    <span asp-validation-for="f_name" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="f_name" class="form-label">Father's Name</label>
-                                    <input asp-for="f_name" class="form-control" />
-                                    <span asp-validation-for="f_name" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="f_phoneNum" class="form-label">Father's Phone Number</label>
-                                    <input asp-for="f_phoneNum" class="form-control" />
-                                    <span asp-validation-for="f_phoneNum" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="f_race" class="form-label">Father's Race</label>
-                                    <input asp-for="f_race" class="form-control" />
-                                    <span asp-validation-for="f_race" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="f_address" class="form-label">Father's Address</label>
-                                    <input asp-for="f_address" class="form-control" />
-                                    <span asp-validation-for="f_address" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="f_Waddress" class="form-label">Father's Work Address</label>
-                                    <input asp-for="f_Waddress" class="form-control" />
-                                    <span asp-validation-for="f_Waddress" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="f_email" class="form-label">Father's Email</label>
-                                    <input asp-for="f_email" class="form-control" />
-                                    <span asp-validation-for="f_email" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="f_occupation" class="form-label">Father's Occupation</label>
-                                    <input asp-for="f_occupation" class="form-control" />
-                                    <span asp-validation-for="f_occupation" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="f_status" class="form-label">Father's Status</label>
-                                    <input asp-for="f_status" class="form-control" />
-                                    <span asp-validation-for="f_status" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="m_name" class="form-label">Mother's Name</label>
-                                    <input asp-for="m_name" class="form-control" />
-                                    <span asp-validation-for="m_name" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="m_phoneNum" class="form-label">Mother's Phone Number</label>
-                                    <input asp-for="m_phoneNum" class="form-control" />
-                                    <span asp-validation-for="m_phoneNum" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="m_race" class="form-label">Mother's Race</label>
-                                    <input asp-for="m_race" class="form-control" />
-                                    <span asp-validation-for="m_race" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="m_address" class="form-label">Mother's Address</label>
-                                    <input asp-for="m_address" class="form-control" />
-                                    <span asp-validation-for="m_address" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="m_Waddress" class="form-label">Mother's Work Address</label>
-                                    <input asp-for="m_Waddress" class="form-control" />
-                                    <span asp-validation-for="m_Waddress" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="m_email" class="form-label">Mother's Email</label>
-                                    <input asp-for="m_email" class="form-control" />
-                                    <span asp-validation-for="m_email" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <label asp-for="m_status" class="form-label">Mother's Status</label>
-                                    <input asp-for="m_status" class="form-control" />
-                                    <span asp-validation-for="m_status" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label asp-for="fm_income" class="form-label">Family Income</label>
-                                    <input asp-for="fm_income" class="form-control" />
-                                    <span asp-validation-for="fm_income" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row g-3 mt-3">
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
+                            <input type="hidden" name="parent_ID" value="@ViewBag.ParentID" />
+                            <div id="step-forms">
+                                @Html.Partial("FatherForm", Model)
+                                @Html.Partial("MotherForm", Model)
                             </div>
                         </form>
                     </div>
@@ -131,8 +30,16 @@
     </div>
 </div>
 
-@section Scripts {
+@section Script {
     <script>
-        // Add any necessary script logic here
+        function showMotherForm() {
+            document.getElementById('father-form').style.display = 'none';
+            document.getElementById('mother-form').style.display = 'block';
+        }
+
+        function showFatherForm() {
+            document.getElementById('mother-form').style.display = 'none';
+            document.getElementById('father-form').style.display = 'block';
+        }
     </script>
 }
