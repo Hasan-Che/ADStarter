@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Add Therapist Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var id = ViewBag.UserId;
+    var id = ViewBag.UserId??0;
 }
 <div class="page-body">
     <div class="container-fluid">
